@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sybaseadaptiveserver name="sybaseadaptiveserver" type="0">
+    <nodes>
+        <node name="Abstract Plans" type="0">
+            <nodes>
+                <node code="sp_add_qpgroup $group_name$" name="Create abstract plan group - Adds a new abstract plan group." type="1"/>
+                <node code="sp_drop_qpgroup $group_name$" name="Delete a abstract plan group - Deletes an existing abstract plan group." type="1"/>
+                <node code="set plan dump $group_name$ on&#xa;go&#xa;$sql$&#xa;go&#xa;set plan dump off&#xa;go" name="Dump Abstract Plan - Template for enabling plan capture." type="1"/>
+            </nodes>
+        </node>
+        <node name="Aggregate Functions" type="0">
+            <nodes>
+                <node code="avg($expression$)" name="avg - Returns the numeric average of all (distinct) values." type="1"/>
+                <node code="count($expression$)" name="count - Returns the number of (distinct) non-null values or the number of selected rows." type="1"/>
+                <node code="max($expression$)" name="max - Returns the highest value in an expression." type="1"/>
+                <node code="min($expression$)" name="min - Returns the lowest value in a column." type="1"/>
+                <node code="sum($expression$)" name="sum - Returns the total of the values." type="1"/>
+            </nodes>
+        </node>
+        <node name="Encryption Keys" type="0">
+            <nodes>
+                <node code="set encryption passwd '$password$' for column $table_name$.$column_name$" name="Set column encryption password - Set encryption password for a column" type="1"/>
+                <node code="set encryption passwd '$password$' for key $key_name$" name="Set key encryption password - Set encryption password for a key" type="1"/>
+            </nodes>
+        </node>
+        <node name="Mathematical Functions" type="0">
+            <nodes>
+                <node code="abs($numeric_expression$)" name="abs - Returns the absolute value of an expression." type="1"/>
+                <node code="acos($float_expression$)" name="acos - Returns the angle (in radians) whose cosine is specified." type="1"/>
+                <node code="asin($float_expression$)" name="asin - Returns the angle (in radians) whose sine is specified." type="1"/>
+                <node code="atan($float_expression$)" name="atan - Returns the angle (in radians) whose tangent is specified." type="1"/>
+                <node code="atan2($float_expression1$, $float_expression2$)" name="atn2 - Returns the angle (in radians) whose sine and cosine are specified." type="1"/>
+                <node code="ceiling($numeric_expression$)" name="ceiling - Returns the smallest integer greater than or equal to the specified value." type="1"/>
+                <node code="cos($float_expression$)" name="cos - Returns the cosine of the specified angle." type="1"/>
+                <node code="cot($float_expression$)" name="cot - Returns the cotangent of the specified angle." type="1"/>
+                <node code="degrees($numeric_expression$)" name="degrees - Returns the size, in degrees, of an angle with the specified number of radians." type="1"/>
+                <node code="exp($float_expression$)" name="exp - Returns the value that results from raising the constant to the specified power." type="1"/>
+                <node code="floor($numeric_expression$)" name="floor - Returns the largest integer that is less than or equal to the specified value." type="1"/>
+                <node code="log($float_expression$)" name="log - Returns the natural logarithm of the specified number." type="1"/>
+                <node code="log10($float_expression$)" name="log10 - Returns the base 10 logarithm of the specified number." type="1"/>
+                <node code="pi()" name="pi - Returns the constant value 3.1415926535897936." type="1"/>
+                <node code="power($numeric_expression$, $y$)" name="power - Returns the value that results from raising the specified number to a given power." type="1"/>
+                <node code="radians($numeric_expression$)" name="radians - Returns the size, in radians, of an angle with the specified number of degrees." type="1"/>
+                <node code="rand()" name="rand - Returns a random value between 0 and 1, which is generated using the specified seed value." type="1"/>
+                <node code="round($numeric_expression$, $decimal_places$)" name="round - Returns the value of the specified number, rounded to a given number of decimal places." type="1"/>
+                <node code="sign($numeric_expression$)" name="sign - Returns the sign (+1 for positive, 0, or -1 for negative) of the specified value." type="1"/>
+                <node code="sin($float_expression$)" name="sin - Returns the sine of the specified angle (in radians)." type="1"/>
+                <node code="sqrt($float_expression$)" name="sqrt - Returns the square root of the specified number." type="1"/>
+                <node code="tan($float_expression$)" name="tan - Returns the tangent of the specified angle (in radians)." type="1"/>
+            </nodes>
+        </node>
+        <node name="Security Functions" type="0">
+            <nodes>
+                <node code="is_sec_service_on($service_name$)" name="is_sec_service_on - Returns 1 if the security service is active and 0 if it is not." type="1"/>
+                <node code="show_sec_services()" name="show_sec_services - Lists the security services that are active for the session." type="1"/>
+            </nodes>
+        </node>
+        <node name="String Functions" type="0">
+            <nodes>
+                <node code="ascii($character_expression$)" name="ascii - Returns the ASCII code for the first character in an expression." type="1"/>
+                <node code="char($integer_expression$)" name="char - Returns the character equivalent of an integer." type="1"/>
+                <node code="charindex($expression1$, $expression2$)" name="charindex - Returns an integer representing the starting position of an expression." type="1"/>
+                <node code="difference($character_expression1$, $character_expression2$)" name="difference - Returns the difference between two soundex values." type="1"/>
+                <node code="lower($character_expression$)" name="lower - Returns the lowercase equivalent of the specified expression." type="1"/>
+                <node code="ltrim($character_expression$)" name="ltrim - Returns the specified expression, trimmed of leading blanks." type="1"/>
+                <node code="patindex('%$pattern$%', $expression$)" name="patindex - Returns the starting position of the first occurrence of a specified pattern." type="1"/>
+                <node code="replicate($character_expression$, $integer_expression$)" name="replicate - Returns a string consisting of the specified expression repeated a given number of times." type="1"/>
+                <node code="reverse($character_expression$)" name="reverse - Returns the specified string with characters listed in reverse order." type="1"/>
+                <node code="right($character_expression$, $integer_expression$)" name="right - The rightmost part of the expression with the specified number of characters." type="1"/>
+                <node code="rtrim($character_expression$)" name="rtrim - Returns the specified expression, trimmed of trailing blanks." type="1"/>
+                <node code="soundex($character_expression$)" name="soundex - Returns a 4-character code representing the way an expression sounds." type="1"/>
+                <node code="space($integer_expression$)" name="space - Returns a string consisting of the specified number of single-byte spaces." type="1"/>
+                <node code="str($float_expression$)" name="str - Returns the character equivalent of the specified number." type="1"/>
+                <node code="stuff($character_expression1$, $start$, $_length$, $character_expression2$)" name="stuff - Returns the string formed by deleting a specified number of characters from one string and replacing them with another string." type="1"/>
+                <node code="substring($expression$, $start$, $_length$)" name="substring - Returns the string formed by extracting the specified number of characters from another string." type="1"/>
+                <node code="to_unichar($integer_expression$)" name="to_unichar - Returns a unichar expression having the value of the integer expression." type="1"/>
+                <node code="uhighsurr('$ncharacter_expression$', $start$)" name="uhighsurr - Returns 1 if the Unicode value at position start is the high half of a surrogate pair (which should appear first in the pair). Returns 0 otherwise." type="1"/>
+                <node code="ulowsurr('$ncharacter_expression$', $start$)" name="ulowsurr - Returns 1 if the Unicode value at position start is the low half of a surrogate pair (which should appear second in the pair). Returns 0 otherwise." type="1"/>
+                <node code="upper($character_expression$)" name="upper - Returns the uppercase equivalent of the specified string." type="1"/>
+                <node code="uscalar('$uchar_expression$')" name="uscalar - Returns the Unicode scalar value for the first Unicode character in an expression." type="1"/>
+            </nodes>
+        </node>
+        <node name="Templates" type="0">
+            <nodes>
+                <node code="sp_addlogin @loginame = '$login_name$', &#xa;&#x9;@password = '$password$'" name="addlogin - Adds a new user account to Adaptive Server; specifies the password expiration interval, the minimum password length, and the maximum number of failed logins allowed for a specified login at creation." type="1"/>
+                <node code="sp_adduser  @loginname   = '$login_name$'" name="adduser - Adds a new user to the current database." type="1"/>
+                <node code="case $input_expression$&#xa;&#x9;when $when_expression1$ then $result_expression1$&#xa;&#x9;when $when_expression2$ then $result_expression2$&#xa;&#x9;when $when_expression3$ then $result_expression3$&#xa;&#x9;when $when_expression4$ then $result_expression4$&#xa;&#x9;when $when_expression5$ then $result_expression5$&#xa;&#x9;else $else_result_expression$ &#xa;end" name="casesimple - Supports conditional SQL expressions; can be used anywhere a value expression can be used." type="1"/>
+                <node code="create unique clustered index $index_name$&#xa;on $database_name$.$owner$.$table_or_view_name$ &#xa;&#x9;($column_1$, &#xa;&#x9; $column_2$)&#xa;with&#xa;fillfactor = $fillfactor_value$,&#xa;ignore_dup_key&#xa;on $segment_name$" name="clusteredidx - Creates an index on one or more columns in a table." type="1"/>
+                <node code="CREATE DATABASE $database_name$" name="db - Creates a database." type="1"/>
+                <node code="delete &#xa;from $table_name$ &#xa;where $condition$" name="delrows - Removes rows from a table." type="1"/>
+                <node code="sp_droplogin @loginame = '$login_name$'" name="droplogin - Drops an Adaptive Server user login by deleting the users entry from master.dbo.syslogins." type="1"/>
+                <node code="drop role '$database_role$'" name="droprole - Drops a user-defined role." type="1"/>
+                <node code="sp_dropuser @name_in_db = '$_user_name$'" name="dropuser - Drops a user from the current database." type="1"/>
+                <node code="if $condition$&#xa;begin&#xa;&#x9;$code$&#xa;end" name="if - Imposes conditions on the execution of a SQL statement." type="1"/>
+                <node code="if $condition$&#xa;begin&#xa;&#x9;$if code$&#xa;end&#xa;else&#xa;begin&#xa;&#x9;$else code$&#xa;end" name="ifelse - Imposes conditions on the execution of a SQL statement." type="1"/>
+                <node code="sp_addlogin @loginame    = '$login_name$',&#xa;&#x9;&#x9;@passwd      = '$password$',&#xa;&#x9;&#x9;@defdb       = '$database$',&#xa;&#x9;&#x9;@deflanguage = '$_language$',&#xa;&#x9;&#x9;@sid         = $sid$,&#xa;&#x9;&#x9;@encryptopt  = $encryption_option$" name="login - Adds a new user account to Adaptive Server; specifies the password expiration interval, the minimum password length, and the maximum number of failed logins allowed for a specified login at creation." type="1"/>
+                <node code="create index $index_name$&#xa;on $database_name$.$owner$.$table_or_view_name$ &#xa;&#x9;($column_1$, &#xa;&#x9; $column_2$)" name="nonclusteredidx - Creates an index on one or more columns in a table." type="1"/>
+                <node code="create role '$role_name$'" name="role - Creates a user-defined role; specifies the password expiration interval, the minimum password length, and the maximum number of failed logins allowed for a specified role at creation." type="1"/>
+                <node code="create table $table_name$ (&#xa;$column_1$ $datatype_for_column_1$ not null, &#xa;$column_2$ $datatype_for_column_2$ null,&#xa;primary key ( $column_1$ ))" name="table - Creates new tables and optional integrity constraints." type="1"/>
+                <node code="create trigger $trigger_name$&#xa;on $table_name$&#xa;for delete, insert, update &#xa;as &#xa;begin&#xa;&#x9;$perform an operation$&#xa;end" name="trigger - Creates a trigger, a type of stored procedure that is often used for enforcing integrity constraints. A trigger executes automatically when a user attempts a specified data modification statement on a specified table." type="1"/>
+                <node code="update $table_name$&#xa;set    $column_name1$ = '$value1$'&#xa;where  $column_name2$ = '$value2$'" name="updatetable - Changes data in existing rows, either by adding data or by modifying existing data." type="1"/>
+                <node code="sp_adduser @loginame   = '$login_name$', &#xa;&#x9;@name_in_db = '$_user_name$',&#xa;&#x9;@grpname    = '$db_role_name$'" name="user - Adds a new user to the current database." type="1"/>
+                <node code="create view $view_name$&#xa;as &#xa;$select_statement$" name="view - Creates a view, which is an alternative way of looking at the data in one or more tables." type="1"/>
+            </nodes>
+        </node>
+        <node name="Text and Image Functions" type="0">
+            <nodes>
+                <node code="patindex('%$pattern$%', $expression$)" name="patindex - Returns the starting position of the first occurrence of a specified pattern." type="1"/>
+                <node code="textptr($column$)" name="textptr - Returns a pointer to the first page of a text or image column." type="1"/>
+                <node code="textvalid('$table.column$', $text_ptr$)" name="textvalid - Returns 1 if the pointer to the specified text column is valid; 0 if it is not." type="1"/>
+            </nodes>
+        </node>
+        <node name="Miscellaneous" type="0">
+            <nodes>
+                <node code="select top 10 * from EMPLOYEE" name="Get top N rows (example)" type="1"/>
+                <node code="CREATE TABLE #test_temp_table (field_name varchar(100), pk NUMERIC(32) null, old_pk NUMERIC(32) null)" name="Create temporary table (example)" type="1"/>
+                <node code="select GETDATE()" name="Get current date+time" type="1"/>
+                <node code="select 'Y'" name="dummy/dual table" type="1"/>
+            </nodes>
+        </node>
+        <node name="Autoincrement field" type="0">
+            <nodes>
+                <node code="create table TEST_AUTOINCREMENT                 &#xa;(&#xa;  CONFIG_PROPERTY_NUM numeric(8,0) IDENTITY,&#xa;  NAME&#x9;VARCHAR(255) null&#xa;)  " name="Create table with autoincrement field (example)" type="1"/>
+                <node code="insert into TEST_AUTOINCREMENT (NAME) values ('TEST')" name="Insert into table with autoincrement field" type="1"/>
+                <node code="SELECT @@IDENTITY" name="Get value of the autoincrement field which was just updated" type="1"/>
+            </nodes>
+        </node>
+        <node name="TSQL procedures and functions and Sql Developer Techniques" type="0">
+            <nodes>
+                <node code="create procedure proc_test &#xa;    @param1 int, &#xa;    @param2 varchar(100), &#xa;    @param3 int output, &#xa;    @param4 varchar(100) output&#xa;as&#xa;begin&#xa;    select @param3 = @param1 + 100&#xa;&#xa;    select @param4 = @param2 + 'test'&#xa;end" name="Create stored procedure with input and output parameters (example)" type="1"/>
+                <node code="{call dbo.proc_test(:integer_param1, :param2, :out_int_param3, :out_varchar_param4)}" name="Execute stored procedure with input and output parameters from Sql Devloper (Execute Script)" type="1"/>
+                <node code="create function test_fnc(@v_value int) RETURNS CHAR(6)&#xa;AS  &#xa;BEGIN&#xa;   return CAST(@v_value as char(6))&#xa;END" name="Create function (example)" type="1"/>
+                <node code="select dbo.test_fnc(:param)" name="Execute function with input parameters from Sql Developer (Execute Sql)" type="1"/>
+                <node code="create procedure test_resultset &#xa;AS  &#xa;BEGIN&#xa;   select * from EMPLOYEE&#xa;END" name="Create procedure which returns resultset" type="1"/>
+                <node code="{call dbo.test_resultset()} " name="Execute procedure which returns resultset from Sql Developer (Execute Script)" type="1"/>
+            </nodes>
+        </node>
+    </nodes>
+</sybaseadaptiveserver>

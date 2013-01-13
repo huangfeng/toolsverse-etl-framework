@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+    <name>extractor</name>
+    <script>extractor</script>
+    <onsave action="skip"/>    
+    <onpersist action="skip"/>
+    <driver name="com.toolsverse.etl.driver.GenericJdbcDriver" />
+    
+    <variables>
+        <SOURCE_NUM value="1" />
+    </variables>
+    
+    <sources> 
+       <source> 
+          <name>source</name>
+          <extract>
+              <sql>select *  from source</sql> 
+          </extract>
+       </source>
+       
+       <source> 
+          <name>source_persist_text</name>
+          <onpersist action="save"/>
+          <extract>
+              <sql>select * from source</sql>
+              <writer class="com.toolsverse.etl.connector.text.TextConnector" delimiter=";" metadata="false" firstrow="false"/> 
+          </extract>
+       </source>
+       
+       <source empty="Yes"> 
+          <name>source_persist_text_empty</name>
+          <onpersist action="save"/>
+          <extract>
+              <sql>select * from source</sql>
+              <writer class="com.toolsverse.etl.connector.text.TextConnector" delimiter=";" metadata="false" firstrow="false"/> 
+          </extract>
+       </source>
+
+       <source> 
+          <name>source_persist_excel</name>
+          <onpersist action="save"/>
+          <extract>
+              <sql>select * from source</sql>
+              <writer class="com.toolsverse.etl.connector.excel.ExcelConnector" sheetname="SOURCE_TASKS_EXCEL" /> 
+          </extract>
+       </source>
+       
+       <source> 
+          <name>source_persist_excel_xlsx</name>
+          <onpersist action="save"/>
+          <extract>
+              <sql>select * from source</sql>
+              <writer class="com.toolsverse.etl.connector.excel.ExcelXlsxConnector" sheetname="SOURCE_TASKS_EXCEL_XLSX" /> 
+          </extract>
+       </source>
+       
+       
+       <source> 
+          <name>source_populate_xml</name>
+          <extract>
+              <connection>source_xml</connection> 
+              <reader>com.toolsverse.etl.connector.xml.XmlConnector</reader> 
+          </extract>
+       </source>
+
+       <source> 
+          <name>source_cond</name>
+          <extract>
+              <sql>select *  from source where source_num = {SOURCE_NUM}</sql>
+              <using>SOURCE_NUM</using> 
+          </extract>
+       </source> 
+
+       <source> 
+          <name>source_test</name>
+          <extract>
+              <connection>test</connection>
+              <sql>select *  from source</sql> 
+          </extract>
+       </source>
+       
+       <source empty="Yes"> 
+          <name>exception</name>
+          <extract>
+              <sql>insert into some_table</sql> 
+          </extract>
+       </source>
+
+       <source empty="Yes"> 
+          <name>ignore_exception</name>
+          <extract>
+              <sql>insert into some_table</sql>
+              <onexception action="ignoreparseerror"/> 
+          </extract>
+       </source>
+       
+       <source> 
+          <name>empty</name>
+       </source>
+       
+       <source empty="Yes"> 
+          <name>empty_data_set</name>
+          <extract>
+              <sql>select *  from source</sql> 
+          </extract>
+       </source>
+        
+       <source> 
+          <name>source_tasks</name>
+          <extract>
+              <sql>select *  from source</sql> 
+          </extract>
+          <tasks>
+                 <task>
+                    <name>testinline</name>   
+                    <class>com.toolsverse.etl.core.task.common.TestInlineTask</class>
+                 </task> 
+          </tasks>
+       </source>
+
+
+       <source> 
+          <name>source_tasks_xml</name>
+          <extract>
+              <connection>source_xml</connection> 
+              <reader>com.toolsverse.etl.connector.xml.XmlConnector</reader>  
+          </extract>
+          <tasks>
+                 <task>
+                    <name>testinline</name>   
+                    <class>com.toolsverse.etl.core.task.common.TestInlineTask</class>
+                 </task> 
+          </tasks>
+       </source>
+
+       <source> 
+          <name>source_tasks_text</name>
+          <extract>
+              <connection>source_text</connection> 
+              <reader>com.toolsverse.etl.connector.text.TextConnector</reader>  
+          </extract>
+          <tasks>
+                 <task>
+                    <name>testinline</name>   
+                    <class>com.toolsverse.etl.core.task.common.TestInlineTask</class>
+                 </task> 
+          </tasks>
+       </source>
+
+       <source> 
+          <name>source_tasks_excel</name>
+          <extract>
+              <connection>source_excel</connection> 
+              <reader>com.toolsverse.etl.connector.excel.ExcelConnector</reader>  
+          </extract>
+          <tasks>
+                 <task>
+                    <name>testinline</name>   
+                    <class>com.toolsverse.etl.core.task.common.TestInlineTask</class>
+                 </task> 
+          </tasks>
+       </source>
+       
+       <source> 
+          <name>source_tasks_excel_xlsx</name>
+          <extract>
+              <connection>source_excel_xlsx</connection> 
+              <reader>com.toolsverse.etl.connector.excel.ExcelXlsxConnector</reader>  
+          </extract>
+          <tasks>
+                 <task>
+                    <name>testinline</name>   
+                    <class>com.toolsverse.etl.core.task.common.TestInlineTask</class>
+                 </task> 
+          </tasks>
+       </source>
+       
+        
+    </sources>
+
+</scenario>

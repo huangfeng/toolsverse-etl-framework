@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+     <name>Move data (demo)</name>
+     <description>Moves data from one database to another. Creates tables if needed.</description>
+     <script>move_data_demo</script>
+     <driver>auto</driver>
+     <sources>
+          <source>
+               <name>employee</name>
+               <extract>
+                    <sql>select * from employee</sql>
+               </extract>
+          </source>
+
+          <source>
+               <name>emp_resume</name>
+               <extract>
+                    <sql>select * from emp_resume</sql>
+               </extract>
+          </source>
+
+          <source>
+               <name>emp_photo</name>
+               <extract>
+                    <sql>select * from emp_photo</sql>
+               </extract>
+          </source>
+          
+     </sources>
+     <destinations>
+          <destination>
+               <name>employee</name>
+               <metadata>yes</metadata>
+          </destination>
+
+          <destination>
+               <name>emp_resume</name>
+               <metadata>yes</metadata>
+          </destination>
+
+          <destination>
+               <name>emp_photo</name>
+               <metadata>yes</metadata>
+          </destination>
+          
+     </destinations>
+</scenario>

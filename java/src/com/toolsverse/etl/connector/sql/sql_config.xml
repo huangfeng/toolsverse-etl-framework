@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups>
+   <group name="SQL" key="sql" >
+      <items>
+         <item label="File Name:" key="filename" type="string" />
+         <item label="Table Name:" key="tablename" type="string" />
+         <item label="Use Selected Cells Only:" key="useselected" type="boolean" default="false" filter="client"/> 
+      </items>
+   </group>
+</groups>

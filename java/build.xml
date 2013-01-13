@@ -1,0 +1,7 @@
+<project default="build-toolsverse-main">
+    <target name="build-all">
+	<ant antfile="build.xml" dir="./build" inheritAll="true" inheritRefs="true" />
+    </target>
+
+    <target depends="build-all" name="build-toolsverse-main" />
+</project>

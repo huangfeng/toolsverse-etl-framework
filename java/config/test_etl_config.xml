@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <connections>
+      <connection alias="xml">
+         <connector>com.toolsverse.etl.connector.xml.XmlConnector</connector>
+         <url>{app.data}/etl_test.xml</url>
+      </connection>
+
+      <connection alias="text">
+         <connector>com.toolsverse.etl.connector.text.TextConnector</connector>
+         <url>{app.data}/etl_test.txt</url>
+         <params>delimiter=';';firstrow=false;metadata=false</params>
+      </connection>
+   </connections>
+   
+   <active.connections>
+      <sourses>
+         <source alias="xml" name="xml_con" />
+      </sourses>
+      <destinations>
+         <destination alias="text" name="text_con" />
+      </destinations>
+   </active.connections>
+   <execute>
+       <scenario name="xml2text.xml" action="extract_load" />
+   </execute>
+</config>

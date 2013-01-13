@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+    <name>etlprocess</name>
+    <script>etlprocess</script>
+    <onsave action="skip"/>    
+    <onpersist action="skip"/>
+    <driver name="com.toolsverse.etl.driver.GenericJdbcDriver" />
+    
+    <sources> 
+       <source> 
+          <name>source</name>
+          <extract>
+              <sql>select * from source</sql> 
+          </extract>
+       </source>
+    </sources>
+    
+    <destinations>
+       <destination>
+          <name>source</name>
+          <load>
+              <connection>source_text</connection>
+              <writer>com.toolsverse.etl.connector.text.TextConnector</writer> 
+          </load>
+       </destination>         
+    </destinations>
+
+</scenario>

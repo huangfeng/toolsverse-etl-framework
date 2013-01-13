@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <name>DELIMITED_FILE_METADATA</name>
+    <metadata>
+        <col name="EMPNO" native_type="CHAR(6)" nullable="false" type="1"/>
+        <col name="FIRSTNME" native_type="VARCHAR(12)" nullable="false" type="12"/>
+        <col name="LASTNAME" native_type="VARCHAR(15)" nullable="false" type="12"/>
+        <col name="JOB" native_type="CHAR(8)" nullable="true" type="1"/>
+    </metadata>
+</dataset>

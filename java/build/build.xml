@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="build-toolsverse">
+	<property name="base-dir" location=".." />
+	<property name="build-dir" location="." />
+	<property name="source-dir" location="${base-dir}/src" />
+	<property name="source-test-dir" location="${base-dir}/src-test" />
+	<property name="destination-dir" location="${base-dir}/classes" />
+	<property name="lib-dir" location="${base-dir}/lib" />
+	<property name="dist-dir" location="${base-dir}/dist" />
+	<property name="doc-dir" location="${base-dir}/doc" />
+	<property name="javadoc-dir" location="${doc-dir}/javadoc" />
+	<property name="junit-reports-dir" location="${build-dir}/junit-reports" />
+	<property name="dist-jar-dir" location="${dist-dir}/all-jars" />
+	<property name="dist-source-jar-dir" location="${dist-dir}/all-jars" />
+	<property name="dist-javadoc-jar-dir" location="${dist-dir}/all-jars" />
+	<property name="modules-dir" location="${build-dir}/modules" />
+
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" >
+		<classpath>
+			<pathelement location="${base-dir}/ant/ant-contrib/ant-contrib-1.0b3.jar"/>
+		</classpath>
+	</taskdef>
+
+	<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask"
+		                     classpath="${base-dir}/ant/launch4j/launch4j.jar:${base-dir}/ant/launch4j/lib/xstream.jar"	/>
+	
+	<condition property="isWindows" value="true" else="false">
+		<os family="windows" />
+	</condition>
+
+	<condition property="isMac" value="true" else="false">
+		<os family="mac" />
+	</condition>
+
+	<path id="toolsverse.classpath">
+		<fileset dir="${lib-dir}" includes="**/*.jar" />
+	</path>
+
+	<path id="unit-test.classpath">
+		<pathelement location="${destination-dir}" />
+		<path refid="toolsverse.classpath" />
+	</path>
+	
+	<buildnumber file="build.num" />
+
+	<target name="import-all-props">
+		<trycatch>
+			<try>
+				<delete file="${build-dir}/temp_build.properties" />
+				<concat destfile="${build-dir}/temp_build.properties" fixlastline="true">
+					<fileset dir="${build-dir}" includes="**/build.properties" />
+				</concat>
+				<property file="${build-dir}/temp_build.properties" />
+			</try>
+			<catch>
+			</catch>
+			<finally>
+				<delete file="temp_build.properties" />
+			</finally>
+		</trycatch>
+	</target>
+
+	<target name="init">
+		<manifest file="manifest.mf">
+			<attribute name="Implementation-Title" value="${app-name}" />
+			<attribute name="Implementation-Version" value="${version-num}-${build.number}" />
+			<attribute name="Implementation-Vendor" value="${app-copyright-company}" />
+		</manifest>
+	</target>
+
+	<target name="compile">
+		<if>
+			<equals arg1="${compile}" arg2="true" />
+			<then>
+				<propertyfile file="${source-dir}/com/toolsverse/config/config.properties">
+					<entry key="app.version" value="${version-num}-${build.number}" />
+				</propertyfile>
+
+				<delete dir="${destination-dir}" quiet="true" />
+				<mkdir dir="${destination-dir}" />
+
+				<copy todir="${destination-dir}">
+					<fileset dir="${source-dir}" excludes="**/*.java,**/.svn" includes="**" />
+				</copy>
+				<javac debug="${debug}" includeantruntime="false" debuglevel="${debuglevel}" destdir="${destination-dir}" nowarn="on" source="${java-level}" srcdir="${source-dir}" target="${java-level}" >
+					<compilerarg line="-XDignore.symbol.file" />
+					<classpath refid="toolsverse.classpath" />
+				</javac>
+
+			</then>
+			<else>
+				<echo message="Skipped compilation." />
+			</else>
+		</if>
+	</target>
+
+
+	<target name="javadoc">
+		<if>
+			<equals arg1="${create-javadoc}" arg2="true" />
+			<then>
+				<delete dir="${javadoc-dir}" quiet="true" />
+
+				<javadoc access="package" author="false" destdir="${javadoc-dir}" linksource="false" noqualifier="java.*:javax.*:com.sun.*" packagenames="*.*" sourcepath="${source-dir}" use="true" version="true" windowtitle="${app-name} ${version-num}">
+					<classpath refid="toolsverse.classpath" />
+					<Doctitle>
+						<![CDATA[<CENTER>
+						<H2>${app-name} ${version-num}</H2>
+					</CENTER>
+					<HR>]]></Doctitle>
+					<bottom>
+						<![CDATA[<i>Copyright ${app-copyright-year} ${app-copyright-url}. All Rights Reserved.</i>]]></bottom>
+				<link href="${javadoc.api.href}" />
+			</javadoc>
+		</then>
+		<else>
+			<echo message="Skipped javadoc." />
+		</else>
+	</if>
+</target>
+
+<target name="unit-tests">
+	<if>
+		<equals arg1="${compile}" arg2="true" />
+		<then>
+			<copy todir="${destination-dir}">
+				<fileset dir="${source-test-dir}" excludes="**/*.java,**/.svn" includes="**" />
+			</copy>
+			<javac debug="${debug}" debuglevel="${debuglevel}" destdir="${destination-dir}" nowarn="on" source="${java-level}" srcdir="${source-test-dir}" target="${java-level}">
+				<classpath refid="toolsverse.classpath" />
+			</javac>
+			<if>
+				<equals arg1="${unit-tests}" arg2="true" />
+				<then>
+					<delete dir="${junit-reports-dir}" quiet="true" />
+
+					<mkdir dir="${junit-reports-dir}" />
+
+					<junit dir="${base-dir}" fork="false" maxmemory="512m" haltonfailure="true" printsummary="true">
+						<sysproperty key="user.dir" value="${base-dir}"/>
+						<classpath refid="unit-test.classpath" />
+						<formatter type="xml" />
+						<test name="com.toolsverse.suite.AllTests" outfile="test-result" todir="${junit-reports-dir}" />
+					</junit>
+				</then>
+				<else>
+					<echo message="Skipped unit tests." />
+				</else>
+			</if>
+		</then>
+		<else>
+			<echo message="Skipped unit tests." />
+		</else>
+	</if>
+</target>
+
+<target name="import-module">
+	<ant antfile="${file.name}" />
+</target>
+
+<target name="create-jars">
+	<if>
+		<equals arg1="${create-jars}" arg2="true" />
+		<then>
+			<delete dir="${dist-dir}" />
+
+			<mkdir dir="${dist-dir}" />
+
+			<mkdir dir="${dist-jar-dir}" />
+
+			<foreach param="file.name" target="import-module" inheritall="true">
+				<fileset dir="${modules-dir}" includes="**/build.xml" />
+			</foreach>
+		</then>
+		<else>
+			<echo message="Skipped creating jars." />
+		</else>
+	</if>
+</target>
+	
+<target name="sign-jar">
+   <signjar jar="${file.name}" alias="${aliasName}" keystore="${keystoreFileName}" storepass="${keystorePassword}" />
+</target>	
+
+<target name="sign-jars">
+	<if>
+		<equals arg1="${sign-jars}" arg2="true" />
+		<then>
+			   <property name="aliasName" value="${app-copyright-company}"/>
+			   <property name="keystorePassword" value="${app-copyright-company}"/>
+			   <property name="keystoreFileName" location="${build-dir}/${app-copyright-company}.ks"/>
+			   <property name="organisationName" value="${app-copyright-company}"/>
+
+			   <delete file="${keystoreFileName}" failonerror="false" />
+			   <genkey alias="${aliasName}" storepass="${keystorePassword}" keystore="${keystoreFileName}" validity="3650">
+	 	          <dname>
+			         <param name="O"  value="${organisationName}"/>
+			      </dname>
+			   </genkey>
+			
+ 			   <foreach param="file.name" target="sign-jar" inheritall="true">
+				    <fileset dir="${dist-jar-dir}" includes="**" />
+			   </foreach>
+		</then>
+		<else>
+			<echo message="Skipped signing jars." />
+		</else>
+	</if>
+
+</target>
+
+
+
+<target name="deploy">
+	<ant antfile="${build-dir}/deploy.xml" inheritAll="true" inheritRefs="true">
+		<property name="type" value="${deploy-type}" />
+	</ant>
+</target>
+
+
+<target name="deploy-all">
+	<if>
+		<isset property="deploy" />
+		<then>
+			<foreach list="${deploy}" delimiter="," param="deploy-type" target="deploy" inheritall="true" inheritrefs="true" />
+		</then>
+		<else>
+			<echo message="Skipped deployment." />
+		</else>
+	</if>
+</target>
+
+<target depends="import-all-props,init,compile,javadoc,create-jars,sign-jars,unit-tests,deploy-all" name="build-toolsverse" />
+</project>

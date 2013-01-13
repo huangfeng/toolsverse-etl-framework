@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups>
+   <group name="XML" key="xml" >
+      <items>
+         <item label="File Name:" key="filename" type="string" /> 
+         <item type="custom" controlclass="separator" />
+         <item label="Use Selected Cells Only:" key="useselected" type="boolean" default="false" filter="client"/>
+         <item label="Example:" key="example" type="label" default="firstname,lastname" />
+         <item label="Split By:" key="splitby" type="string" />
+         <item label="XSLT File Name:" key="xsl" type="string" />
+         <item type="custom" controlclass="separator" />
+         <item label="Date and Time Format:" key="datetimeformat" type="string" default="MM/dd/yyyy HH:mm:ss" prefx="200" />
+         <item label="Date Format:" key="dateformat" type="string" default="MM/dd/yyyy" prefx="200" />
+         <item label="Time Format:" key="timeformat" type="string" default="HH:mm:ss" prefx="200" />
+      </items>
+   </group>
+</groups>

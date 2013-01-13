@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db2 name="db2" type="0">
+    <nodes>
+        <node name="Aggregate Functions" type="0">
+            <nodes>
+                <node code="AVG ($scope$ $expression$)" name="AVG - AVG returns the average for a set of numbers (built-in). The result can be null.&#xa;" type="1"/>
+                <node code="CORRELATION ($expression1$, $expression2$)" name="CORRELATION - CORRELATION returns the double-precision float coefficient of correlation for a pair of numbers. The result can be null.&#xa;" type="1"/>
+                <node code="COUNT ($scope$ $expression$)" name="COUNT - COUNT returns a large integer for the total number of rows or values from a set of rows or values. The result cannot be null.&#xa;" type="1"/>
+                <node code="COUNT_BIG ($scope$ $expression$)" name="COUNT_BIG - COUNT_BIG returns the total number of rows of decimal of precision 31, scale 0  from a set of rows or values. The result can be greater than the maximum value for the integer. The result cannot be null.&#xa;" type="1"/>
+                <node code="COVARIANCE ($expression1$, $expression2$)" name="COVARIANCE - COVARIANCE returns the double-precision float covariance (population) for a set of numbered pairs. The result can be null.&#xa;" type="1"/>
+                <node code="GROUPING ($expression$)" name="GROUPING - GROUPING returns a small integer used to determine whether the row returned in a GROUP BY excludes the column represented by the expression.&#xa;" type="1"/>
+                <node code="MAX ( $scope$ $expression$)" name="MAX - MAX returns the maximum value from a set of values for any built-in type except a long string or DATALINK. The result cannot be a: LONG VARCHAR, LONG GRAPHIC, BLOB, CLOB, DBCLOB, or DATALINK type. Distinct types for the excluded types or structured types " type="1"/>
+                <node code="MIN ( $scope$ $expression$)" name="MIN - MIN returns the minimum value from a set of values for any built-in type except a long string or DATALINK. The result cannot be a: LONG VARCHAR, LONG GRAPHIC, BLOB, CLOB, DBCLOB, or DATALINK. Distinct types for the excluded types or structured types are n&#xa;" type="1"/>
+                <node code="REGR_AVGX  ($expression1$, $expression2$)" name="REGR_AVGX - REGR_AVGX returns values that can be used to compute statistics to evaluate the quality and validity of regression models.&#xa;" type="1"/>
+                <node code="REGR_AVGY  ($expression1$, $expression2$)" name="REGR_AVGY - REGR_AVGY returns values that can be used to compute statistics to evaluate the quality and validity of regression models." type="1"/>
+                <node code="REGR_COUNT  ($expression1$, $expression2$)" name="REGR_COUNT - REGR_COUNT returns the number pairs used to fit a regression line. The pairs are non-null. " type="1"/>
+                <node code="REGR_INTERCEPT  ($expression1$, $expression2$)" name="REGR_INTERCEPT - REGR_INTERCEPT returns the Y-intercept of the regression line." type="1"/>
+                <node code="REGR_R2 ($expression1$, $expression2$)" name="REGR_R2 - REGR_R2 returns the coefficient of determination (also referred to as R2 or goodness of fit) for the regression." type="1"/>
+                <node code="REGR_SLOPE ($expression1$, $expression2$)" name="REGR_SLOPE - REGR_SLOPE returns the line slope." type="1"/>
+                <node code="REGR_SXX ($expression1$, $expression2$)" name="REGR_SXX - REGR_SXX returns values that can be used to compute statistics to evaluate the quality and validity of regression models.&#xa;" type="1"/>
+                <node code="REGR_SXY ($expression1$, $expression2$)" name="REGR_SXY - REGR_SXY returns values that can be used to compute statistics to evaluate the quality and validity of regression models.&#xa;" type="1"/>
+                <node code="REGR_SYY ($expression1$, $expression2$)" name="REGR_SYY - REGR_SYY returns values that can be used to compute statistics to evaluate the quality and validity of regression models." type="1"/>
+                <node code="STDDEV ($scope$ $expression$)" name="STDDEV - STDDEV returns the double-precision float standard deviation for a set of numbers. The result can be null." type="1"/>
+                <node code="SUM ($scope$ $expression$)" name="SUM - SUM returns the sum for a set of built-in type numbers. The result can be a large integer or double-precision float if the values are small integers or single-precision floating points respectively." type="1"/>
+                <node code="VARIANCE ($scope$ $expression$)" name="VARIANCE - VARIANCE returns the double-precision float variance for a set of numbers. The result can be null." type="1"/>
+            </nodes>
+        </node>
+        <node name="Array Functions" type="0">
+            <nodes>
+                <node code="ARRAY_AGG ($expression$ [$order-by-clause$])" name="ARRAY_AGG - Aggregates a set of elements into an array." type="1"/>
+                <node code="ARRAY_DELETE ($var$ [, $array-index1$ [ , $array-index2$]])" name="ARRAY_DELETE - Deletes elements from an array." type="1"/>
+                <node code="ARRAY_FIRST ($var$)" name="ARRAY_FIRST - Returns the minimum array index value of the array." type="1"/>
+                <node code="ARRAY_LAST ($var$)" name="ARRAY_LAST - Returns the maximum array index value of the array." type="1"/>
+                <node code="ARRAY_NEXT ($var$, $array-index$)" name="ARRAY_NEXT - Returns the next larger array index value for an array relative to the specified array index argument." type="1"/>
+                <node code="ARRAY_PRIOR ($var$, $array-index$)" name="ARRAY_PRIOR - Returns the next smaller array index value for an array relative to the specified array index argument." type="1"/>
+                <node code="CARDINALITY ($var$)" name="CARDINALITY - Returns a value of type BIGINT representing the number of elements of an array" type="1"/>
+                <node code="MAX_CARDINALITY ($var$)" name="MAX_CARDINALITY - Returns a value of type BIGINT representing the maximum number of elements that an array can contain" type="1"/>
+                <node code="TRIM_ARRAY ($var$)" name="TRIM_ARRAY - Deletes elements from the end of an array" type="1"/>
+                <node code="UNNEST($var$)" name="UNNEST - Returns a result table that includes a row for each element of the specified array." type="1"/>
+            </nodes>
+        </node>
+        <node name="Cast Scalar Functions" type="0">
+            <nodes>
+                <node code="BIGINT ($exp$)" name="BIGINT - BIGINT returns a 64-bit integer constant for the numeric, character, or datetime type passed in the argument. Graphic strings are converted to character strings before execution." type="1"/>
+                <node code="BLOB ($string$ [, $length$])" name="BLOB - BLOB returns a BLOB for character, graphic, or binary string types. " type="1"/>
+                <node code="CHAR ($exp$, $lenght$)" name="CHAR - CHAR returns a fixed-length character string representation of the argument." type="1"/>
+                <node code="CLOB ($exp$ [, $length$])" name="CLOB - CLOB returns a CLOB for a character string. Unicode graphic strings are converted to character strings before execution.&#xa;" type="1"/>
+                <node code="DATE ($exp$) " name="DATE - DATE returns a date from a date, timestamp, positive number less than or equal to 3652059, string representing a date/timestamp, or a string containing a length of 7 that does not have a CLOB, LONG VARCHAR, DBCLOB, or LONG GRAPHIC type. &#xa;" type="1"/>
+                <node code="DBCLOB ($exp$)" name="DBCLOB - DBCLOB returns a DBCLOB for a graphic string. Unicode databases convert character strings to graphic strings before execution." type="1"/>
+                <node code="DECIMAL ($exp$)" name="DECIMAL - DECIMAL returns a decimal value for a number; a character string representation of a decimal, integer, or floating point number; and a datetime value if date, time, or timestamp types are used in the argument." type="1"/>
+                <node code="DOUBLE ($exp$)" name="DOUBLE - DOUBLE returns a float corresponding to a number or character string depending on the type of expression supplied in the argument." type="1"/>
+                <node code="DOUBLE_PRECISION ($exp$)" name="DOUBLE_PRECISION - DOUBLE_PRECISION returns a float corresponding to a number or character string depending on the type of expression supplied in the argument." type="1"/>
+                <node code="EMPTY_BLOB()" name="EMPTY_BLOB - Returns a zero-length value with a data type of BLOB(1)." type="1"/>
+                <node code="EMPTY_CLOB()" name="EMPTY_CLOB - Returns a zero-length value with a data type of CLOB(1)." type="1"/>
+                <node code="EMPTY_DBCLOB()" name="EMPTY_DBCLOB - Returns a zero-length value with a data type of DBCLOB(1)." type="1"/>
+                <node code="FLOAT ($exp$)" name="FLOAT - FLOAT returns a float corresponding to a number or character string depending on the type of expression supplied in the argument." type="1"/>
+                <node code="GRAPHIC ($exp$)" name="GRAPHIC - GRAPHIC returns a fixed-length graphic string for any type of graphic string, character string, or date time value specified in the argument. If the argument is a character string, it is converted to a graphic string before execution." type="1"/>
+                <node code="INTEGER ($exp$)" name="INTEGER - INTEGER returns a large integer for number, character string, date, or time integer constants. The result can be null." type="1"/>
+                <node code="LONG_VARCHAR ($exp$)" name="LONG_VARCHAR - LONG_VARCHAR returns a LONG VARCHAR value for a character string with a maximum length of 32,700 bytes." type="1"/>
+                <node code="LONG_VARGRAPHIC ($exp$)" name="LONG_VARGRAPHIC - LONG_VARGRAPHIC returns a LONG VARGRAPHIC value for a double-byte character string with a maximum length of 16,350 double-byte characters." type="1"/>
+                <node code="REAL ($exp$)" name="REAL - REAL returns a single-precision float for any built-in numeric data type." type="1"/>
+                <node code="SMALLINT ($exp$)" name="SMALLINT - SMALLINT returns a small integer for a number or character string." type="1"/>
+                <node code="TIME ($exp$)" name="TIME - TIME returns the time from arguments containing time, timestamps, or string representations of time or timestamp values. String representations of time or timestamps cannot be CLOB, DBCLOB, LONG VARCHAR, or LONG GRAPHIC types." type="1"/>
+                <node code="TIMESTAMP ($exp1$ [, $exp2$])" name="TIMESTAMP - TIMESTAMP returns a timestamp from a value or a pair of values." type="1"/>
+                <node code="TO_CLOB ($exp$ [, $length$])" name="TO_CLOB - Returns a CLOB representation of a character string" type="1"/>
+                <node code="TO_NUMBER ($exp$ [, $formatstring$])" name="TO_NUMBER - Returns a DECFLOAT(34) value that is based on the interpretation of the input string using the specified format." type="1"/>
+                <node code="VARCHAR ($exp1$ [, $exp2$])" name="VARCHAR - VARCHAR returns a varying-length character string representation of the argument" type="1"/>
+                <node code="VARGRAPHIC ($exp1$ [, $exp2$])" name="VARGRAPHIC - VARCHAR returns a varying-length graphic string representation of the argument" type="1"/>
+            </nodes>
+        </node>
+        <node name="Comment Statements" type="0">
+            <nodes>
+                <node code="-- region $name$&#xa;$selected$$end$&#xa;-- endregion" name="region - Starts a collapsible code region." type="1"/>
+            </nodes>
+        </node>
+        <node name="Cursor Statements" type="0">
+            <nodes>
+                <node code="ALLOCATE $cursor-name$ CURSOR FOR RESULT SET $locator-variable$" name="ALLOCATE - ALLOCATE allocates a cursor for the result set given in the locator variable." type="1"/>
+                <node code="CLOSE $cursor-name$ [WITH RELEASE]" name="CLOSE - CLOSE closes a cursor." type="1"/>
+                <node code="DECLARE $cursor-name$ CURSOR [WITH HOLD] [WITH RETURN  [TO CALLER |TO CLIENT]] FOR $select_statement$" name="DECLARE - DECLARE CURSOR defines the cursor used by OPEN or FETCH." type="1"/>
+                <node code="FETCH FROM $cursor-name$ [INTO $host_variable$ [, host_variable ...] | USING DESCRIPTOR  $descriptor$]" name="FETCH - FETCH sets the cursor position to the next row of the result table and assigns the value to a host variable." type="1"/>
+                <node code="OPEN $cursor-name$ [USING $host_variable$ [, $host_variable$  ...] | USING DESCRIPTOR  $descriptor$]" name="OPEN - OPEN opens a cursor." type="1"/>
+            </nodes>
+        </node>
+        <node name="Datalink Scalar Functions" type="0">
+            <nodes>
+                <node code="DLCOMMENT ($exp$)" name="DLCOMMENT - DLCOMMENT returns a VARCHAR(254) with the comment from a DATALINK value, if one exists." type="1"/>
+                <node code="DLLINKTYPE ($exp$)" name="DLLINKTYPE - DLLINKTYPE returns a VARCHAR(4), which is the linktype value from a DATALINK value." type="1"/>
+                <node code="DLNEWCOPY ($data-location$, $has-token$)" name="DLNEWCOPY - DLNEWCOPY returns a DATALINK value indicating that the referenced file changed." type="1"/>
+                <node code="DLPREVIOUSCOPY ($data-location$, $has-token$)" name="DLPREVIOUSCOPY - DLPREVIOUSCOPY returns a DATALINK value indicating that the previous value of the file should be restored." type="1"/>
+                <node code="DLREPLACECONTENT ($data-location$, $data-location-source$ $[, comment-string]$ )&#xa;" name="DLREPLACECONTENT - DLREPLACECONTENT returns a DATALINK value, which on assignment, replaces the content of a file with another file and creates a link to it." type="1"/>
+                <node code="DLURLCOMPLETE ($datalink-expression$)" name="DLURLCOMPLETE - DLURLCOMPLETE returns a VARCHAR(254) with the data location attribute from a DATALINK value with a linktype URL. A file acces token is included in the result." type="1"/>
+                <node code="DLURLCOMPLETEONLY ($datalink-expression$)" name="DLURLCOMPLETEONLY - DLURLCOMPLETEONLY returns a VARCHAR(254) with the data location attribute from a DATALINK value with a linktype URL. A file access token is not included in the result." type="1"/>
+                <node code="DLURLPATH ($datalink-expression$)" name="DLURLPATH - DLURLPATH returns a VARCHAR(254) with the path and file name needed to access a file on a server from a DATALINK value with a linktype URL. A file ac access token is included in the result." type="1"/>
+                <node code="DLURLPATHONLY ($datalink-expression$)" name="DLURLPATHONLY - DLURLPATHONLY returns a VARCHAR(254) with the path and file name needed to access a file on a server from a DATALINK value with linktype URL. Does not include file access token." type="1"/>
+                <node code="DLURLPATHWRITE ($datalink-expression$)" name="DLURLPATHWRITE - DLURLPATHWRITE returns a VARCHAR(254) with the path and file name needed to access a file on a server from a DATALINK value with a linktype URL." type="1"/>
+                <node code="DLURLSCHEME ($datalink-expression$)" name="DLURLSCHEME - DLURLSCHEME returns an uppercase VARCHAR(20) scheme from a DATALINK value with a linktype URL." type="1"/>
+                <node code="DLURLSERVER ($datalink-expression$)" name="DLURLSERVER - DLURLSERVER returns an uppercase VARCHAR(254) file server from a DATALINK value with a linktype URL." type="1"/>
+                <node code="DLVALUE ($data-location$)" name="DLVALUE - DLVAlUE returns a DATALINK value." type="1"/>
+            </nodes>
+        </node>
+        <node name="Datetime Scalar Functions" type="0">
+            <nodes>
+                <node code="ADD_MONTHS ($expression$, $numericexpression$)" name="ADD_MONTHS - Returns a datetime value that represents expression + the specified number of months" type="1"/>
+                <node code="DAY ($exp$)" name="DAY - DAY returns the value for the day part from the argument." type="1"/>
+                <node code="DAYNAME ($exp$)" name="DAYNAME - DAYNAME returns a character string (VARCHAR 100) for the name of the day. The string is mixed case and the result can be null." type="1"/>
+                <node code="DAYOFWEEK ($exp$)" name="DAYOFWEEK - DAYOFWEEK returns an integer representing the day of the week in the range of 1-7 (1 is Sunday)." type="1"/>
+                <node code="DAYOFWEEK_ISO ($exp$)" name="DAYOFWEEK_ISO - DAYOFWEEK_ISO returns an integer representing the day of the week in the range of 1-7 (1 is Monday)." type="1"/>
+                <node code="DAYOFYEAR ($exp$)" name="DAYOFYEAR - DAYOFYEAR returns an integer representing the day of the year in the range of 1-366. The result can be null." type="1"/>
+                <node code="DAYS ($exp$)" name="DAYS - DAYS returns an integer representing the date, timestamp, or valid character string representing a date or timestamp." type="1"/>
+                <node code="HOUR ($exp$)" name="HOUR - HOUR returns the value for the hour part from the argument." type="1"/>
+                <node code="JULIAN_DAY ($exp$)" name="JULIAN_DAY - JULIAN_DAY returns the number of days from January 1, 4713 B.C. to the date specified. The result is an integer and can be null." type="1"/>
+                <node code="LAST_DAY ($expression$)" name="LAST_DAY - Returns a datetime value that represents the last day of the month of the expression." type="1"/>
+                <node code="MICROSECOND ($exp$)" name="MICROSECOND - MICROSECOND returns the value for the microsecond part from the argument." type="1"/>
+                <node code="MIDNIGHT_SECONDS ($exp$)" name="MIDNIGHT_SECONDS - MIDNIGHT_SECONDS returns the number of seconds between midnight and the time specified. The result is an integer in the range of 0 and 86,400 and can be null." type="1"/>
+                <node code="MINUTE ($exp$)" name="MINUTE - MINUTE returns the value for the minute part from the argument." type="1"/>
+                <node code="MONTH ($exp$)" name="MONTH - MONTH returns the value for the month part from the argument." type="1"/>
+                <node code="MONTHNAME ($exp$)" name="MONTHNAME - MONTHNAME returns a character string (VARCHAR 100) for the name of the month. The string is mixed case and the result can be null." type="1"/>
+                <node code="MONTHS_BETWEEN ($expression1$, $expression2$)" name="MONTHS_BETWEEN - Returns a decimal value of the estimate of the number of months between expression1 and expression2." type="1"/>
+                <node code="NEXT_DAY ($expression$, $expression2$ [$locale$])" name="NEXT_DAY - Returns a datetime value that represents the first weekday, named by day-of-week, that is past the date in expression." type="1"/>
+                <node code="QUARTER ($exp$)" name="QUARTER - QUARTER returns the quarter of the year associated with the date in the argument. The result is an integer in the range of 1-4 and can be null." type="1"/>
+                <node code="ROUND ($expression$ [, $format-string$] [$locale$])" name="ROUND - Returns a datetime-expression rounded to the unit specified by the format-string." type="1"/>
+                <node code="ROUND_TIMESTAMP ($expression$ [, $format-string$] [$locale$])" name="ROUND_TIMESTAMP - Returns a datetime-expression rounded to the unit specified by the format-string." type="1"/>
+                <node code="SECOND ($exp$)" name="SECOND - SECOND returns the value for seconds part from the argument." type="1"/>
+                <node code="TIMESTAMPDIFF ($exp1$, $exp2$)" name="TIMESTAMPDIFF - TIMESTAMPDIFF returns the estimated intervals between two timestamps of the type defined in the first argument (INTEGER, SMALLINT)." type="1"/>
+                <node code="TIMESTAMP_FORMAT ($expression$ [ , $format-string$])" name="TIMESTAMP_FORMAT - Returns a timestamp that is based on the interpretation of the input string using the specified format" type="1"/>
+                <node code="TIMESTAMP_ISO ($exp$)" name="TIMESTAMP_ISO - TIMESTAMP_ISO returns a timestamp." type="1"/>
+                <node code="TO_CHAR ($exp$, $format$)" name="TO_CHAR - TO_CHAR returns a character string of a timestamp formatted using a character template. Synonymous with VARCHAR_FORMAT." type="1"/>
+                <node code="TO_DATE ($exp$, $format$)" name="TO_DATE - TO_DATE returns a timestamp from a character string formatted using a character template. Synonymous with TIMESTAMP_FORMAT." type="1"/>
+                <node code="VARCHAR_FORMAT ($exp$, $format$)" name="VARCHAR_FORMAT - VARCHAR_FORMAT returns a character string of a timestamp formatted using a character template. Synonymous with TO_CHAR." type="1"/>
+                <node code="WEEK ($exp$)" name="WEEK - WEEK returns an integer for the week of the year in the range of 1-54 for the argument. Sunday starts the week." type="1"/>
+                <node code="WEEK_ISO ($exp$)" name="WEEK_ISO - WEEK_ISO returns an integer for the week of the year in the range of 1-53 for the argument. Monday starts the week and is always 7 days in length." type="1"/>
+                <node code="YEAR ($exp$)" name="YEAR - YEAR returns the value for the year part from the argument." type="1"/>
+            </nodes>
+        </node>
+        <node name="Miscellaneous Scalar Functions" type="0">
+            <nodes>
+                <node code="[$BITAND$ | $BITANDNOT$ | $BITOR$ | $BITXOR$] ($expression1, $expression2$)" name="BITAND - These bitwise functions operate on the &quot;two's complement&quot; representation of the integer value of the input arguments." type="1"/>
+                <node code="BITNOT ($expression$)" name="BITNOT - This function returns the value of a bitwise NOT operation." type="1"/>
+                <node code="COALESCE ($exp1$, $exp2$)" name="COALESCE - COALESCE returns the first argument that does not contain a null value. Synonymous with the VALUE function." type="1"/>
+                <node code="DECODE ($exp1$, $exp2$, $result-exp$)" name="DECODE - Compares expression2 to expression1. If expression1 is equal to expression2, or both expression1 and expression2 are null, the value of the following result-expresssion is returned. Multiple sets of parameters are allowed." type="1"/>
+                <node code="DEREF ($exp$)" name="DEREF - DEREF returns an instance of a reference data type that has a defined scope." type="1"/>
+                <node code="EVENT_MON_STATE ($exp$)" name="EVENT_MON_STATE - EVENT_MON_STATE returns an INTEGER that represents the current state of an event monitor (0 if inactive, 1 if active)." type="1"/>
+                <node code="GREATEST ($exp1$, $exp2$ [, $exp3$])" name="GREATEST - Returns the maximum value in the given set of values." type="1"/>
+                <node code="HEX ($exp$)" name="HEX - HEX returns a character string of hexadecimal digits for any built-in type value not to exceed 16,336 bytes." type="1"/>
+                <node code="IDENTITY_VAL_LOCAL ()" name="IDENTITY_VAL_LOCAL - IDENTITY_VAL_LOCAL returns the most recent value assigned for an identity column." type="1"/>
+                <node code="LENGTH ($exp$)" name="LENGTH - LENGTH returns a large integer that represents the length of the argument." type="1"/>
+                <node code="NULLIF ($exp1$, $exp2$)" name="NULLIF - NULLIF returns a null when arguments are equal or the value of the first argument if the arguments are not equal." type="1"/>
+                <node code="RAISE_ERROR ($sqlstate$, $diagnostic-string$)" name="RAISE_ERROR - RAISE_ERROR returns an error that contains the SQLSTATE, SQLCODE, and diagnostic string for the statement including the function." type="1"/>
+                <node code="REC2XML ($decimal-constant$, $format-string$, $row-tag-string$, $column-name$ [, $column-name$ ..." name="REC2XML - REC2XML returns a VARCHAR  XML formatted string. The max length is 32,672 bytes." type="1"/>
+                <node code="RID ($exp$)" name="RID - Return the row identifier (RID) of a row as a BIGINT." type="1"/>
+                <node code="RIDBIT ($exp$)" name="RIDBIT - Returns the row identifier (RID) of a row as a VARCHAR(16) FOR BIT DATA value." type="1"/>
+                <node code="TABLE_NAME ($exp$  $exp2$)" name="TABLE_NAME - TABLE_NAME returns a VARCHAR(128) that contains the unqualified name of the table or view after alias chains have been resolved." type="1"/>
+                <node code="TABLE_SCHEMA ($exp$  $exp2$)" name="TABLE_SCHEMA - TABLE_SCHEMA returns a VARCHAR(128) that contains the schema name of a two-part table or view name after alias chains have been resolved." type="1"/>
+                <node code="TYPE_ID ($exp$)" name="TYPE_ID - TYPE_ID returns an INTEGER with the unqualified name of a user-defined structured type (dynamic data type)." type="1"/>
+                <node code="TYPE_NAME ($exp$)" name="TYPE_NAME - TYPE_NAME returns a VARCHAR(18) with the unqualified name of a user-defined structured type (dynamic data type)." type="1"/>
+                <node code="TYPE_SCHEMA ($exp$)" name="TYPE_SCHEMA - TYPE_SCHEMA returns a VARCHAR(128) with the schema name of a user-defined structured type (dynamic data type)." type="1"/>
+                <node code="VALUE ($exp$, $exp1$ $exp2$)" name="VALUE - VALUE returns the first argument that does not contain a null value. Synonymous with the COALESCE function." type="1"/>
+            </nodes>
+        </node>
+        <node name="Numeric Scalar Function" type="0">
+            <nodes>
+                <node code="ABS ($exp$)" name="ABS - ABS returns the absolute value for any built-in numeric data type." type="1"/>
+                <node code="ACOS ($exp$)" name="ACOS - ACOS returns the double-precision arccosine of the argument in radians." type="1"/>
+                <node code="ASIN ($exp$)" name="ASIN - ASIN returns the double-precision arcsine of the argument in radians." type="1"/>
+                <node code="ATAN ($exp$)" name="ATAN - ATAN returns the double-precision arctangent of the argument in radians." type="1"/>
+                <node code="ATAN2 ($exp$, $exp$)" name="ATAN2 - ATAN2 returns the double-precision arctangent for the x and y coordinates specified in the arguments." type="1"/>
+                <node code="ATANH ($exp$)" name="ATANH - ATANH returns the double-precision hyperbolic arctangent. The argument can be any numeric built-in data type expressed in radians." type="1"/>
+                <node code="CEILING ($exp$)" name="CEILING - CEILING returns the smallest integer value greater or equal to any built-in numeric type in the argument." type="1"/>
+                <node code="COMPARE_DECFLOAT ($exp1$, $exp2$)" name="COMPARE_DECFLOAT - Returns a SMALLINT value that indicates whether the two arguments are equal or unordered, or whether one argument is greater than the other." type="1"/>
+                <node code="COS ($exp$)" name="COS - COS returns the double-precision cosine of the argument. The argument can be any numeric built-in data type expressed in radians.&#xa;" type="1"/>
+                <node code="COSH ($exp$)" name="COSH - COSH returns the double-precision hyperbolic cosine of the argument. The argument can be any numeric built-in data type expressed in radians." type="1"/>
+                <node code="COT ($exp$)" name="COT - COT returns the double-precision cotangent of the argument. The argument can be any numeric built-in data type expressed in radians.&#xa;" type="1"/>
+                <node code="DECFLOAT_FORMAT ($exp$ [ , $format-string$])" name="DECFLOAT_FORMAT - Returns a DECFLOAT(34) value representing the interpretation of the expression using the specified format." type="1"/>
+                <node code="DEGREES ($exp$)" name="DEGREES - DEGREES converts the argument expressed in radians to the number of degrees. The result is a double-precision floating point number. &#xa;&#xa;" type="1"/>
+                <node code="DIGITS ($exp$)" name="DIGITS - DIGITS returns a fixed-length character string representing the number in the argument.&#xa;&#xa;&#xa;" type="1"/>
+                <node code="EXP ($exp$)" name="EXP - EXP returns the double-precision exponential function of the argument.&#xa;&#xa;&#xa;" type="1"/>
+                <node code="FLOOR ($exp$)" name="FLOOR - FLOOR returns the largest integer value greater or equal to any built-in numeric type in the argument.&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="LN ($exp$)" name="LN - LN returns the double-precision natural logarithm of the argument.&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="LOG ($exp$)" name="LOG - LOG returns the double-precision natural logarithm of the argument. &#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="LOG10 ($exp$)" name="LOG10 - LOG10 returns the double-precision base 10 logarithm of the argument.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="MOD ($exp$, $exp$)" name="MOD - MOD returns the remainder of the first argument divided by the second argument.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="MULTIPLY_ALT ($exp$, $exp$)" name="MULTIPLY_ALT - MULTIPLY_ALT returns a DECIMAL which is the product of the two arguments.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="NORMALIZE_DECFLOAT ($exp$)" name="NORMALIZE_DECFLOAT - Returns a decimal floating-point value equal to the input argument set to its simplest form." type="1"/>
+                <node code="POWER ($exp$, $exp$)" name="POWER - POWER returns the value of the first argument raised to the power of the second argument.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="QUANTIZE ( $exp1$, $exp2$)" name="QUANTIZE - Returns a decimal floating-point value that is equal in value and sign to numeric-expression and that has an exponent equal to the exponent." type="1"/>
+                <node code="RADIANS ($exp$)" name="RADIANS - RADIANS returns a double-precision value for the argument (expressed in degrees) converted to radians.&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="RAND ($exp$)" name="RAND - RAND returns a double-precision floating point value between 0 and 1.&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="ROUND ($exp$, $exp$)" name="ROUND - ROUND returns the value in the first argument rounded to the value supplied in the second argument. The first argument is rounded to the right of the decimal if the value for argument 2 is positive or to the left if the second argument is zero or negative.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="SIGN ($exp$)" name="SIGN - SIGN returns the sign of the argument.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="SIN ($exp$)" name="SIN - SIN returns the double-precision sine of the argument. The argument can be any numeric built-in data type expressed in radians.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="SINH ($exp$)" name="SINH - SINH returns the double-precision hyperbolic sine of the argument. The argument can be any numeric built-in data type expressed in radians.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="SQRT ($exp$)" name="SQRT - SQRT returns the double-precision square root of the argument.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="TAN ($exp$)" name="TAN - TAN returns the double-precision tangent of the argument. The argument can be any numeric built-in data type expressed in radians.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="TANH ($exp$)" name="TANH - TANH returns the double-precision hyperbolic tangent of the argument. The argument can be any numeric built-in data type expressed in radians.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="TOTALORDER ($exp1$, $exp2$)" name="TOTALORDER - Returns a SMALLINT value of -1, 0, or 1 that indicates the comparison order of two decimal arguments" type="1"/>
+                <node code="TRUNCATE ($exp$, $exp$)" name="TRUNCATE - TRUNCATE returns the value in the first argument truncated to the value supplied in the second argument. The first argument is rounded to the right of the decimal if the value for argument 2 is positive or to the left if the second argument is zero or negative. &#xa;&#xa;&#xa;&#xa;" type="1"/>
+            </nodes>
+        </node>
+        <node name="Partitioning Scalar Function" type="0">
+            <nodes>
+                <node code="DATAPARTITIONNUM ($exp$)" name="DATAPARTITIONNUM - Returns the sequence number (SYSDATAPARTITIONS.SEQNO) of the data partition in which the row resides." type="1"/>
+                <node code="DBPARTITIONNUM ($column-name$)" name="DBPARTITIONNUM - DBPARTITIONNUM returns the partition number for a qualified or unqualified name of a table column.&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="HASHEDVALUE ($column-name$)" name="HASHEDVALUE - HASHEDVALUE returns the partitioning map index for a qualified or unqualified name of a table column.&#xa;" type="1"/>
+            </nodes>
+        </node>
+        <node name="Security Scalar Functions" type="0">
+            <nodes>
+                <node code="SECLABEL ($sec-policy$, $sec-label$)" name="SECLABEL - Returns an unnamed security label with a data type of DB2SECURITYLABEL." type="1"/>
+                <node code="SECLABEL_BY_NAME ($sec-policy$, $sec-label$)" name="SECLABEL_BY_NAME - Returns the specified security label as a data type of DB2SECURITYLABEL." type="1"/>
+                <node code="SECLABEL_TO_CHAR ($sec-policy$, $sec-label$)" name="SECLABEL_TO_CHAR - Returns a string that contains all elements in the security label." type="1"/>
+            </nodes>
+        </node>
+        <node name="String Scalar Function" type="0">
+            <nodes>
+                <node code="ASCII ($exp$)" name="ASCII - ASCII returns the ASCII code as an integer representing the leftmost character of any built-in character string type. Unicode graphic strings are converted to character strings before execution. The argument can be null.&#xa;" type="1"/>
+                <node code="CHARACTER_LENGTH( $exp$, $codeunits16$ | $codeunits32$ | $octets$)" name="CHARACTER_LENGTH - Returns the length of expression in the specified string unit." type="1"/>
+                <node code="CHR ($exp$)" name="CHR - CHR returns the character represented by the ASCII code value in the argument. " type="1"/>
+                <node code="COLLATION_KEY_BIT ($exp$, $col-name$ [, $length$])" name="COLLATION_KEY_BIT - Returns a VARCHAR FOR BIT DATA string representing the collation key of the string-expression in the specified collation-name." type="1"/>
+                <node code="CONCAT ($exp$, $exp$)" name="CONCAT - CONCAT returns a string which is the concatenation of two compatible arguments. The result can be null.&#xa;" type="1"/>
+                <node code="DECRYPT_BIN ($encrypted-data$  $exp$ )&#xa;" name="DECRYPT_BIN - DECRYPT_BIN returns the decrypted value for the argument encrypted using the ENCRYPT function. &#xa;" type="1"/>
+                <node code="DECRYPT_CHAR ($encrypted-data$  $exp$ )&#xa;" name="DECRYPT_CHAR - DECRYPT_CHAR returns the decrypted value for the argument encrypted using the ENCRYPT function. &#xa;&#xa;" type="1"/>
+                <node code="DIFFERENCE ($exp$, $exp$) &#xa;" name="DIFFERENCE - DIFFERENCE returns an INTEGER that ranges from 0-4 (4 = closest match; 0 = least closest match) and represents the difference between the sounds of two strings where the SOUNDEX function was applied. &#xa;&#xa;&#xa;" type="1"/>
+                <node code="ENCRYPT ($exp1$ [, $exp2$ [, $exp3$] ] )" name="ENCRYPT - ENCRYPT encrypts the data-string expression and returns a VARCHAR FOR BIT DATA." type="1"/>
+                <node code="GENERATE_UNIQUE ()" name="GENERATE_UNIQUE - GENERATE_UNIQUE returns an unique CHAR(13) FOR BIT DATA compared to another execution of the same function&#xa;&#xa;&#xa;" type="1"/>
+                <node code="GETHINT ($exp$)" name="GETHINT - GETHINT returns a VARCHAR(32) containing the password hint for the argument. The data string must have been encrypted using the ENCRYPT function.&#xa;&#xa;&#xa;" type="1"/>
+                <node code="INITCAP ($exp$)" name="INITCAP - Returns a string with the first character of each word converted to uppercase, using the UPPER function semantics, and the other characters converted to lowercase, using the LOWER function semantics." type="1"/>
+                <node code="INSERT ($expression1$, $expression2$, $expression3$, $expression4$)" name="INSERT - INSERT returns a string where expression3 bytes were deleted from expression1, beginning at expression2, and where expression4 was inserted into expression1, beginning at expression2. The result can be a VARCHAR(4000), CLOB(1M), or BLOB(1M) type depending&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="INSTR ($src-string$, $search-string$ [, $start-clause$] [, $codeunit-clause$])" name="INSTR - Returns the starting position of a string (the search-string) within another string (the source-string)." type="1"/>
+                <node code="LCASE ($exp$)" name="LCASE - LCASE returns a string for CHAR or VARCHAR arguments in which all characters have been converted to lowercase." type="1"/>
+                <node code="LEFT ($expression1$, $expression2$)" name="LEFT - LEFT returns a string ( VARCHAR(4000), CLOB(1M), BLOB(1M) ) that contains the leftmost values expression1. The number of values is specified in expression2.&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="LOCATE ($search-string$, $source-string$) " name="LOCATE - LOCATE returns an INTEGER for the starting position of the first occurrence of a search-string within the source-string.&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="LOCATE_IN_STRING ($source-string$, $search-string$)" name="LOCATE_IN_STRING - Returns the starting position of a string (the search-string ) within another string (the source-string)." type="1"/>
+                <node code="LOWER ($exp$)" name="LOWER - LOWER returns a string for CHAR or VARCHAR arguments in which all characters have been converted to lowercase." type="1"/>
+                <node code="LPAD ($exp$, $integer$ [, $pad$])" name="LPAD - Returns a string composed of string-expression that is padded on the left, with pad or blanks." type="1"/>
+                <node code="LTRIM ($exp$) " name="LTRIM - LTRIM removes blank spaces from the beginning of the string in the argument. The argument accepts CHAR, VARCHAR, GRAPHIC, or VARGRAPHIC types. &#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="OCTET_LENGTH ($exp$)" name="OCTET_LENGTH - Returns the length of expression in octets." type="1"/>
+                <node code="OVERLAY ($source-string$, $insert-string$, $start$, $length$, $units$)" name="OVERLAY - Returns a string in which, beginning at start in source-string, length of the specified code units have been deleted and insert-string has been inserted." type="1"/>
+                <node code="POSITION ($search-string$, $source-string$, $units$)" name="POSITION - Returns the starting position of the first occurrence of one string (the search-string) within another string (the source-string)." type="1"/>
+                <node code="POSSTR ($search-string$, $source-string$) " name="POSSTR - POSSTR returns a large integer representing the starting position of the first occurrence of one string with another string. &#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="REPEAT ($expression1$, $expression2$)" name="REPEAT - REPEAT returns a character string ( VARCHAR(4000), CLOB(1M), BLOB(1M) ) in which the value of the first argument is repeated. The value specified in the second argument (SMALLINT, INTEGER) determines the number of times the first argument is repeated.&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="REPLACE ($expression1$, $expression2$, $expression3$)" name="REPLACE - REPLACE replaces all occurences of argument2 in expression1 with expression3. The result can be a VARCHAR(4000), CLOB(1M), or BLOB(1M) type depending on the supplied arguments.&#xa;" type="1"/>
+                <node code="RIGHT ($expression1$, $expression2$)" name="RIGHT - RIGHT returns a string ( VARCHAR(4000), CLOB(1M), BLOB(1M) ) that contains the rightmost values in expession1. The number of values is specified in expression2." type="1"/>
+                <node code="RTRIM ($exp$)" name="RTRIM - RTRIM removes blank spaces from the end of the string. The argument accepts CHAR, VARCHAR, GRAPHIC, or VARGRAPHIC types. &#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="SOUNDEX ($exp$)" name="SOUNDEX - SOUNDEX returns a CHAR(4) value used to identify similarities between strings. &#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="SPACE ($exp$)" name="SPACE - SPACE returns a VARCHAR(4000) of blank spaces, which are specified in the second argument (SMALLINT or INTEGER). The argument can accept a null value.   &#xa;&#xa;&#xa;&#xa;&#xa;" type="1"/>
+                <node code="STRIP ($exp$)" name="STRIP - Removes blanks or occurrences of another specified character from the end or the beginning of a string expression." type="1"/>
+                <node code="SUBSTR ($string$, $start$ $exp$) " name="SUBSTR - SUBSTR returns a substring from a string.&#xa;&#xa;" type="1"/>
+                <node code="SUBSTRB ($string$, $start$ [, $length$]) " name="SUBSTRB - Returns a substring of a string, beginning at a specified position in the string. Lengths are calculated in bytes." type="1"/>
+                <node code="SUBSTRING ($exp$ FROM $start$ [FOR $length$] USING $codeunits$)&#xa;" name="SUBSTRING - Returns a substring of a string" type="1"/>
+                <node code="TRANSLATE ($char-string-exp$, $to-string-exp$, $from-string-exp$ $pad-char$)" name="TRANSLATE - TRANSLATE returns a value where one or more characters in a character string expression may have been translated. The result can be null.&#xa;&#xa;&#xa;" type="1"/>
+                <node code="TRIM ($exp$)" name="TRIM - Removes blanks or occurrences of another specified character from the end or the beginning of a string expression." type="1"/>
+                <node code="UCASE ($exp$)" name="UCASE - UCASE returns a value for the argument where one or more lowercase characters have been converted to uppercase. " type="1"/>
+                <node code="UPPER ($exp$)" name="UPPER - UPPER returns a value for the argument where one or more lowercase characters have been converted to uppercase. &#xa;" type="1"/>
+            </nodes>
+        </node>
+        <node name="Table functions" type="0">
+            <nodes>
+                <node code="ADMIN_LIST_HIST ()&#xa;" name="ADMIN_LIST_HIST - Returns information from the history file that is associated with the currently connected database partition." type="1"/>
+                <node code="AM_BASE_RPTS  ($report-id$, $type$, $client-locale$)&#xa;&#xa;" name="AM_BASE_RPTS - Returns activity reports used by the activity monitor." type="1"/>
+                <node code="AM_BASE_RPT_RECOMS ($report-id$, $client-locale$)&#xa;" name="AM_BASE_RPT_RECOMS - Returns recommendations for activity reports used by the activity monitor." type="1"/>
+                <node code="BASE_TABLE ($objectschema$, $objectname$)" name="BASE_TABLE - Returns both the object name and schema name of the object found after any alias chains have been resolved." type="1"/>
+                <node code="COMPILATION_ENV ($compilation-env$)&#xa;&#xa;" name="COMPILATION_ENV - Returns the elements of a compilation environment." type="1"/>
+                <node code="DB_PARTITIONS ()&#xa;&#xa;" name="DB_PARTITIONS - Returns the contents of the db2nodes.cfg file in table format." type="1"/>
+                <node code="ENV_GET_INST_INFO ()&#xa;&#xa;" name="ENV_GET_INST_INFO - Returns information about the current instance." type="1"/>
+                <node code="ENV_GET_PROD_INFO ()&#xa;&#xa;" name="ENV_GET_PROD_INFO - Returns information about installed DB2 products." type="1"/>
+                <node code="ENV_GET_SYS_INFO ()&#xa;&#xa;" name="ENV_GET_SYS_INFO - Returns information about the operating system." type="1"/>
+                <node code="EXPLAIN_GET_MSGS ($explain-requester$, $explain-time$, $source-name$, $source-schema$, $source-version$, &#xa;$explain-level$, $stmtno$, $sectno$, $locale$)" name="EXPLAIN_GET_MSGS - Returns formatted messages from queries against the EXPLAIN_DIAGNOSTIC and  EXPLAIN_DIAGNOSTIC_DATA Explain tables." type="1"/>
+                <node code="GET_DBM_CONFIG ()&#xa;&#xa;" name="GET_DBM_CONFIG - Returns database manager configuration information." type="1"/>
+                <node code="HEALTH_CONT_HI ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_CONT_HI - Returns health indicator information for containers of tablespaces in a database." type="1"/>
+                <node code="HEALTH_CONT_HI_HIS ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_CONT_HI_HIS - Returns health indicator history information for containers of tablespaces in a database." type="1"/>
+                <node code="HEALTH_CONT_INFO ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_CONT_INFO - Returns container information from a health snapshot of a database." type="1"/>
+                <node code="HEALTH_DBM_HI ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_DBM_HI - Returns health indicator information from a health snapshot of the DB2 database manager." type="1"/>
+                <node code="HEALTH_DBM_HI_HIS ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_DBM_HI_HIS - Returns health indicator history information from a health snapshot of the DB2 database manager." type="1"/>
+                <node code="HEALTH_DBM_INFO ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_DBM_INFO - Returns information from a health snapshot of the DB2 database manager." type="1"/>
+                <node code="HEALTH_DB_HI ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_DB_HI - Returns health indicator information from a health snapshot of a database." type="1"/>
+                <node code="HEALTH_DB_HIC ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_DB_HIC - Returns collection health indicator information from a health snapshot of a database." type="1"/>
+                <node code="HEALTH_DB_HIC_HIS ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_DB_HIC_HIS - Returns collection health indicator history information from a health snapshot of a database." type="1"/>
+                <node code="HEALTH_DB_HI_HIS ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_DB_HI_HIS - Returns health indicator history information from a health snapshot of a database." type="1"/>
+                <node code="HEALTH_DB_INFO ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_DB_INFO - Returns information from a health snapshot of a database." type="1"/>
+                <node code="HEALTH_TBS_HI ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_TBS_HI - Returns health indicator information for tablespaces from a health snapshot of tablespaces in a database." type="1"/>
+                <node code="HEALTH_TBS_HI_HIS ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_TBS_HI_HIS - Returns health indicator history information for tablespaces from a health snapshot of a database." type="1"/>
+                <node code="HEALTH_TBS_INFO ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="HEALTH_TBS_INFO - Returns tablespace information from a health snapshot of a database." type="1"/>
+                <node code="MQREADALL ( $exp$ $exp1$ $exp2$)&#xa;&#xa;" name="MQREADALL - Returns a table containing the messages and message metadata from the MQSeries location specified by receive-service, using the quality of service-policy." type="1"/>
+                <node code="MQREADALLCLOB ( $exp$ $exp1$ $exp2$)&#xa;&#xa;" name="MQREADALLCLOB - Returns a table containing the messages as CLOBs and message metadata from the MQSeries location specified by receive-service, using the quality of service-policy." type="1"/>
+                <node code="MQRECEIVEALL ( $exp$ $exp1$ $exp3$ $exp2$)&#xa;&#xa;" name="MQRECEIVEALL - Returns a table containing the messages and message metadata from the MQSeries location specified by receive-service, using the quality of service-policy.  This also removes the messages from the queue." type="1"/>
+                <node code="MQRECEIVEALLCLOB ( $exp$ $exp1$ $exp3$ $exp2$)&#xa;&#xa;" name="MQRECEIVEALLCLOB - Returns a table containing the messages as CLOBs and message metadata from the MQSeries location specified by receive-service, using the quality of service-policy.  This also removes the messages from the queue." type="1"/>
+                <node code="REG_LIST_VARIABLES ()&#xa;&#xa;" name="REG_LIST_VARIABLES - Returns the DB2 registry settings that are currently used by the database partition from which the function was invoked." type="1"/>
+                <node code="SNAPSHOT_AGENT ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_AGENT - Returns information about agents from an application snapshot." type="1"/>
+                <node code="SNAPSHOT_APPL ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_APPL - Returns general information from an application snapshot." type="1"/>
+                <node code="SNAPSHOT_APPL_INFO ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_APPL_INFO - Returns general information from an application snapshot." type="1"/>
+                <node code="SNAPSHOT_BP ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_BP - Returns information from a buffer pool snapshot." type="1"/>
+                <node code="SNAPSHOT_CONTAINER ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_CONTAINER - Returns container configuration information from a tablespace snapshot." type="1"/>
+                <node code="SNAPSHOT_DATABASE ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_DATABASE - Returns information from a database snapshot." type="1"/>
+                <node code="SNAPSHOT_DBM ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_DBM - Returns information from a snapshot of the DB2 database manager." type="1"/>
+                <node code="SNAPSHOT_DYN_SQL ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_DYN_SQL - Returns information from a dynamic SQL snapshot." type="1"/>
+                <node code="SNAPSHOT_FCM ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_FCM - Returns database manager level fast communication manager (FCM) information." type="1"/>
+                <node code="SNAPSHOT_FCMNODE ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_FCMNODE - Returns information from a snapshot of the fast communication manager (FCM) in the database manager." type="1"/>
+                <node code="SNAPSHOT_LOCK ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_LOCK - Returns information from a lock snapshot." type="1"/>
+                <node code="SNAPSHOT_LOCKWAIT ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_LOCKWAIT - Returns lock wait information from an application snapshot." type="1"/>
+                <node code="SNAPSHOT_QUIESCERS ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_QUIESCERS - Returns quiescer information from a tablespace snapshot." type="1"/>
+                <node code="SNAPSHOT_RANGES ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_RANGES - Returns information from a range snapshot." type="1"/>
+                <node code="SNAPSHOT_STATEMENT ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_STATEMENT - Returns information about statements from an application snapshot." type="1"/>
+                <node code="SNAPSHOT_SUBSECT ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_SUBSECT - Returns information about subsections of access plans from an application snapshot." type="1"/>
+                <node code="SNAPSHOT_SWITCHES ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_SWITCHES - Returns information about the database snapshot switches states." type="1"/>
+                <node code="SNAPSHOT_TABLE ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_TABLE - Returns activity information from a table snapshot." type="1"/>
+                <node code="SNAPSHOT_TBREORG ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_TBREORG - Returns table reorganization information in the form of a result set." type="1"/>
+                <node code="SNAPSHOT_TBS ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_TBS - Returns activity information from a tablespace snapshot." type="1"/>
+                <node code="SNAPSHOT_TBS_CFG ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAPSHOT_TBS_CFG - Returns configuration information from a tablespace snapshot." type="1"/>
+                <node code="SNAP_GET_AGENT ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_AGENT - Returns agent logical data group application snapshot information for the currently connected database." type="1"/>
+                <node code="SNAP_GET_AGENT_MEMORY_POOL ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_AGENT_MEMORY_POOL - Returns information about memory usage at the agent level." type="1"/>
+                <node code="SNAP_GET_APPL ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_APPL - Returns information about applications from an application snapshot." type="1"/>
+                <node code="SNAP_GET_APPL_INFO ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_APPL_INFO - Returns appl_info logical data group information from an application snapshot." type="1"/>
+                <node code="SNAP_GET_BP ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_BP - Returns bufferpool logical data group information from a bufferpool snapshot." type="1"/>
+                <node code="SNAP_GET_BP_PART ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_BP_PART - Returns bufferpool_nodeinfo logical data group information from a bufferpool snapshot." type="1"/>
+                <node code="SNAP_GET_CONTAINER ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_CONTAINER - Returns tablespace_container logical data group information." type="1"/>
+                <node code="SNAP_GET_CONTAINER_V91 ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_CONTAINER_V91 - Returns tablespace_container logical data group information." type="1"/>
+                <node code="SNAP_GET_DB ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_DB - Returns snapshot information from the database and detail_log logical data groups." type="1"/>
+                <node code="SNAP_GET_DBM ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_DBM - Returns the snapshot monitor database manager logical grouping information." type="1"/>
+                <node code="SNAP_GET_DBM_MEMORY_POOL ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_DBM_MEMORY_POOL - Returns information about memory usage at the database manager." type="1"/>
+                <node code="SNAP_GET_DB_MEMORY_POOL ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_DB_MEMORY_POOL - Returns information about memory usage at the database level (only for UNIX platforms)." type="1"/>
+                <node code="SNAP_GET_DB_V91 ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_DB_V91 - Returns snapshot information from the database logical group." type="1"/>
+                <node code="SNAP_GET_DETAILLOG_V91 ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_DETAILLOG_V91 - Returns snapshot information from the detail_log logical data group." type="1"/>
+                <node code="SNAP_GET_DYN_SQL ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_DYN_SQL - Returns snapshot information from the dynsql logical data group." type="1"/>
+                <node code="SNAP_GET_DYN_SQL_V91 ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_DYN_SQL_V91 - Returns snapshot information from the dynsql logical data group." type="1"/>
+                <node code="SNAP_GET_FCM ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_FCM - Returns fast communication manager (fcm) logical data group information from a database manager snapshot." type="1"/>
+                <node code="SNAP_GET_FCM_PART ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_FCM_PART - Returns fast communication manager node (fcm_node) logical data group information from a database manager snapshot." type="1"/>
+                <node code="SNAP_GET_HADR ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_HADR - Returns information about high availability disaster recovery (HADR) from a database snapshot." type="1"/>
+                <node code="SNAP_GET_LOCK ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_LOCK - Returns lock logical data group snapshot information." type="1"/>
+                <node code="SNAP_GET_LOCKWAIT ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_LOCKWAIT - Returns lockwait logical data group snapshot information." type="1"/>
+                <node code="SNAP_GET_STMT ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_STMT - Returns information about SQL or XQuery statements from an application snapshot." type="1"/>
+                <node code="SNAP_GET_STORAGE_PATHS ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_STORAGE_PATHS - Returns a list of automatic storage paths, including file system information, for the database for each storage path." type="1"/>
+                <node code="SNAP_GET_STO_PATHS ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_STO_PATHS - Returns snapshot information from the storage_paths logical data group." type="1"/>
+                <node code="SNAP_GET_SUBSECTION ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_SUBSECTION - Returns subsection logical monitor grouping information." type="1"/>
+                <node code="SNAP_GET_SWITCHES ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_SWITCHES - Returns information about the database snapshot switches states." type="1"/>
+                <node code="SNAP_GET_TAB ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_TAB - Returns snapshot information from the table logical data group." type="1"/>
+                <node code="SNAP_GET_TAB_REORG ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_TAB_REORG - Returns table reorganization information." type="1"/>
+                <node code="SNAP_GET_TAB_V91 ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_TAB_V91 - Returns table logical data group snapshot information." type="1"/>
+                <node code="SNAP_GET_TBSP ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_TBSP - Returns tablespace logical data group snapshot information." type="1"/>
+                <node code="SNAP_GET_TBSP_PART ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_TBSP_PART - Returns tablespace_nodeinfo logical data group snapshot information." type="1"/>
+                <node code="SNAP_GET_TBSP_PART_V91 ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_TBSP_PART_V91 - Returns tablespace_nodeinfo logical data group snapshot information." type="1"/>
+                <node code="SNAP_GET_TBSP_QUIESCER ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_TBSP_QUIESCER - Returns quiescer information from a tablespace snapshot." type="1"/>
+                <node code="SNAP_GET_TBSP_RANGE ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_TBSP_RANGE - Returns tablespace information from a range snapshot." type="1"/>
+                <node code="SNAP_GET_TBSP_V91 ($dbname$, $dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_TBSP_V91 - Returns tablespace logical data group snapshot information." type="1"/>
+                <node code="SNAP_GET_UTIL ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_UTIL - Returns snapshot information on utilities from the utility_info logical data group." type="1"/>
+                <node code="SNAP_GET_UTIL_PROGRESS ($dbpartitionnum$)&#xa;&#xa;&#xa;" name="SNAP_GET_UTIL_PROGRESS - Returns snapshot information about utility progress." type="1"/>
+                <node code="SQLCACHE_SNAPSHOT ( )&#xa;&#xa;&#xa;" name="SQLCACHE_SNAPSHOT - Returns the results of a snapshot of the DB2 dynamic SQL statement cache." type="1"/>
+            </nodes>
+        </node>
+        <node name="XML Functions" type="0">
+            <nodes>
+                <node code="PARAMETER ($int$)" name="PARAMETER - Represents a position in an SQL statement where the value is provided dynamically by XQuery as part of the invocation of the db2-fn:sqlquery function." type="1"/>
+                <node code="XMLAGG ($expression$ [$order-by-clause$])" name="XMLAGG - Returns XML sequence containing an item for each non-null value in a set of XML values." type="1"/>
+                <node code="XMLATTRIBUTES ($val$ [$attribute-name$])" name="XMLATTRIBUTES - Constructs XML attributes from the arguments." type="1"/>
+                <node code="XMLCOMMENT ($exp$)" name="XMLCOMMENT - Returns an XML value with a single XQuery comment node with the input argument as the content." type="1"/>
+                <node code="XMLCONCAT ($exp1$ ,$exp2$)" name="XMLCONCAT - Returns a sequence containing the concatenation of a variable number of XML input arguments." type="1"/>
+                <node code="XMLDOCUMENT ($exp$)" name="XMLDOCUMENT - Returns an XML value with a single XQuery document node with zero or more children nodes." type="1"/>
+                <node code="XMLELEMENT (NAME $element-name$ [ , $namespace$] [ , $attributes$] [$opt-clause$})" name="XMLELEMENT - Returns an XML value that is an XQuery element node" type="1"/>
+                <node code="XMLFOREST ([$namespaces$ ,] $element$ [$opt-clause$])" name="XMLFOREST - Returns an XML value that is a sequence of XQuery element nodes" type="1"/>
+                <node code="XMLGROUP ($expression$ [$order-by-clause$] [$option-clause$])" name="XMLGROUP - Returns an XML value with a single XQuery document node containing one top level element node." type="1"/>
+                <node code="XMLNAMESPACES ($namespace-clause1$ AS $namespace-clause2$)" name="XMLNAMESPACES - Constructs namespace declarations from the arguments." type="1"/>
+                <node code="XMLPARSE (DOCUMENT $exp$)" name="XMLPARSE - Parses the argument as an XML document and returns an XML value" type="1"/>
+                <node code="XMLPI (NAME $pi-name$ [, $exp$])" name="XMLPI - Returns an XML value with a single XQuery processing instruction node." type="1"/>
+                <node code="XMLQUERY ($exp$ [$passing-clause$])" name="XMLQUERY - Returns an XML value from the evaluation of an XQuery expression using specified input arguments as XQuery variables." type="1"/>
+                <node code="XMLROW ($exp$ [$as-clause$] [$opt-clause$})" name="XMLROW - Returns an XML value with a single XQuery document node containing one top-level element node." type="1"/>
+                <node code="XMLSERIALIZE ($exp$ AS $data-type$)" name="XMLSERIALIZE - Returns a serialized XML value of the specified data type generated from the XML-expression argument." type="1"/>
+                <node code="XMLTABLE ([$namespaces$] $row-exp$ [$passing-clause$] [$columns-clause$])" name="XMLTABLE - Returns a result table from the evaluation of XQuery expressions, using specified input arguments as XQuery variables." type="1"/>
+                <node code="XMLTEXT ($exp$)" name="XMLTEXT - Returns an XML value with a single XQuery text node having the input argument as the content." type="1"/>
+                <node code="XMLVALIDATE ($exp$ $val-clause$)" name="XMLVALIDATE - Returns a copy of the input XML value augmented with information obtained from XML schema validation, including default values." type="1"/>
+                <node code="XMLXSROBJECTID ($exp$)" name="XMLXSROBJECTID - Returns the XSR object identifier of the XML schema used to validate the XML document specified in the argument." type="1"/>
+                <node code="XSLTRANSFORM ($xml-doc$ USING $xsl-stylesheet$ AS $data-type$)" name="XSLTRANSFORM - Converts XML data into other formats." type="1"/>
+            </nodes>
+        </node>
+        <node name="Miscellaneous" type="0">
+            <nodes>
+                <node code="select * from employee FETCH FIRST 10 ROWS ONLY" name="Get top N rows (example)" type="1"/>
+                <node code="decalre global temporary table temp_table &#xa;(field1 varchar2(100), &#xa; field2 number(32)) on commit preserve rows not logged" name="Create temporary table (example)" type="1"/>
+                <node code="merge into some_table&#xa;using sysibm.sysdummy1 on&#xa;(&#xa;some_table.field1 = param1&#xa;and some_table.field2 = param2&#xa;...&#xa;)&#xa;when not matched then insert values (value1, value2, etc)&#xa;when matched update set field1 = value1, field2 = value2, etc" name="Merge" type="1"/>
+                <node code="select CURRENT_TIMESTAMP from sysibm.sysdummy1" name="Get current date+time" type="1"/>
+                <node code="select * from sysibm.sysdummy1" name="dummy/dual table" type="1"/>
+            </nodes>
+        </node>
+        <node name="SQL PL procedures and functions and Sql Developer Techniques" type="0">
+            <nodes>
+                <node code="create or replace procedure test_proc(in param1 int, in param2 varchar(255), &#xa;                                      out param3 int, out param4 varchar(255), &#xa;                                      OUT empl CURSOR)&#xa;begin&#xa;    set param3 = param1 + 100;&#xa;&#xa;    set param4 = concat(param2, 'test');&#xa;&#xa;    SET empl = CURSOR FOR SELECT * FROM employee; &#xa;    &#xa;    OPEN empl;     &#xa;end" name="Create stored procedure with input and output parameters, including cursor (example)" type="1"/>
+                <node code="call test_proc(:param1, :param2, :out_number_param3, :out_varchar_param4, :out_cursor_emp)" name="Execute stored procedure with input and output parameters from Sql Developer (Execute Script)" type="1"/>
+                <node code="CREATE or REPLACE PROCEDURE get_resultsets()&#xa;  RESULT SET 2&#xa;BEGIN&#xa;&#xa;   DECLARE C1 CURSOR WITH RETURN FOR&#xa;       SELECT * FROM employee;&#xa;&#xa;   DECLARE C2 CURSOR WITH RETURN FOR&#xa;       SELECT empno FROM employee;&#xa;       &#xa;&#xa;   OPEN C1;&#xa;&#xa;   OPEN C2;&#xa;END" name="Create procedure which returns multiple resultsets (example)" type="1"/>
+                <node code="call get_resultsets()" name="Execute procedure which returns multiple resultsets from Sql Developer (Execute Script)" type="1"/>
+                <node code="CREATE OR REPLACE FUNCTION test_func(v_value INT) RETURNS CHAR(6)&#xa;BEGIN&#xa;   RETURN to_char(v_value);&#xa;END" name="Create function (example)" type="1"/>
+                <node code="select test_func(:param) from sysibm.sysdummy1" name="Execute function with input parameters from Sql Developer (Execute Sql)" type="1"/>
+                <node code="CREATE OR REPLACE FUNCTION FN_GET_ROWS() RETURNS TABLE (EMPNO CHAR(6),&#xa;                    LASTNAME VARCHAR(15),&#xa;                    FIRSTNAME VARCHAR(12))&#xa;&#xa;BEGIN atomic    &#xa;     RETURN&#xa;       SELECT EMPNO, LASTNAME, FIRSTNME&#xa;       FROM EMPLOYEE;&#xa;END" name="Create function which returns resultset" type="1"/>
+                <node code="CREATE OR REPLACE FUNCTION FN_GET_ROWS() &#xa;   RETURNS TABLE(EMPNO CHAR(6), LASTNAME VARCHAR(15), FIRSTNAME VARCHAR(12)) &#xa;LANGUAGE SQL READS SQL DATA NO EXTERNAL ACTION DETERMINISTIC &#xa;RETURN&#xa;  SELECT EMPNO, LASTNAME, FIRSTNME&#xa;  FROM EMPLOYEE" name="Create table function which returns resultset" type="1"/>
+                <node code="select *&#xa;from table(FN_GET_ROWS())" name="Execute function which returns resultset from Sql Developer (Execute Sql)" type="1"/>
+            </nodes>
+        </node>
+        <node name="Sequences and autoincrement fields" type="0">
+            <nodes>
+                <node code="CREATE SEQUENCE SEQ_TEST&#xa;     START WITH 1&#xa;     INCREMENT BY 1&#xa;     NO MAXVALUE&#xa;     NO CYCLE&#xa;     CACHE 24 " name="Create sequence (example)" type="1"/>
+                <node code="SELECT NEXTVAL FOR SEQ_TEST FROM SYSIBM.SYSDUMMY1" name="Use sequence (example)" type="1"/>
+                <node code="CREATE TABLE T_TEST(ID INTEGER GENERATED ALWAYS AS&#xa;IDENTITY PRIMARY KEY, NAME VARCHAR(10));" name="Create table with autoincrement field" type="1"/>
+                <node code="INSERT INTO t_test(name) VALUES ('Andrew');" name="Insert into table with autoincrement field" type="1"/>
+                <node code="select identity_val_local() from sysibm.sysdummy1" name="Get value of the autoincrement field which was just updated" type="1"/>
+            </nodes>
+        </node>
+    </nodes>
+</db2>

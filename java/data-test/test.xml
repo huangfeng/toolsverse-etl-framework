@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <name>TABLE1</name>
+    <metadata>
+        <col name="Col1" native_type="" nullable="true" type="-1"/>
+        <col name="Col2" native_type="" nullable="true" type="-1"/>
+        <col name="Col3" native_type="" nullable="true" type="-1"/>
+        <col name="Col4" native_type="" nullable="true" type="-1"/>
+    </metadata>
+    <data>
+        <row>
+            <value>1900-01-01 00:00:00</value>
+            <value>abc</value>
+            <value>1999-10-10 00:00:00</value>
+            <value>1900-01-23 04:48:00</value>
+        </row>
+        <row>
+            <value>1900-01-02 00:00:00</value>
+            <value>sss</value>
+            <value>1999-10-11 00:00:00</value>
+            <value>1900-02-02 00:00:00</value>
+        </row>
+        <row>
+            <value>1900-01-03 00:00:00</value>
+            <value>bbb</value>
+            <value>1999-10-12 00:00:00</value>
+            <value>1900-02-13 12:00:00</value>
+        </row>
+    </data>
+</dataset>

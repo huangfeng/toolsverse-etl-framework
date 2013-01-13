@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <properties>
+      <log.step>777</log.step>
+      <cache>com.toolsverse.cache.MemoryCache</cache>
+      <oracle.oraclehome>c:/oracle</oracle.oraclehome>
+      <informix.home>c:/informix</informix.home>
+   </properties>
+   <connections>
+      <connection alias="test javadb">
+         <driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+         <url>jdbc:derby:{app.home}/javadb</url>
+      </connection>
+   </connections>
+
+   <active.connections>
+      <sourses>
+         <source alias="test javadb" />
+      </sourses>
+      <destination alias="test javadb"/> 
+
+   </active.connections>
+   <execute>
+       <scenario name="test.xml" action="extract_load" />
+   </execute>
+
+</config>

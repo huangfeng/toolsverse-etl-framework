@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mysql name="mysql" type="0">
+    <nodes>
+        <node name="Bit Functions" type="0">
+            <nodes>
+                <node code="BIT_COUNT($N$)" name="bit_count - Returns the number of bits specified in N." type="1"/>
+            </nodes>
+        </node>
+        <node name="Cast Functions" type="0">
+            <nodes>
+                <node code="CAST($character_string$ AS $character_data_type$ CHARACTER SET $charset_name$)" name="cast - Converts a string to a different character set." type="1"/>
+                <node code="CONVERT($expr$, $type$)" name="convert - Converts the value of the data type specified in EXPR to the data type specified in TYPE." type="1"/>
+                <node code="CONVERT($expr$ USING $transcoding_name$)" name="convertusing - Converts data specified in EXPR to a different character set specified in TRANSCODING_NAME." type="1"/>
+            </nodes>
+        </node>
+        <node name="Comment Statements" type="0">
+            <nodes>
+                <node code="-- end region" name="endregion - Ends a collapsible code region." type="1"/>
+                <node code="-- region $name$&#xa;$selected$$end$&#xa;-- endregion" name="region - Starts a collapsible code region." type="1"/>
+            </nodes>
+        </node>
+        <node name="Control Flow Functions" type="0">
+            <nodes>
+                <node code="CASE $value$ WHEN $compare_value1$ THEN $result1$ WHEN $compare_value2$ THEN $result2$ ELSE $result3$ END" name="case - Compares the value specifed in VALUE against COMPARE_VALUE1 and returns RESULT1 if the values match. If they do not match, VALUE is compared against COMPARE_VALUE2 and returns RESULT2 if the values match. If neither value matches, RESULT3 is returned." type="1"/>
+                <node code="CASE WHEN $condition1$ THEN $result1$ WHEN $condition2$ THEN $result2$ ELSE $result3$ END" name="casewhen - Evaluates each condition and returns the result for the first condition that matches. If none of the conditions match, RESULT3 is returned." type="1"/>
+                <node code="IF($expr1$, $expr2$, $expr3$)" name="if - Returns EXPR2 if EXPR1 evalutes to true. If EXPR1 evaluates to false, EXPR3 is returned." type="1"/>
+                <node code="IFNULL($expr1$, $expr2$)" name="ifnull - Returns the value of EXPR1 if it is not NULL. If EXPR1 is NULL, returns the value of EXPR2." type="1"/>
+                <node code="NULLIF($expr1$, $expr2$)" name="nullif - Returns NULL if both expressions evaluate to true. If the expressions evaluate to false, the value of EXPR1 is returned." type="1"/>
+            </nodes>
+        </node>
+        <node name="Date and Time Functions" type="0">
+            <nodes>
+                <node code="ADDDATE($expr$, $days$)" name="adddate - Adds the number of days specified in DAYS to the expression." type="1"/>
+                <node code="ADDDATE($date$, INTERVAL $expr$ $type$)" name="adddateinterval - Adds an interval value (EXPR) to the start date, where TYPE is the expression's date or datetime value." type="1"/>
+                <node code="ADDTIME($expr$, $expr2$)" name="addtime - Adds the value of EXPR2 to the expression and returns the result." type="1"/>
+                <node code="CONVERT_TZ($dt$, $from_tz$, $to_tz$)" name="convert_tz - Converts the datetime value (DT) from the current time zone to the time zone specified in TO_TZ." type="1"/>
+                <node code="CURDATE()" name="curdate - Returns the current date in 'YYYY-MM-DD' format when used as a string, or in YYYYMMDD format when  used in numeric context." type="1"/>
+                <node code="CURRENT_DATE()" name="current_date - Returns the current date in 'YYYY-MM-DD' format when used as a string, or in YYYYMMDD format when  used in numeric context." type="1"/>
+                <node code="CURRENT_TIMESTAMP()" name="current_timestamp - Returns the current time in 'HH:MM:SS' format when used in a string, or in HHMMSS format when used in a numeric context." type="1"/>
+                <node code="CURTIME()" name="curtime - Returns the current time in 'HH:MM:SS' format when used in a string, or in HHMMSS format when used in a numeric context." type="1"/>
+                <node code="DATE($expr$)" name="date - Returns the date from the expression." type="1"/>
+                <node code="DATEDIFF($expr$, $expr2$)" name="datediff - Returns the total number of days between the start date (EXPR) and end date (EXPR2)." type="1"/>
+                <node code="DATE_ADD($date$, INTERVAL $expr$ $type$)" name="date_add - Adds an interval value specifed in EXPR to the start date." type="1"/>
+                <node code="DATE_FORMAT($date$, $format$)" name="date_format - Formats the date based on the format specified in FORMAT." type="1"/>
+                <node code="DATE_SUB($date$, INTERVAL $expr$ $type$)" name="date_sub - Subtracts an interval value specifed in EXPR from the start date." type="1"/>
+                <node code="DAY($date$)" name="day - Returns the day of the month using a value between 1 and 31." type="1"/>
+                <node code="DAYNAME($date$)" name="dayname - Returns the day of the week (i.e., Monday) for the current date." type="1"/>
+                <node code="DAYOFMONTH($date$)" name="dayofmonth - Returns the day of the month using a value between 1 and 31." type="1"/>
+                <node code="DAYOFWEEK($date$)" name="dayofweek - Returns a numeric value repreesnting the day of the week with values ranging from 1 to 7 (1 = Sunday; 7=Saturday)." type="1"/>
+                <node code="DAYOFYEAR($date$)" name="dayofyear - Returns the current day of the year, with values ranging from 1 to 366." type="1"/>
+                <node code="EXTRACT($type$ FROM $date$)" name="extract - Returns a portion of the date based on the value specified in TYPE." type="1"/>
+                <node code="FROM_DAYS($N$)" name="from_days - Returns the date based on the number of days specified in N since year 0 (Gregorian calendar)." type="1"/>
+                <node code="FROM_UNIXTIME($unix_timestamp$)" name="from_unixtime - Returns a value in the format of 'YYYY-MM-DD HH:MM:SS' for a string or YYYYMMDDHHMMSS for a numeric context." type="1"/>
+                <node code="FROM_UNIXTIME($unix_timestamp$, $format$)" name="from_unixtime_format - Returns a value for the year, month, day, hours, minutes, and seconds using the format specified in &quot;format.&quot;" type="1"/>
+                <node code="GET_FORMAT($type$, '$format$')" name="get_format - Returns a date, datetime, or time value using the format specified in FORMAT." type="1"/>
+                <node code="HOUR($time$)" name="hour - Returns the hour from the current time with values ranging from 0 to 23 for time-of-day values." type="1"/>
+                <node code="LAST_DAY($date$)" name="last_day - Returns the last day of the month from a DATE or DATETIME value." type="1"/>
+                <node code="LOCALTIME()" name="localtime - Returns the current date and time as a value in 'YYYY-MM-DD HH:MM:SS' or YYYYMMDDHHMMSS format, depending on whether the function is used in a string or numeric context." type="1"/>
+                <node code="LOCALTIMESTAMP()" name="localtimestamp - Returns the current date and time as a value in 'YYYY-MM-DD HH:MM:SS' or YYYYMMDDHHMMSS format, depending on whether the function is used in a string or numeric context." type="1"/>
+                <node code="MAKEDATE($year$, $dayofyear$)" name="makedate - Returns a date based on the values specified for year and the day of the year." type="1"/>
+                <node code="MAKETIME($hour$, $minute$, $second$)" name="maketime - Returns the time in HH:MM:SS format based on the values specified in the hour, minute, and second arguments." type="1"/>
+                <node code="MICROSECOND($expr$)" name="microsecond - Returns the microseconds from the expression with values ranging from 0 to 999999." type="1"/>
+                <node code="MINUTE($time$)" name="minute - Returns the minute from the time value (HH:MM:SS) with values ranging from 0 to 59." type="1"/>
+                <node code="MONTH($date$)" name="month - Returns the month from the specified date, with values ranging from 1 to 12." type="1"/>
+                <node code="MONTHNAME($date$)" name="monthname - Returns the name of the month, such as March, for the specified date." type="1"/>
+                <node code="NOW()" name="now - Returns the current date and time as a value in 'YYYY-MM-DD HH:MM:SS' or YYYYMMDDHHMMSS format, depending on whether the function is used in a string or numeric context." type="1"/>
+                <node code="PERIOD_ADD($P$, $N$)" name="period_add - Adds the number of months specified in N to the period specified in P and returns a value in the format of YYYYMM. The period is formatted using YYMM or YYYYMM." type="1"/>
+                <node code="PERIOD_DIFF($p1$, $p2$)" name="period_diff - Returns the number of months between two periods with values formatted using YYMM or YYYYMM." type="1"/>
+                <node code="QUARTER($date$)" name="quarter - Returns the quarter associated with the specified date, with values ranging from 1 to 4." type="1"/>
+                <node code="SECOND($time$)" name="second - Returns the value for seconds from the time (HH:MM:SS) with values ranging from 0 to 59." type="1"/>
+                <node code="SEC_TO_TIME($seconds$)" name="sec_to_time - Converts the seconds to the equivalent time using an 'HH:MM:SS' or HHMMSS format, depending on whether the function is used in a string or numeric context." type="1"/>
+                <node code="STR_TO_DATE($str$, $format$)" name="str_to_date - Formats the string using the format specified in FORMAT and returns a datetime value." type="1"/>
+                <node code="SUBDATE($expr$ $days$)" name="subdate - Subtracts the number of days from the value specified in EXPR." type="1"/>
+                <node code="SUBDATE($date$, INTERVAL $expr$ $type$)" name="subdateinterval - Subtracts an interval specified in EXPR from the start date." type="1"/>
+                <node code="SUBTIME($expr$, $expr2$)" name="subtime - Subtracts EXPR2 from EXPR and returns the result." type="1"/>
+                <node code="SYSDATE()" name="sysdate - Returns the system's date and time in 'YYYY-MM-DD HH:MM:SS' format when used as a string, or in YYYYMMDDHHMMSS format when used in numeric context." type="1"/>
+                <node code="TIME($expr$)" name="time - Extracts the time in the format of HH:MM:SS from the expression." type="1"/>
+                <node code="TIMEDIFF($expr$, $expr2$)" name="timediff - Returns the amount of time elapsed between the start time (EXPR) and end time (EXPR2). Both expressions accept time or date-and-time values, as long as the types match." type="1"/>
+                <node code="TIMESTAMP($expr$)" name="timestamp - Returns a datetime value for the expression." type="1"/>
+                <node code="TIMESTAMP($expr$, $expr2$)" name="timestamp2 - Adds the time specified in EXPR2 to the value in EXPR and returns a datetime value." type="1"/>
+                <node code="TIMESTAMPADD($interval$, $int_expr$, $datetime_expr$)" name="timestampadd - Adds an integer (INT_EXPR) to the DATETIME_EXPR. The unit for the integer is specified in the interval, which accepts the following values: FRAC_SECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, or YEAR." type="1"/>
+                <node code="TIMESTAMPDIFF($interval$, $datetime_expr1$, $datetime_expr2$)" name="timestampdiff - Returns the difference between the two expressions as long as the types match. The interval specifies the unit for the result and accepts the following values: FRAC_SECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, QUARTER, or YEAR." type="1"/>
+                <node code="TIME_FORMAT($time$, $format$)" name="time_format - Formats the time based on FORMAT. The format string can only contain hours, minutes, and seconds as specifiers or the value returned is NULL or 0." type="1"/>
+                <node code="TIME_TO_SEC($time$)" name="time_to_sec - Converts the time (HH:MM:SS) to seconds." type="1"/>
+                <node code="TO_DAYS($date$)" name="to_days - Returns the number of days since year 0 based on the specified date." type="1"/>
+                <node code="UNIX_TIMESTAMP()" name="unix_timestamp - Returns a Unix timestamp (seconds since '1970-01-01 00:00:00' GMT) as an unsigned integer." type="1"/>
+                <node code="UNIX_TIMESTAMP($date$)" name="unix_timestamp2 - Returns the number of seconds for the specified date." type="1"/>
+                <node code="UTC_DATE()" name="utc_date - Returns the UTC date in the format of  'YYYY-MM-DD' for a string or YYYYMMDD for a numeric context." type="1"/>
+                <node code="UTC_TIME()" name="utc_time - Returns the UTC time in the format of 'HH:MM:SS' for a string or HHMMSS for a numeric context." type="1"/>
+                <node code="UTC_TIMESTAMP()" name="utc_timestamp - Returns the UTC time in the format of 'HH:MM:SS' for a string or HHMMSS for a numeric context." type="1"/>
+                <node code="WEEK($date$, $mode$)" name="week - Returns the week number for the date. The value specified in &quot;mode&quot; determines whether the week starts on Sunday or Monday and whether a value from 0 to 53 or from 1 to 52 is returned. If a value is not specified for &quot;mode,&quot; the value of the default_week_format system variable is used." type="1"/>
+                <node code="WEEKDAY($date$)" name="weekday - Returns a value for the weekday based on the DATE or DATETIME value specified (0 = Monday, 1 = Tuesday, ..., 6 = Sunday)." type="1"/>
+                <node code="WEEKOFYEAR($date$)" name="weekofyear - Returns the calendar week (1 to 53) for the date." type="1"/>
+                <node code="YEAR($date$)" name="year - Returns the year for the date, with values ranging from 1000 to 9999." type="1"/>
+                <node code="YEARWEEK($date$)" name="yearweek - Returns the year and the week for the specified date." type="1"/>
+                <node code="YEARWEEK($date$, $start$)" name="yearweek2 - Returns the year and week for the specified date." type="1"/>
+            </nodes>
+        </node>
+        <node name="Encryption Functions" type="0">
+            <nodes>
+                <node code="AES_DECRYPT($crypt_str$, $key_str$)" name="aes_decrypt - Decrypts data using the Advanced Encryption Standard (AES). This function returns a NULL value if  CRYPT_STR or KEY_STR is NULL." type="1"/>
+                <node code="AES_ENCRYPT($str$, $key_str$)" name="aes_encrypt - Encrypts data using the Advanced Encryption Standard (AES). This function returns a NULL value if STR or KEY_STR is NULL." type="1"/>
+                <node code="DECODE($crypt_str$, $pass_str$)" name="decode - Decrypts the string using the value specified in PASS_STR as the password." type="1"/>
+                <node code="DES_DECRYPT($crypt_str$, $key_str$)" name="des_decrypt - Decrypts a string that has been encrypted using the DES_ENCRYPT function. In order to use this function, MySQL must be configured with SSL support." type="1"/>
+                <node code="DES_ENCRYPT($crypt_str$, $key_str$)" name="des_encrypt - Encrypts the string using a Triple-DES algorithm. In order to use this function, MySQL must be configured with SSL support." type="1"/>
+                <node code="ENCODE($str$, $pass_str$)" name="encode - Encrypts the string using the password specified in the argument." type="1"/>
+                <node code="ENCRYPT($str$, $salt$)" name="encrypt - Encrypts the string using UNIX crypt(). If a value (consisting of two or more characters) is not specified for SALT, a random value is used." type="1"/>
+                <node code="MD5($str$)" name="md5 - Encrypts the string by calculating an MD5 128-bit checksum and returning a 32 hex digit string or a NULL value if the string was NULL. This function should be used if the UNIX crypt () system call is not available." type="1"/>
+                <node code="OLD_PASSWORD($str$)" name="old_password - Returns the value of the PASSWORD function. This function is used to reset passwords for any clients prior to MySQL v4.1 that connect to a MySQL v5.0 server." type="1"/>
+                <node code="PASSWORD($str$)" name="password - Returns an encrypted password from the string or a NULL value that will be stored in the Password column of the user grant table." type="1"/>
+                <node code="SHA($str$)" name="sha - Encrypts the string by calculating a SHA1 160-bit checksum and returns the value as a 40 hex digit string or NULL. This function can be used as a hash key." type="1"/>
+                <node code="SHA1($str$)" name="sha1 - Encrypts the string by calculating a SHA1 160-bit checksum and returns the value as a 40 hex digit string or NULL. This function can be used as a hash key." type="1"/>
+            </nodes>
+        </node>
+        <node name="Favorites" type="0">
+            <nodes>
+                <node code="The Favorites folder is provided for convenient access to a list of&#xa;favorite or frequently used Snippets.  You may activate the Favorites folder&#xa;in the Editor by pressing the default shortcut key of Ctrl+N.&#xa;&#xa;You may also quickly create a new Snippet directly into the Favorites folder&#xa;by selecting the text in the Editor, right-click to invoke the context menu,&#xa;and selecting &quot;Snippets&quot; | &quot;Add to Favorites...&quot;&#xa;&#xa;The &quot;Add to Favorites&quot; action is also available in the SQL Recall tool &#xa;window to allow you to quickly convert a saved SQL command into a Snippet.&#xa;" name="ReadMe - Describes how to use the Favorites folder." type="1"/>
+            </nodes>
+        </node>
+        <node name="Group By and Aggregate Functions" type="0">
+            <nodes>
+                <node code="AVG($expr$)" name="avg - Returns the average value." type="1"/>
+                <node code="BIT_AND($expr$)" name="bit_and - Returns the bitwise AND for the expression using 64-bit (BIGINT) precision." type="1"/>
+                <node code="BIT_OR($expr$)" name="bit_or - Returns the bitwise OR for the expression using 64-bit (BIGINT) precision." type="1"/>
+                <node code="BIT_XOR($expr$)" name="bit_xor - Returns the bitwise XOR for the expression using 64-bit (BIGINT) precision." type="1"/>
+                <node code="COUNT($expr$)" name="count - Counts the total number of non-NULL values for the queried rows." type="1"/>
+                <node code="COUNT(DISTINCT $expr$)" name="countdisctinct - Counts the total number of unique non-NULL values." type="1"/>
+                <node code="GROUP_CONCAT($expr$)" name="group_concat - Returns a concatenated string for any non-NULL values in the group." type="1"/>
+                <node code="MAX($expr$)" name="max - Returns the maximum value of the expression." type="1"/>
+                <node code="MIN($expr$)" name="min - Returns the minimum value of the expression." type="1"/>
+                <node code="STD($expr$)" name="std - Returns the population standard deviation (square root of the VARIANCE function)." type="1"/>
+                <node code="STDDEV($expr$)" name="stddev - Returns the population standard deviation (square root of the VARIANCE function).This function is used for Oracle compatibility." type="1"/>
+                <node code="STDDEV_POP($expr$)" name="stddev_pop - Returns the population standard deviation (square root of the VAR_POP function). This function is available in MySQL v5.0.3 or later." type="1"/>
+                <node code="STDDEV_SAMP($expr$)" name="stddev_samp - Returns the sample standard deviation (square root of the VAR_POP function)." type="1"/>
+                <node code="SUM($expr$)" name="sum - Returns the sum of the expression. A NULL value is returned if the result does not have any rows." type="1"/>
+                <node code="VARIANCE($expr$)" name="variance - Returns the standard variance of the expression (evalutates rows as the entire population rather than a sample population; so it uses the number of rows as a denominator)." type="1"/>
+                <node code="VAR_POP($expr$)" name="var_pop - Returns the population standard variance. This function is available in MySQL v5.0.3 or later." type="1"/>
+                <node code="VAR_SAMP($expr$)" name="var_samp - Returns the sample variance of the expression.This function is available in MySQL v5.0.3 or later." type="1"/>
+            </nodes>
+        </node>
+        <node name="Information Functions" type="0">
+            <nodes>
+                <node code="BENCHMARK($count$, $expr$)" name="benchmark - Executes the expression the number of times specified in COUNT to determine performance of the query on the client." type="1"/>
+                <node code="CHARSET($str$)" name="charset - Returns the character set used for the string." type="1"/>
+                <node code="COERCIBILITY($str$)" name="coercibility - Returns the collation coercibility for the string." type="1"/>
+                <node code="COLLATION($str$)" name="collation - Returns the collation for the character set specified in the string." type="1"/>
+                <node code="CONNECTION_ID()" name="connection_id - Returns the unique thread ID associated with the connection." type="1"/>
+                <node code="CURRENT_USER()" name="current_user - Returns the username associated with the account that determines access privileges and the hostname connected to the current session. The username can be different than the value returned for USER()." type="1"/>
+                <node code="DATABASE()" name="database - Returns the name of the current database." type="1"/>
+                <node code="FOUND_ROWS()" name="found_rows - Returns the number of rows a query containing a LIMIT clause would return if the LIMIT clause were removed. This is useful to determine the rows without having to re-execute the query." type="1"/>
+                <node code="LAST_INSERT_ID($expr$)" name="last_insert_id - Returns the first value that was automatically inserted in an AUTO_INCREMENT column by the last INSERT or UPDATE query that automatically added a value to a column of that type." type="1"/>
+                <node code="row_count()" name="row_count - Returns the number of rows that were affected by the previous INSERT, UPDATE, or DELETE statement." type="1"/>
+                <node code="SCHEMA()" name="schema - Returns the name of the current database. This function is a synonym for the DATABASE function." type="1"/>
+                <node code="session_user()" name="session_user - Returns the username and hostname used when connecting." type="1"/>
+                <node code="SYSTEM_USER()" name="system_user - Returns the username and hostname used when connecting." type="1"/>
+                <node code="USER()" name="user - Returns the username and hostname used when connecting." type="1"/>
+                <node code="VERSION()" name="version - Returns the version number for the connected database." type="1"/>
+            </nodes>
+        </node>
+        <node name="Mathematical Functions" type="0">
+            <nodes>
+                <node code="ABS($X$)" name="abs - Returns the absolute value of the variable specified in &quot;X.&quot;" type="1"/>
+                <node code="ACOS($X$)" name="acos - Returns the angle whose cosine is &quot;X.&quot;" type="1"/>
+                <node code="ASIN($X$)" name="asin - Returns the angle for the value whose sine is &quot;X.&quot;" type="1"/>
+                <node code="ATAN($X$)" name="atan - Returns the angle whose tangent is specified in X." type="1"/>
+                <node code="ATAN2($Y$, $X$)" name="atan2 - Returns the angle whose tangent is comprised of X and Y." type="1"/>
+                <node code="CEIL($X$)" name="ceil - Returns the smallest integer that is greater than or equal to X." type="1"/>
+                <node code="CEILING($X$)" name="ceiling - Returns the smallest integer that is greater than or equal to X." type="1"/>
+                <node code="COS($X$)" name="cos - Returns the cosine of X." type="1"/>
+                <node code="COT($X$)" name="cot - Returns the cotangent of X." type="1"/>
+                <node code="CRC32($X$)" name="crc32 - Returns a 32-bit unsigned value after calculating the cyclic redundancy check value." type="1"/>
+                <node code="DEGREES($X$)" name="degrees - Converts the value of X from radians to degrees." type="1"/>
+                <node code="EXP($X$)" name="exp - Returns the exponential value." type="1"/>
+                <node code="FLOOR($X$)" name="floor - Returns the largest integer that is less than or equal to X." type="1"/>
+                <node code="LN($X$)" name="ln - Returns the natural logarithm of X." type="1"/>
+                <node code="LOG($B$, $X$)" name="log - Returns the logarithm of X for an arbitrary base." type="1"/>
+                <node code="LOG10($X$)" name="log10 - Returns the base-10 logarithm of X." type="1"/>
+                <node code="LOG2($X$)" name="log2 - Returns the base-2 logarithm of X." type="1"/>
+                <node code="MOD($N$, $M$)" name="mod - Returns the remainder of N after dividing it by M." type="1"/>
+                <node code="PI()" name="pi - Returns a Pi constant." type="1"/>
+                <node code="POW($X$, $Y$)" name="pow - Converts X to the power of Y." type="1"/>
+                <node code="POWER($X$, $Y$)" name="power - Converts X to the power of Y." type="1"/>
+                <node code="RADIANS($X$)" name="radians - Converts the value of X from degrees to radians." type="1"/>
+                <node code="RAND($N$)" name="rand - Returns a random floating-point value between 0 and 1." type="1"/>
+                <node code="ROUND($X$, $D$)" name="round - Rounds the value of X using the decimal precision specified in D." type="1"/>
+                <node code="SIGN($X$)" name="sign - Returns the sign of the argument as:  -1 for negative, 0, or 1 for positive." type="1"/>
+                <node code="SIN($X$)" name="sin - Returns the sine of X." type="1"/>
+                <node code="SQRT($X$)" name="sqrt - Returns the square root of X." type="1"/>
+                <node code="TAN($X$)" name="tan - Returns the tangent of X." type="1"/>
+                <node code="TRUNCATE($X$, $D$)" name="truncate - Truncates the value of X to the number of decimals specified in D." type="1"/>
+            </nodes>
+        </node>
+        <node name="Miscellaneous Functions" type="0">
+            <nodes>
+                <node code="DEFAULT($col_name$)" name="default - Returns the default value for a table column." type="1"/>
+                <node code="FORMAT($X$, $D$)" name="format - Formats the value of X similar to '#,###,###.##', and rounds the value to the number of decimails specified in D." type="1"/>
+                <node code="GET_LOCK($str$, $timeout$)" name="get_lock - Locks an application or simulates a record lock using the name specified in STR if the attempt does not timeout. This function returns 1 if the lock was obtained successfully, 0 if the attempt timed out (e.g. another client has already locked the name), or NULL if an error occurred." type="1"/>
+                <node code="INET_ATON($expr$)" name="inet_aton - Returns a 4 or 8-byte integer representing the numeric value of the network address for the dotted-quad expression." type="1"/>
+                <node code="INET_NTOA($expr$)" name="inet_ntoa - Returns a dotted quad representation of the 4 or 8-byte numeric network address." type="1"/>
+                <node code="IS_FREE_LOCK($str$)" name="is_free_lock - Verifies whether the lock name is available (not locked). This function returns 1 if the lock name can be used, 0 if the lock name is already being used, and NULL if an error occured." type="1"/>
+                <node code="IS_USED_LOCK($str$)" name="is_used_lock - Checks whether the lock named str is in use (that is, locked). If so, it returns the connection identifier of the client that holds the lock. Otherwise, it returns NULL." type="1"/>
+                <node code="MASTER_POS_WAIT($log_name$, $log_pos$, $timeout$)" name="master_pos_wait - Blocks any entries to the master log until the slave has read and applied all updates up to the specified position in the master log. The return value is the number of log events that were blocked until the slave reached the specified position in the master log file.This function is useful for controlling master/slave synchronization." type="1"/>
+                <node code="RELEASE_LOCK($str$)" name="release_lock - Releases the named lock. This function returns 1 if the lock was released, 0 if the lock was not locked by this thread (in which case the lock was not released), and NULL if the named lock did not exist." type="1"/>
+                <node code="UUID()" name="uuid - Returns a Universal Unique Identifier (UUID) that is globally unique in space and time." type="1"/>
+            </nodes>
+        </node>
+        <node name="Stored Procedures" type="0">
+            <nodes>
+                <node code="CALL $name$($param_value$)&#xa;" name="call - Calls a stored procedure." type="1"/>
+                <node name="Cursors" type="0">
+                    <nodes>
+                        <node code="CLOSE $cursor_name$;" name="close - Closes an open cursor." type="1"/>
+                        <node code="DECLARE $cursor_name$ CURSOR FOR $select_statement$;" name="cursor - Declares a cursor." type="1"/>
+                        <node code="FETCH $cursor_name$ INTO $var_name$;" name="fetch - Fetches the next row for the open cursor and advances the cursor pointer." type="1"/>
+                        <node code="OPEN $cursor_name$;" name="open - Opens a cursor." type="1"/>
+                    </nodes>
+                </node>
+                <node name="Flow Control" type="0">
+                    <nodes>
+                        <node code="BEGIN&#xa;&#x9;$selected$$end$&#xa;END;" name="begin - Delimits a block of statements." type="1"/>
+                        <node code="CASE $expr$&#xa;  WHEN $val1$ THEN $statement_list1$&#xa;  WHEN $val2$ THEN $statement_list2$&#xa;  ELSE $statement_list3$&#xa;END CASE;" name="case - Compares a specific value to a list of other values and returns a different result in each circumstance." type="1"/>
+                        <node code="ELSEIF $expr$ THEN &#xa;&#x9;$selected$$end$" name="elseif - Evaluates a Boolean condition and executes the condition if the condition is true. If the condition is false, executes the ELSEIF condition." type="1"/>
+                        <node code="IF $expr$ THEN &#xa;&#x9;$selected$$end$&#xa;END IF;&#xa;" name="if - Evaluates a Boolean condition and executes an appropriate set of commands." type="1"/>
+                        <node code="IF $expr1$ THEN &#xa;&#x9;$statement_list1$&#xa;ELSEIF $expr2$ THEN &#xa;&#x9;$statement_list2$&#xa;ELSE&#xa;&#x9;$selected$$end$&#xa;END IF;&#xa;" name="ifelse - Evaluates a Boolean condition and executes the condition if the condition is true. If the condition is false, executes the ELSE condition." type="1"/>
+                        <node code="LOOP&#xa;  $selected$$end$&#xa;END LOOP;" name="loop - Repeats execution of the statements in the loop." type="1"/>
+                        <node code="REPEAT&#xa;  $selected$$end$&#xa;UNTIL $expr$&#xa;END REPEAT;" name="repeat - Repeats execution of the statements until the expression evaluates to true." type="1"/>
+                        <node code="WHILE $expr$ DO&#xa;&#x9;$selected$$end$&#xa;END WHILE;" name="while - Executes the statements until the expression evaluates to false." type="1"/>
+                    </nodes>
+                </node>
+                <node code="CREATE FUNCTION $name$ ($param_name$ $param_type$) RETURNS $return_type$&#xa;BEGIN&#xa;&#x9;$selected$$end$&#xa;&#x9;RETURN $return_value$;&#xa;END&#xa;" name="func - Creates a function." type="1"/>
+                <node code="CREATE PROCEDURE $name$ ($param_name$ $param_type$)&#xa;BEGIN&#xa;&#x9;$selected$$end$&#xa;END;&#xa;" name="proc - Creates a stored procedure." type="1"/>
+                <node name="Variables" type="0">
+                    <nodes>
+                        <node code="DECLARE $var_name$ $data_type$ DEFAULT $value$;" name="declare - Declares a local variable." type="1"/>
+                        <node code="SELECT $col_name$ INTO $var_name$ &#xa;&#x9;FROM $table$ WHERE $limit$;" name="selinto - Stores the specified columns as variables." type="1"/>
+                        <node code="SET $var_name$ = $value$;" name="set - Assigns a value to a variable." type="1"/>
+                    </nodes>
+                </node>
+            </nodes>
+        </node>
+        <node name="String Functions" type="0">
+            <nodes>
+                <node code="ASCII($str$)" name="ascii - Converts a character to a numeric ASCII code." type="1"/>
+                <node code="BIN($N$)" name="bin - Returns a string that represents the argument's binary value." type="1"/>
+                <node code="BIT_LENGTH($str$)" name="bit_length - Returns the length of the string in bits." type="1"/>
+                <node code="CHAR($N1$)" name="char - Converts a numeric ASCII code to a character format." type="1"/>
+                <node code="CHARACTER_LENGTH($str$)" name="character_length - Returns the length of the string in character format." type="1"/>
+                <node code="CHAR_LENGTH($str$)" name="char_length - Returns the length of the string in character format." type="1"/>
+                <node code="COMPRESS($str$)" name="compress - Compresses the value of the string if MySQL has been compiled with a compression library." type="1"/>
+                <node code="CONCAT($str1$, $str2$)" name="concat - Concatenates the values of the arguments." type="1"/>
+                <node code="CONCAT_WS($separator$, $str1$, $str2$)" name="concat_ws - Concatenates the values of the arguments and adds a separator between the values." type="1"/>
+                <node code="CONV($N$, $from_base$, $to_base$)" name="conv - Converts the number specified in N from one number base to another base and returns a string." type="1"/>
+                <node code="ELT($N$, $str1$, $str2$)" name="elt - Returns the value of the string argument that corresponds to the value of N (e.g. returns str1 if N = 1, str2 if N = 2...)." type="1"/>
+                <node code="EXPORT_SET($bits$, $on$, $off$)" name="export_set - Returns a string in which for every bit set specified in BITS, an ON string is returned and for every reset bit an OFF string is returned." type="1"/>
+                <node code="FIELD($str$, $str1$, $str2$)" name="field - Returns the index for the value specified in STR using values from the STR1, STR2, ... list." type="1"/>
+                <node code="FIELD_IN_SET($str$, $strlist$)" name="field_in_set - Returns a value 1 to N if the string str is in the string list strlist consisting of N substrings." type="1"/>
+                <node code="FIND_IN_SET($str$, $strlist$)" name="find_in_set - Returns the number of substrings in STRLIST that match the value of STR. Note that the value of STR is included in the value returned." type="1"/>
+                <node code="HEX($N$)" name="hex - Returns the hexadecimal value of N." type="1"/>
+                <node code="INSERT($str$, $pos$, $len$, $newstr$)" name="insert - Replaces the value of the string beginning at the specified position for the number of characters specified in LEN with the value of NEWSTR." type="1"/>
+                <node code="INSTR($str$, $substr$)" name="instr - Locates the first occurrence of SUBSTR in STR and returns the numeric position of it. This function is similar to the LOCATE() function, except that the arguments are switched." type="1"/>
+                <node code="LCASE($str$)" name="lcase - Converts the string to lowercase (default character set mapping is ISO-8859-1 Latin1)." type="1"/>
+                <node code="LEFT($str$, $len$)" name="left - Returns a portion of the string, starting the number of characters from the left specified in LEN." type="1"/>
+                <node code="LENGTH($str$)" name="length - Returns the number of characters in STR, measured in bytes. Multi-byte characters are counted as multiple bytes." type="1"/>
+                <node code="LOAD_FILE($file_name$)" name="load_file - Returns the contents of the file as a string. To use this functtion, you must have the FILE privilege, the file must be located on the server, and FILE_NAME must include the full path to the file." type="1"/>
+                <node code="LOCATE($substr$, $str$, $pos$)" name="locate - Locates the first occurrence of SUBSTR in STR and returns the numeric position of it." type="1"/>
+                <node code="LOWER($str$)" name="lower - Converts the string to lowercase (default character set mapping is ISO-8859-1 Latin1)." type="1"/>
+                <node code="LPAD($str$, $len$, $padstr$)" name="lpad - Adds the number of blank spaces specified in LEN to the beginning of the string." type="1"/>
+                <node code="LTRIM($str$)" name="ltrim - Removes blank spaces from the beginning of the string in the argument." type="1"/>
+                <node code="MAKE_SET($bits$, $str1$, $str2$)" name="make_set - Returns a string containing substrings separated by ',' characters (set value) that have the corresponding bit set as specified in BITS." type="1"/>
+                <node code="MID($str$, $pos$, $len$)" name="mid - Returns a portion of a string that is LEN characters long, starting at the specified position. This function is a synonym for the SUBSTRING function." type="1"/>
+                <node code="OCT($N$)" name="oct - Returns a string containing the octal value of N." type="1"/>
+                <node code="OCTET_LENGTH($str$)" name="octet_length - Returns the number of characters in STR, measured in bytes. Multi-byte characters are counted as multiple bytes. This function is a synonym for LENGTH()." type="1"/>
+                <node code="ORD($str$)" name="ord - Returns the numeric ASCII code if the leftmost character of the string is not a multi-byte character. If the leftmost character of the string is a multi-byte character, this function returns the code for that character, calculated from the numeric values of its constituent bytes using the following formula: (1st byte code)+(2nd byte code * 256)+(3rd byte code * 256^2) ..." type="1"/>
+                <node code="POSITION($substr$ IN $str$)" name="position - Returns the numeric position of the first occurrence of the substring STR." type="1"/>
+                <node code="QUOTE($str$)" name="quote - Returns a string that can be used as a properly escaped data value in an SQL statement." type="1"/>
+                <node code="REPEAT($str$, $count$)" name="repeat - Repeats the value of STR the number of times specified in COUNT." type="1"/>
+                <node code="REPLACE($str$, $from_str$, $to_str$)" name="replace - Replaces all occurrences of FROM_STR with TO_STR in STR." type="1"/>
+                <node code="REVERSE($str$)" name="reverse - Reverses the order of characters in the string." type="1"/>
+                <node code="RIGHT($str$, $len$)" name="right - Returns a portion of the string, starting the number of characters from the right specified in LEN." type="1"/>
+                <node code="RPAD($str$, $len$, $padstr$)" name="rpad - Adds the number of blank spaces specified in LEN to the end of the string." type="1"/>
+                <node code="RTRIM($str$)" name="rtrim - Removes blank spaces from the end of the string in the argument." type="1"/>
+                <node code="SOUNDEX($str$)" name="soundex - Returns a soundex string." type="1"/>
+                <node code="SPACE($N$)" name="space - Returns a string consisting of a given number of space characters." type="1"/>
+                <node code="SUBSTRING($str$, $pos$, $len$)" name="substring - Returns a portion of a string that is LEN characters long, starting at the specified position." type="1"/>
+                <node code="SUBSTRING_INDEX($str$, $delim$, $count$)" name="substring_index - Returns the substring from the string before the delimiter reaches the number of occurrences specified in COUNT." type="1"/>
+                <node code="TRIM($remstr$ FROM $str$)" name="trim - Removes all leading and trailing spaces from the string." type="1"/>
+                <node code="TRIM($scope$ $remstr$ FROM $str$)" name="trimscope - Returns the string with all leading and trailing spaces removed." type="1"/>
+                <node code="UCASE($str$)" name="ucase - Converts the string to uppercase (default character set mapping is ISO-8859-1 Latin1)." type="1"/>
+                <node code="UNCOMPRESS($str$)" name="uncompress - Uncompresses the value of the string if MySQL has been compiled with a compression library." type="1"/>
+                <node code="UNCOMPRESSED_LENGTH($str$)" name="uncompressed_length - Returns the length of a compressed string before it was compressed." type="1"/>
+                <node code="UNHEX($str$)" name="unhex - Converts each pair of hexadecimal digits in the argument from a numeric format to a character format." type="1"/>
+                <node code="UPPER($str$)" name="upper - Converts the string to uppercase (default character set mapping is ISO-8859-1 Latin1)." type="1"/>
+            </nodes>
+        </node>
+        <node name="MySql procedures and functions and Sql Developer Techniques" type="0">
+            <nodes>
+                <node code="create procedure test_proc(in param1 int, in param2 varchar(255), &#xa;                                      out param3 int, out param4 varchar(255))&#xa;begin&#xa;    set param3 = param1 + 100;&#xa;&#xa;    set param4 = concat(param2, 'test');&#xa;end;" name="Create stored procedure with input and output parameters (example)" type="1"/>
+                <node code="call test_proc(param1, param2, :out_number_param3, :out_varchar_param4);&#xa;" name="Execute stored procedure with input and output parameters from Sql Developer (Execute Script)" type="1"/>
+                <node code="create procedure test_get_rs() &#xa;begin &#xa;   select * from employee; &#xa;&#xa;   select empno from employee; &#xa;end;" name="Create procedure which returns resultsets" type="1"/>
+                <node code="call test_get_rs();" name="Execute procedure which returns resultsets from Sql Developer (Execute Sql)" type="1"/>
+                <node code="CREATE FUNCTION test_fnc(v_value INT) RETURNS CHAR(6)&#xa;BEGIN&#xa;   RETURN CAST(v_value AS char);&#xa;END;" name="Create function (example)" type="1"/>
+                <node code="select test_fnc(10)" name="Execute function (example)" type="1"/>
+            </nodes>
+        </node>
+        <node name="Miscellaneous" type="0">
+            <nodes>
+                <node code="select * from employee limit 10" name="Get top N rows (example)" type="1"/>
+                <node code="CREATE TEMPORARY TABLE IF NOT EXISTS temp_table(&#xa;           field_name varchar(100), &#xa;           pk NUMERIC(32), &#xa;           old_pk NUMERIC(32)) ENGINE = InnoDB;" name="Create temporary table (example)" type="1"/>
+                <node code="select SYSDATE()" name="Get current date+time" type="1"/>
+                <node code="select 'y'" name="dummy/dual table" type="1"/>
+            </nodes>
+        </node>
+        <node name="Autoincrement fields" type="0">
+            <nodes>
+                <node code="create table test_tab&#xa;(&#xa;   PK BIGINT&#x9;not null AUTO_INCREMENT,&#xa;   NAME&#x9;VARCHAR(255),&#xa;   primary key (PK)&#xa;)   " name="Create table with autoincrement field (example)" type="1"/>
+                <node code="insert into test_tab (name) values ('test');" name="Insert into table with autoincrement field" type="1"/>
+                <node code="SELECT auto_increment &#xa;FROM information_schema.TABLES where table_schema = 'some_schema' and table_name = 'some_table';" name="Get value of the autoincrement field which was just updated" type="1"/>
+            </nodes>
+        </node>
+    </nodes>
+</mysql>

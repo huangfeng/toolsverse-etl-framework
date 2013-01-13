@@ -1,0 +1,104 @@
+<project default="toolsverse-etl-jar">
+    <target name="toolsverse-etl-jar">
+        <mkdir dir="${dist-jar-dir}/etl" />
+
+        <jar destfile="${dist-jar-dir}/etl/toolsverse-etl-common.jar" basedir="${destination-dir}" includes="com/toolsverse/etl/common/**,
+			                     com/toolsverse/etl/parser/**,
+			                     com/toolsverse/etl/resource/**,
+			                     com/toolsverse/etl/sql/**,
+			                     com/toolsverse/etl/connector/**,
+			                     com/toolsverse/etl/util/**,
+        	                     com/toolsverse/etl/aliasreader/**,
+                                 com/toolsverse/etl/metadata/*.class,
+                                 com/toolsverse/etl/metadata/text/**,
+                                 com/toolsverse/etl/metadata/xml/**,
+                                 com/toolsverse/etl/metadata/excel/**,
+                                 com/toolsverse/etl/metadata/qed/**,
+                                 com/toolsverse/etl/driver/*.class,
+                                 com/toolsverse/etl/driver/qed/**,
+                                 com/toolsverse/etl/driver/excel/**" manifest="manifest.mf" />
+
+        <jar destfile="${dist-jar-dir}/etl/toolsverse-etl-core.jar" basedir="${destination-dir}" includes="com/toolsverse/etl/core/codegen/**,
+			           com/toolsverse/etl/core/config/**,
+			           com/toolsverse/etl/core/codegen/**,
+        	           com/toolsverse/etl/demo/**,
+			           com/toolsverse/etl/core/connection/**,
+			           com/toolsverse/etl/core/engine/**,
+		               com/toolsverse/etl/core/service/**,
+		               com/toolsverse/etl/core/util/**,
+		               com/toolsverse/etl/core/task/common/**,
+		               com/toolsverse/etl/core/task/sql/**,
+		               com/toolsverse/etl/core/function/*.class" manifest="manifest.mf" />
+
+        <if>
+            <equals arg1="${create-source-jars}" arg2="true" />
+            <then>
+                <mkdir dir="${dist-source-jar-dir}/etl" />
+                <jar destfile="${dist-source-jar-dir}/etl/toolsverse-etl-common-source.jar" basedir="${source-dir}" includes="com/toolsverse/etl/common/**,
+					                     com/toolsverse/etl/parser/**,
+					                     com/toolsverse/etl/resource/**,
+					                     com/toolsverse/etl/sql/**,
+					                     com/toolsverse/etl/connector/**,
+					                     com/toolsverse/etl/util/**,
+                	                     com/toolsverse/etl/aliasreader/**,
+		                                 com/toolsverse/etl/metadata/*.*,
+		                                 com/toolsverse/etl/metadata/text/**,
+		                                 com/toolsverse/etl/metadata/xml/**,
+		                                 com/toolsverse/etl/metadata/excel/**,
+		                                 com/toolsverse/etl/metadata/qed/**,
+		                                 com/toolsverse/etl/driver/*.*,
+		                                 com/toolsverse/etl/driver/qed/**,
+		                                 com/toolsverse/etl/driver/excel/**" />
+
+                <jar destfile="${dist-source-jar-dir}/etl/toolsverse-etl-core-source.jar" basedir="${source-dir}" includes="com/toolsverse/etl/core/codegen/**,
+					           com/toolsverse/etl/core/config/**,
+                	           com/toolsverse/etl/demo/**,
+					           com/toolsverse/etl/core/codegen/**,
+					           com/toolsverse/etl/core/connection/**,
+					           com/toolsverse/etl/core/engine/**,
+				               com/toolsverse/etl/core/service/**,
+				               com/toolsverse/etl/core/util/**,
+				               com/toolsverse/etl/core/task/common/**,
+				               com/toolsverse/etl/core/task/sql/**,
+				               com/toolsverse/etl/core/function/*.*" />
+ 
+            </then>
+        </if>
+
+        <if>
+            <equals arg1="${create-javadoc}" arg2="true" />
+            <then>
+                <mkdir dir="${dist-javadoc-jar-dir}/etl" />
+                <jar destfile="${dist-javadoc-jar-dir}/etl/toolsverse-etl-common-javadoc.jar" basedir="${javadoc-dir}" includes="com/toolsverse/etl/common/**,
+					                     com/toolsverse/etl/parser/**,
+					                     com/toolsverse/etl/resource/**,
+					                     com/toolsverse/etl/sql/**,
+					                     com/toolsverse/etl/connector/**,
+                	                     com/toolsverse/etl/aliasreader/**,
+					                     com/toolsverse/etl/util/**,
+		                                 com/toolsverse/etl/metadata/*.*,
+		                                 com/toolsverse/etl/metadata/text/**,
+		                                 com/toolsverse/etl/metadata/xml/**,
+		                                 com/toolsverse/etl/metadata/excel/**,
+		                                 com/toolsverse/etl/metadata/qed/**,
+		                                 com/toolsverse/etl/driver/*.*,
+		                                 com/toolsverse/etl/driver/qed/**,
+		                                 com/toolsverse/etl/driver/excel/**" />
+
+                <jar destfile="${dist-javadoc-jar-dir}/etl/toolsverse-etl-core-javadoc.jar" basedir="${javadoc-dir}" includes="com/toolsverse/etl/core/codegen/**,
+					           com/toolsverse/etl/core/config/**,
+					           com/toolsverse/etl/core/codegen/**,
+					           com/toolsverse/etl/core/connection/**,
+                	           com/toolsverse/etl/demo/**,
+					           com/toolsverse/etl/core/engine/**,
+				               com/toolsverse/etl/core/service/**,
+				               com/toolsverse/etl/core/util/**,
+				               com/toolsverse/etl/core/task/common/**,
+				               com/toolsverse/etl/core/task/sql/**,
+				               com/toolsverse/etl/core/function/*.*" />
+				               
+            </then>
+        </if>
+
+    </target>
+</project>

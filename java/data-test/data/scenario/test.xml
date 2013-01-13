@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+    <name>Test</name>
+    <script>test</script>
+    <onsave action="save"/>    
+    <onpersist action="save"/>
+    <driver name="com.toolsverse.etl.driver.MockExtendedCallableDriver" case="lower" />
+    <description>This is a description</description>
+    
+    <variables>
+        <SUBST value="value" />
+        <TEST_SUBST value="some {SUBST}" />
+        <FIRST_NAME label="First Name" value="John" />
+        <LAST_NAME label="Last Name" value="Smith" />
+        <DOB label="Date of Birth" />
+    </variables>
+    
+    <sources> 
+       <source> 
+          <name>image</name>
+          <extract>
+              <sql>select *  from image
+              </sql> 
+          </extract>
+       </source> 
+
+
+       <source> 
+          <name>clobs</name>
+          <extract>
+              <sql>select * from clobs
+              </sql> 
+          </extract>
+       </source> 
+
+
+       <source> 
+          <name>property</name>
+          <extract>
+              <sql>select *
+                   from property
+              </sql>
+              <tasks>
+                 <task>
+                    <name>tmp_property</name>   
+                    <class>com.toolsverse.etl.core.task.common.SqlTask</class> 
+                    <connection>test</connection> 
+                 </task> 
+              </tasks>
+          </extract>
+       </source> 
+       <source> 
+          <name>group</name>
+          <extract>
+              <sql>select * from group</sql> 
+              <tasks>
+                 <task>
+                    <name>tmp_group</name>   
+                    <class>com.toolsverse.etl.core.task.common.SqlTask</class> 
+                    <connection>test</connection> 
+                 </task> 
+              </tasks>
+          </extract>
+       </source>         
+        
+       <source> 
+          <name>property_value</name>
+          <extract>
+              <sql>select * from property_value</sql> 
+              <tasks>
+                 <task>
+                    <name>tmp_property_value</name>   
+                    <class>com.toolsverse.etl.core.task.common.SqlTask</class> 
+                    <connection>test</connection> 
+                 </task> 
+              </tasks>
+          </extract>
+       </source>    
+    </sources>
+
+    <destinations>   
+       <destination type="function">
+          <name>test</name>
+          <objectname>to_value</objectname>           
+          <load>
+              <sql>
+                 CREATE FUNCTION to_value(@value VARCHAR(3000)) RETURNS VARCHAR(3000)
+                 AS  
+                 BEGIN
+                   return @value
+                 END
+              </sql>
+          </load>
+       </destination>
+       <destination>
+          <name>delete</name>
+          <load>
+              <sql>
+                 delete from image  
+                 delete from clobs   
+                 delete from property_value 
+                 delete from property    
+                 delete from group                    
+              </sql> 
+          </load>
+       </destination>         
+
+       <destination>
+          <name>image</name>
+          <source>image</source>
+          <load>
+              <variables>
+                 <IMAGE_NUM function="getPk" include="Yes" />
+                 <IMAGE linked="IMAGE_NUM" />
+              </variables> 
+          </load>
+       </destination>   
+
+       <destination externalblob="YES">
+          <name>clobs</name>
+          <load>
+              <variables>
+                 <ID function="getPk" />
+                 <DATA_FILTER linked="ID" /> 
+              </variables> 
+          </load>
+       </destination>   
+
+       <destination>
+          <name>property</name>
+          <source>property</source>          
+          <sourcetable name="tmp_property" onfinish="keep" />
+          <load>
+              <variables>
+                 <PROPERTY_NUM function="getPk" include="No" />
+              </variables> 
+          </load>
+       </destination>         
+
+       <destination>
+          <name>group</name>
+          <source>group</source>          
+          <sourcetable name="tmp_group" onfinish="keep" />
+          <load>
+              <variables>
+                 <GROUP_NUM function="getPk" include="No" /> 
+              </variables> 
+          </load>
+       </destination>         
+
+       <destination>
+          <name>property_value</name>
+          <source>property_value</source>          
+          <sourcetable name="tmp_property_value" onfinish="keep" />
+          <load>
+              <variables>
+                 <PROPERTY_NUM function="getFk" /> 
+                 <GROUP_NUM function="getFk" /> 
+                 <VALUE /> 
+                 <NEW_VALUE type="VARCHAR(3000)" sql=" select @NEW_VALUE = dbo.to_value(@VALUE) set @VALUE = @NEW_VALUE " /> 
+              </variables>               
+          </load>
+       </destination>      
+    </destinations>
+</scenario>

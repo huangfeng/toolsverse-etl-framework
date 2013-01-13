@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+    <name>tasks</name>
+    <script>tasks</script>
+    <onsave action="skip"/>    
+    <onpersist action="skip"/>
+    <driver name="com.toolsverse.etl.driver.GenericJdbcDriver" />
+    
+    <sources> 
+       <source> 
+          <name>source_regexp</name>
+          <extract>
+              <sql>select *  from source</sql> 
+          </extract>
+          <tasks>
+                 <task>
+                    <name>regexp</name>   
+                    <class>com.toolsverse.etl.core.task.common.RegexpTransformator</class>
+                    <variables>
+                       <REGEXP value="." />
+                       <FIELD value="DESCRIPTION" />
+                       <REPLACE value="replaced" />
+                    </variables>
+                 </task> 
+          </tasks>
+       </source>
+
+       <source> 
+          <name>source_eval</name>
+          <extract>
+              <sql>select *  from source</sql> 
+          </extract>
+          <tasks>
+                 <task>
+                    <name>eval</name>   
+                    <class>com.toolsverse.etl.core.task.common.EvalTransformator</class>
+                    <variables>
+                       <CODE value="var value; value = '123';" />
+                       <LANG value="JavaScript" />
+                       <FIELD value="DESCRIPTION" />
+                    </variables>
+                 </task> 
+          </tasks>
+       </source>
+
+       <source> 
+          <name>source_valid</name>
+          <extract>
+              <sql>select *  from source</sql> 
+          </extract>
+          <tasks>
+                 <task>
+                    <name>eval</name>   
+                    <class>com.toolsverse.etl.core.task.common.Validator</class>
+                    <variables>
+                       <CODE value="importPackage(com.toolsverse.etl.core.engine); 
+                                           importPackage(com.toolsverse.util); 
+                                           var value;
+                                           if (Utils.isNothing(fieldValue))
+                                           {
+                                               value = TaskResult.CONTINUE;
+                                           }
+                                           else
+                                           {
+                                               value = TaskResult.REJECT; 
+                                           }" />
+                       <LANG value="JavaScript" />
+                       <FIELD value="DESCRIPTION" />
+                    </variables>
+                 </task> 
+          </tasks>
+       </source>
+        
+    </sources>
+
+</scenario>

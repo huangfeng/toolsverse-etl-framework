@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups>
+   <group name="Text" key="text" >
+      <items>
+         <item label="File Name:" key="filename" type="string" /> 
+         <item type="custom" controlclass="separator" />
+         <item label="Use Selected Cells Only:" key="useselected" type="boolean" default="false" filter="client"/>
+         <item label="Example:" key="example" type="label" default="firstname,lastname" />
+         <item label="Split By:" key="splitby" type="string" />
+         <item label="Delimiter:" key="delimiter" type="select" default="|" >
+                <select> 
+                   <value key="|" description="Pipe (|)" />
+                   <value key="," description="Comma (,)" />
+                   <value key=";" description="Semicolon (;)" />
+                   <value key=":" description="(:)" />
+                   <value key=" " description="Space" />
+                   <value key="&#009;" description="Tab" />
+                   <value key="." description="Dot (.)" />
+                   <value key="!" description="Exclamation (!)" />
+                   <value key="\" description="Backslash (\)" />
+                   <value key="/" description="Slash (/)" />
+                   <value key="_" description="Underscore (_)" />
+                   <value key="-" description="Dash (-)" />
+                   <value key="*" description="Star (*)" />
+                   <value key="&amp;" description="Amp (&amp;)" />
+                   <value key="$" description="Dollar ($)" />
+                   <value key="#" description="(#)" />
+                   <value key="@" description="(@)" />
+                   <value key="+" description="(+)" />
+                   <value key="=" description="(=)" />
+                </select>
+         </item>
+         <item label="Store Metadata" key="metadata" type="boolean" default="true" /> 
+         <item label="Use First Row for Data" key="firstrow" type="boolean" default="true" />
+         <item label="Example:" key="fieldsinfo" type="label" default="6,12,15,8 - numbers are corresponding field lengths and ',' is a delimiter" />
+         <item label="Fields:" key="fields" type="string" />    
+         <item type="custom" controlclass="separator" />
+         <item label="Date and Time Format:" key="datetimeformat" type="string" default="MM/dd/yyyy HH:mm:ss" prefx="200" />
+         <item label="Date Format:" key="dateformat" type="string" default="MM/dd/yyyy" prefx="200" />
+         <item label="Time Format:" key="timeformat" type="string" default="HH:mm:ss" prefx="200" />
+      </items>
+   </group>
+</groups>

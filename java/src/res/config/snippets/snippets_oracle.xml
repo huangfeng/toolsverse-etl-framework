@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oracle name="oracle" type="0">
+    <nodes>
+        <node name="Aggregate Functions" type="0">
+            <nodes>
+                <node code="COUNT(*)" name="COUNT(*) - Returns the number of rows returned by the query." type="1"/>
+                <node code="COUNT([ALL | DISTINCT] expr)" name="COUNT([ALL | DISTINCT] expr) - Returns the number of rows returned by the query." type="1"/>
+                <node code="MAX(expr)" name="MAX(expr) - Returns maximum value of expr." type="1"/>
+                <node code="MEDIAN(expr)" name="MEDIAN(expr) - Returns the middle value or an interpolated value that would be the middle value once the values are sorted." type="1"/>
+                <node code="MIN(expr)" name="MIN(expr) - Returns minimum value of expr." type="1"/>
+                <node code="STDDEV(expr)" name="STDDEV(expr) - Returns the sample standard deviation of expr, a set of numbers." type="1"/>
+                <node code="SUM(expr)" name="SUM(expr) - Returns the sum of values of expr." type="1"/>
+                <node code="VARIANCE(expr)" name="VARIANCE(expr) - Returns the variance of expr." type="1"/>
+            </nodes>
+        </node>
+        <node name="Analytic Functions" type="0">
+            <nodes>
+                <node code="AVG(salary) OVER (PARTITION BY manager_id ORDER BY hire_date" name="AVG(expr) - AVG returns average value of expr." type="1"/>
+                <node code="CORR(SYSDATE-hire_date, salary) OVER(PARTITION BY job_id) AS &quot;Correlation&quot;" name="CORR(expr1, expr2) - CORR returns the coefficient of correlation of a set of number pairs." type="1"/>
+                <node code="COVAR_POP(list_price, min_price) OVER (ORDER BY product_id, supplier_id) AS CUM_COVP" name="COVAR_POP(expr1, expr2) - COVAR_POP returns the population covariance of a set of number pairs." type="1"/>
+                <node code="COVAR_SAMP(list_price, min_price) OVER (ORDER BY product_id, supplier_id) AS CUM_COVP" name="COVAR_SAMP(expr1, expr2) - COVAR_SAMP returns the sample covariance of a set of number pairs." type="1"/>
+                <node code="COUNT(*) OVER (ORDER BY salary RANGE BETWEEN 50 PRECEDING AND 150 FOLLOWING) AS mov_count" name="COUNT(expr) - COUNT returns the number of rows returned by the query." type="1"/>
+                <node code="CUME_DIST() OVER (PARTITION BY job_id ORDER BY salary) AS cume_dist" name="CUME_DIST(expr1, ...) - CUME_DIST calculates the cumulative distribution of a value in a group of values." type="1"/>
+                <node code="DENSE_RANK() OVER (PARTITION BY e.department_id ORDER BY e.salary) AS drank" name="DENSE_RANK() - DENSE_RANK computes the rank of a row in an ordered group of rows and returns the rank as a NUMBER." type="1"/>
+                <node code="FIRST_VALUE(last_name) OVER (ORDER BY salary ASC ROWS UNBOUNDED PRECEDING) AS lowest_sal" name="FIRST_VALUE(expr) - FIRST_VALUE returns the first value in an ordered set of values. " type="1"/>
+                <node code="LAG(salary, 1, 0) OVER (ORDER BY hire_date) AS prev_sal" name="LAG(expr, offset, ...) - LAG provides access to a row at a given physical offset prior to cursor position." type="1"/>
+                <node code="LAST_VALUE(hire_date) OVER (ORDER BY salary ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS lv" name="LAST_VALUE(expr) - LAST_VALUE returns the last value in an ordered set of values. " type="1"/>
+                <node code="LEAD(hire_date, 1) OVER (ORDER BY hire_date) AS &quot;NextHired&quot;" name="LEAD(expr, offset, ...) - LEAD provides access to a row at a given physical offset beyond cursor position." type="1"/>
+                <node code="MAX(salary) OVER (PARTITION BY manager_id) AS mgr_max" name="MAX(expr) - Returns maximum value of expr." type="1"/>
+                <node code="MIN(salary) OVER(PARTITION BY manager_id ORDER BY hire_date" name="MIN(expr) - Returns minimum value of expr." type="1"/>
+                <node code="NTILE(4) OVER (ORDER BY salary DESC)" name="NTILE(expr) - NTILE divides an ordered data set into a number of buckets indicated by expr and assigns the appropriate bucket number to each row." type="1"/>
+                <node code="PERCENT_RANK(15000, .05) WITHIN GROUP (ORDER BY salary, commission_pct) &quot;Percent-Rank&quot;" name="PERCENT_RANK(expr1, ...) - For a row r, PERCENT_RANK calculates the rank of r minus 1, divided by 1 less than the number of rows being evaluated." type="1"/>
+                <node code="PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY salary DESC) OVER (PARTITION BY department_id) &quot;Percentile_Cont&quot;" name="PERCENTILE_CONT(expr) - PERCENTILE_CONT takes a percentile value and a sort specification, and returns an interpolated value that would fall into that percentile value." type="1"/>
+                <node code="PERCENTILE_DISC(0.5) WITHIN GROUP (ORDER BY salary DESC) OVER (PARTITION BY department_id) &quot;Percentile_Disc&quot;" name="PERCENTILE_DISC(expr) - PERCENTILE_DISC takes a percentile value and a sort specification and returns an element from the set." type="1"/>
+                <node code="RANK(15500, .05) WITHIN GROUP (ORDER BY salary, commission_pct) &quot;Rank&quot;" name="RANK(expr1, ...) - RANK computes the rank of each row returned from a query with respect to the other rows returned by the query." type="1"/>
+                <node code="RATIO_TO_REPORT(salary) OVER () AS rr" name="RATIO_TO_REPORT(expr) - RATIO_TO_REPORT computes the ratio of a value to the sum of a set of values." type="1"/>
+                <node code="REGR_SLOPE(SYSDATE-hire_date, salary) OVER (PARTITION BY job_id) slope" name="REGR_SLOPE(expr1, expr2) - REGR_SLOPE returns the slope of the line." type="1"/>
+                <node code="REGR_INTERCEPT(SYSDATE-hire_date, salary) OVER (PARTITION BY job_id) slope" name="REGR_INTERCEPT(expr1, expr2) - REGR_INTERCEPT returns the y-intercept of the regression line." type="1"/>
+                <node code="REGR_SLOPE(SYSDATE-hire_date, salary) OVER (PARTITION BY job_id) slope" name="REGR_SLOPE(expr1, expr2) - REGR_SLOPE returns the slope of the line." type="1"/>
+                <node code="REGR_COUNT(SYSDATE-hire_date, salary) OVER (PARTITION BY job_id) slope" name="REGR_COUNT(expr1, expr2) - REGR_COUNT returns an integer that is the number of non-null number pairs used to fit the regression line." type="1"/>
+                <node code="REGR_R2(SYSDATE-hire_date, salary) OVER (PARTITION BY job_id) slope" name="REGR_R2(expr1, expr2) - REGR_R2 returns the coefficient of determination (also called R-squared or goodness of fit) for the regression." type="1"/>
+                <node code="REGR_AVGX(SYSDATE-hire_date, salary) OVER (PARTITION BY job_id) slope" name="REGR_AVGX(expr1, expr2) - REGR_AVGX evaluates the average of the independent variable (expr2) of the regression line." type="1"/>
+                <node code="REGR_AVGY(SYSDATE-hire_date, salary) OVER (PARTITION BY job_id) slope" name="REGR_AVGY(expr1, expr2) - REGR_AVGY evaluates the average of the independent variable (expr1) of the regression line." type="1"/>
+                <node code="ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY salary desc) rn" name="ROW_NUMBER() - ROW_NUMBER assigns a unique number to each row to which it is applied." type="1"/>
+                <node code="STDDEV(salary) OVER (ORDER BY hire_date) &quot;StdDev&quot;" name="STDDEV(expr) - STDDEV returns the sample standard deviation of expr, a set of numbers." type="1"/>
+                <node code="STDDEV_POP(salary) OVER (PARTITION BY department_id) AS pop_std" name="STDDEV_POP(expr) - STDDEV_POP computes the population standard deviation and returns the square root of the population variance." type="1"/>
+                <node code="STDDEV_SAMP(salary) OVER (PARTITION BY department_id ORDER BY hire_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cum_sdev" name="STDDEV_SAMP(expr) - STDDEV_SAMP computes the cumulative sample standard deviation and returns the square root of the sample variance." type="1"/>
+                <node code=" SUM(salary) OVER (PARTITION BY manager_id ORDER BY salary" name="SUM(expr) - SUM returns the sum of values of expr." type="1"/>
+                <node code="VAR_POP(SUM(s.amount_sold)) OVER (ORDER BY t.calendar_month_desc) &quot;Var_Pop&quot;" name="VAR_POP(expr) - VAR_POP returns the population variance of a set of numbers." type="1"/>
+                <node code="VAR_SAMP(SUM(s.amount_sold)) OVER (ORDER BY t.calendar_month_desc) &quot;Var_Samp&quot;" name="VAR_SAMP(expr) - VAR_SAMP returns the sample variance of a set of numbers." type="1"/>
+                <node code="VARIANCE(salary) OVER (ORDER BY hire_date) &quot;Variance&quot;" name="VAR_POP(expr) - VARIANCE returns the variance of expr." type="1"/>
+            </nodes>
+        </node>
+        <node name="Character Functions" type="0">
+            <nodes>
+                <node code="CHR(n)" name="CHR(n) - Returns the character having the binary equivalent to n as a VARCHAR2 value in either the database character set or, if you specify USING NCHAR_CS, the national character set." type="1"/>
+                <node code="CONCAT(char1, char2)" name="CONCAT(char1, char2) - Returns char1 concatenated with char2." type="1"/>
+                <node code="INITCAP(char)" name="INITCAP(char) - Returns char, with the first letter of each word in uppercase, all other letters in lowercase." type="1"/>
+                <node code="LOWER(char)" name="LOWER(char) - Returns char, with all letters lowercase." type="1"/>
+                <node code="LPAD(expr1, n, expr2)" name="LPAD(expr1, n, expr2) - Returns expr1, left-padded to length n characters with the sequence of characters in expr2." type="1"/>
+                <node code="LTRIM(char, set)" name="LTRIM(char, set) - Removes from the left end of char all of the characters contained in set." type="1"/>
+                <node code="NLS_INITCAP(char, 'NLS_SORT = lang')" name="NLS_INITCAP(char, 'NLS_SORT = lang') - Returns char, with the first letter of each word in uppercase, all other letters in lowercase." type="1"/>
+                <node code="NLS_LOWER(char, 'NLS_SORT = lang')" name="NLS_LOWER(char, 'NLS_SORT = lang') - Returns char, with all letters lowercase." type="1"/>
+                <node code="NLS_UPPER(char, 'NLS_SORT = lang')" name="NLS_UPPER(char, 'NLS_SORT = lang') - Returns char, with all letters uppercase." type="1"/>
+                <node code="NLSSORT(char, 'NLS_SORT = lang')" name="NLSSORT(char, 'NLS_SORT = lang') - Returns the string of bytes used to sort char." type="1"/>
+                <node code="RPAD(expr1, n, expr2)" name="RPAD(expr1, n, expr2) - Returns expr1, right-padded to length n characters with the sequence of characters in expr2." type="1"/>
+                <node code="RTRIM(char, set)" name="RTRIM(char, set) - Removes from the right end of char all of the characters contained in set." type="1"/>
+                <node code="SOUNDEX(char)" name="SOUNDEX(char) - Returns a character string containing the phonetic representation of char." type="1"/>
+                <node code="SUBSTR(char, position, substring_length)" name="SUBSTR(char, position, substring_length) - Returns a portion of char, beginning at character position, substring_length characters long." type="1"/>
+                <node code="TRANSLATE(expr, from_string, to_string)" name="TRANSLATE(expr, from_string, to_string) - Returns expr with all occurrences of each character in from_string replaced by its corresponding character in to_string." type="1"/>
+                <node code="TRIM([LEADING | TRAILING | BOTH] trim_character FROM trim_source)" name="TRIM([LEADING | TRAILING | BOTH] trim_character FROM trim_source) - Trims leading or trailing characters (or both) from a character string. If trim_character or trim_source is a character literal, enclose it in single quotes." type="1"/>
+                <node code="UPPER(char)" name="UPPER(char) - Returns char, with all letters uppercase." type="1"/>
+            </nodes>
+        </node>
+        <node name="Conversion Functions" type="0">
+            <nodes>
+                <node code="TO_CHAR (nchar | clob | nclob)" name="TO_CHAR (nchar | clob | nclob) - Converts NCHAR, NVARCHAR2, CLOB, or NCLOB data to the database character set." type="1"/>
+                <node code="TO_CHAR(datetime, fmt, nlsparam)" name="TO_CHAR(datetime, fmt, nlsparam) - Converts a datetime or interval value of DATE, TIMESTAMP, TIMESTAMP WITH TIME ZONE, or TIMESTAMP WITH LOCAL TIME ZONE datatype to a value of VARCHAR2 datatype in the format specified by the date format fmt." type="1"/>
+                <node code="TO_CHAR (n, fmt, nlsparam)" name="TO_CHAR (n, fmt, nlsparam) - Converts n to a value of VARCHAR2 datatype, using the optional number format fmt." type="1"/>
+                <node code="TO_CLOB(lob_column | char)" name="TO_CLOB(lob_column | char) - Converts NCLOB values in a LOB column or other character strings to CLOB values." type="1"/>
+                <node code="TO_DATE(datetime, fmt, nlsparam)" name="TO_DATE(datetime, fmt, nlsparam) - Converts char of CHAR, VARCHAR2, NCHAR, or NVARCHAR2 datatype to a value of DATE datatype." type="1"/>
+                <node code="TO_TIMESTAMP(char, fmt, nlsparam)" name="TO_TIMESTAMP(char, fmt, nlsparam) - Converts char of CHAR, VARCHAR2, NCHAR, or NVARCHAR2 datatype to a value of TIMESTAMP datatype." type="1"/>
+                <node code="NVL(value, default)" name="NVL(value, default) - NVL lets you replace a null with a value." type="1"/>
+            </nodes>
+        </node>
+        <node name="Date Formats" type="0">
+            <nodes>
+                <node code="TO_CHAR(sysdate, 'DD-MON-YYYY HH24:MI:SS')" name="DD-MON-YYYY HH24:MI:SS - Example: 10-OCT-2005 17:58:01" type="1"/>
+                <node code="TO_CHAR(sysdate, 'DD-MON-YYYY HH12:MI:SS PM')" name="DD-MON-YYYY HH12:MI:SS PM - Example: 10-OCT-2005 05:58:01 PM" type="1"/>
+                <node code="TO_CHAR(systimestamp, 'DD-MON-YYYY HH24:MI:SS.FF')" name="DD-MON-YYYY HH24:MI:SS.FF - Example: 10-OCT-2005 17:58:01.983755" type="1"/>
+                <node code="TO_CHAR(sysdate, 'DY, DD-MON-YYYY')" name="DY, DD-MON-YYYY - Example: MON, 10-OCT-2005" type="1"/>
+                <node code="to_char(sysdate,'Month DDth, YYYY') " name="Month DDth, YYYY - Example: June 10TH, 2005" type="1"/>
+                <node code="TO_CHAR(systimestamp, 'DD-MON-YYYY HH24:MI:SS TZH:TZM')" name="DD-MON-YYYY HH24:MI:SS TZH:TZM - Example: 10-OCT-2005 17:58:01 -07:00" type="1"/>
+                <node code="TO_CHAR(sysdate, 'MM/DD/YYYY HH24:MI:SS')" name="MM/DD/YYYY HH24:MI:SS - Example: 10/13/2005 18:10:25" type="1"/>
+                <node code="TO_CHAR(sysdate, 'MM/DD/YY HH24:MI:SS')" name="MM/DD/YY HH24:MI:SS - Example: 10/13/05 18:10:25" type="1"/>
+                <node code="TO_CHAR(sysdate, 'MM/DD/RRRR HH12:MI:SS PM')" name="MM/DD/RRRR HH12:MI:SS PM - Example: 10/13/2005 06:10:25 PM" type="1"/>
+                <node code="TO_CHAR(sysdate, 'MM/DD/RR HH12:MI:SS PM')" name="MM/DD/RR HH12:MI:SS PM - Example: 10/13/05 06:10:25 PM" type="1"/>
+            </nodes>
+        </node>
+        <node name="Date/Time Functions" type="0">
+            <nodes>
+                <node code="ADD_MONTHS(date, integer)" name="ADD_MONTHS(date, integer) - Returns the date plus integer months." type="1"/>
+                <node code="CURRENT_DATE" name="CURRENT_DATE - Returns the current date in the session time zone, in a value in the Gregorian calendar of datatype DATE." type="1"/>
+                <node code="CURRENT_TIMESTAMP" name="CURRENT_TIMESTAMP - Returns the current date and time in the session time zone, in a value of datatype TIMESTAMP WITH TIME ZONE." type="1"/>
+                <node code="SYSDATE" name="SYSDATE - Returns the current date and time set for the operating system on which the database resides." type="1"/>
+                <node code="SYSTIMESTAMP" name="SYSTIMESTAMP - Returns the system date, including fractional seconds and time zone, of the system on which the database resides." type="1"/>
+                <node code="TO_CHAR(datetime, fmt, nlsparam)" name="TO_CHAR(datetime, fmt, nlsparam) - Converts a datetime or interval value of DATE, TIMESTAMP, TIMESTAMP WITH TIME ZONE, or TIMESTAMP WITH LOCAL TIME ZONE datatype to a value of VARCHAR2 datatype in the format specified by the date format fmt." type="1"/>
+                <node code="TO_CHAR(sysdate, 'DD-MON-YYYY HH24:MI:SS')" name="TO_CHAR(sysdate, 'DD-MON-YYYY HH24:MI:SS') - Converts timestamp [example]." type="1"/>
+                <node code="TO_TIMESTAMP(char, fmt, nlsparam)" name="TO_TIMESTAMP(char, fmt, nlsparam) - Converts char of CHAR, VARCHAR2, NCHAR, or NVARCHAR2 datatype to a value of TIMESTAMP datatype." type="1"/>
+                <node code="TRUNC(date, fmt)" name="TRUNC(date, fmt) - Returns date with the time portion of the day truncated to the unit specified by the format model fmt." type="1"/>
+                <node code="MONTHS_BETWEEN(date, date)" name="MONTHS_BETWEEN(date, date) - Returns the number of months between two dates." type="1"/>
+            </nodes>
+        </node>
+        <node name="Number Formats" type="0">
+            <nodes>
+                <node code="TO_CHAR(123456.78, '999,999.99')" name="999,999.99 - Example: 123,456.78" type="1"/>
+                <node code="TO_CHAR(123456.78, 'S999,999.99')" name="S999,999.99 - Example: +123,456.78" type="1"/>
+                <node code="TO_CHAR(123456.78, '$999,999.99')" name="$999,999.99 - Example: $123,456.78" type="1"/>
+                <node code="TO_CHAR(123456.78, 'C999,999.99')" name="C999,999.99 - Example: USD123,456.78" type="1"/>
+                <node code="TO_CHAR(123456.78, '9.9EEEE')" name="9.9EEEE - Example: 1.2E+05" type="1"/>
+                <node code="TO_CHAR(-123456.78, '999,999.99PR')" name="999,999.99PR - Negative value in angle brackets; positive value with a leading and trailing blank." type="1"/>
+            </nodes>
+        </node>
+        <node name="Numeric Functions" type="0">
+            <nodes>
+                <node code="ABS(n)" name="ABS(n) - Returns the absolute value of n." type="1"/>
+                <node code="CEIL(n)" name="CEIL(n) - Returns smallest integer greater than or equal to n." type="1"/>
+                <node code="EXP(n)" name="EXP(n) - Returns e raised to the nth power, where e = 2.71828183." type="1"/>
+                <node code="FLOOR(n)" name="FLOOR(n) - Returns largest integer equal to or less than n." type="1"/>
+                <node code="LOG(n2, n1)" name="LOG(n2, n1) - Returns the logarithm, base n2, of n1." type="1"/>
+                <node code="MOD(n2, n1)" name="MOD(n2, n1) - Returns the remainder of n2 divided by n1. Returns n2 if n1 is 0." type="1"/>
+                <node code="POWER(n2, n1)" name="POWER(n2, n1) - Returns n2 raised to the n1 power." type="1"/>
+                <node code="REMAINDER(n2, n1)" name="REMAINDER(n2, n1) - Returns the remainder of n2 divided by n1." type="1"/>
+                <node code="ROUND(n, integer)" name="ROUND(n, integer) - Returns n rounded to integer places to the right of the decimal point." type="1"/>
+                <node code="TRUNC(n1, n2)" name="TRUNC(n1, n2) - Returns n1 truncated to n2 decimal places." type="1"/>
+            </nodes>
+        </node>
+        <node name="Optimizer Hints" type="0">
+            <nodes>
+                <node code="/*+ ALL_ROWS */" name="ALL_ROWS - Optimizes a statement block with a goal of best throughput, that is, minimum total resource consumption." type="1"/>
+                <node code="/*+ APPEND */" name="APPEND - Uses direct-path INSERT if your database is running in serial mode." type="1"/>
+                <node code="/*+ CACHE(table-name) */" name="CACHE(table-name) - Places the blocks retrieved for the table at the most recently used end of the LRU list in the buffer cache when a full table scan is performed." type="1"/>
+                <node code="/*+ CLUSTER(table-name) */" name="CLUSTER(table-name) - Uses a cluster scan to access the specified table." type="1"/>
+                <node code="/*+ CURSOR_SHARING_EXACT  */" name="CURSOR_SHARING_EXACT  - Executes the SQL statement without any attempt to replace literals with bind variables." type="1"/>
+                <node code="/*+ DRIVING_SITE(table-name) */" name="DRIVING_SITE(table-name) - Executes the query at a different site than that selected by the database." type="1"/>
+                <node code="/*+ DYNAMIC_SAMPLING(table-name integer) */" name="DYNAMIC_SAMPLING(table-name integer) - Controls dynamic sampling to improve server performance by determining more accurate predicate selectivity and statistics for tables and indexes." type="1"/>
+                <node code="/*+ FACT(table-name) */" name="FACT(table-name) - Makes the table specified in tablespec a fact table in the star transformation." type="1"/>
+                <node code="/*+ FIRST_ROWS(n) */" name="FIRST_ROWS(n) - Optimizes an individual SQL statement for fast response, choosing the plan that returns the first n rows most efficiently." type="1"/>
+                <node code="/*+ FULL(table-name) */" name="FULL(table-name) - Performs a full table scan for the specified table." type="1"/>
+                <node code="/*+ HASH(table-name) */" name="HASH(table-name) - Uses a hash scan to access the specified table." type="1"/>
+                <node code="/*+ INDEX(table-name index-name) */" name="INDEX(table-name index-name) - Uses an index scan for the specified table." type="1"/>
+                <node code="/*+ INDEX_COMBINE(table-name index-name) */" name="INDEX_COMBINE(table-name index-name) - Uses a bitmap access path for the table. If index-name is omitted, the optimizer uses whatever Boolean combination of indexes has the best cost estimate for the table." type="1"/>
+                <node code="/*+ INDEX_FFS(table-name index-name) */" name="INDEX_FFS(table-name index-name) - Performs a fast full index scan rather than a full table scan." type="1"/>
+                <node code="/*+ INDEX_JOIN(table-name index-name) */" name="INDEX_JOIN(table-name index-name) - Uses an index join as an access path." type="1"/>
+                <node code="/*+ INDEX_SS(table-name index-name) */" name="INDEX_SS(table-name index-name) - Performs an index skip scan for the specified table." type="1"/>
+                <node code="/*+ LEADING(table-name, ...) */" name="LEADING(table-name, ...) - Uses the specified set of tables as the prefix in the execution plan." type="1"/>
+                <node code="/*+ MERGE(v) */" name="MERGE(v) - Lets you merge views in a query." type="1"/>
+                <node code="/*+ MODEL_MIN_ANALYSIS */" name="MODEL_MIN_ANALYSIS - Omits some compile-time optimizations of spreadsheet rules -- primarily detailed dependency graph analysis." type="1"/>
+                <node code="/*+ NOAPPEND */" name="NOAPPEND - Uses conventional INSERT by disabling parallel mode for the duration of the INSERT statement." type="1"/>
+                <node code="/*+ NOCACHE(table-name) */" name="NOCACHE(table-name) - Places the blocks retrieved for the table at the least recently used end of the LRU list in the buffer cache when a full table scan is performed. This is the normal behavior of blocks in the buffer cache." type="1"/>
+                <node code="/*+ NO_EXPAND(table-name) */" name="NO_EXPAND(table-name) - Does not consider OR-expansion for queries having OR conditions or IN-lists in the WHERE clause. Usually, the optimizer considers using OR expansion and uses this method if it decides that the cost is lower than not using it." type="1"/>
+                <node code="/*+ NO_FACT(table-name) */" name="NO_FACT(table-name) - Makes the table specified in tablespec not a fact table in the star transformation." type="1"/>
+                <node code="/*+ NO_INDEX(table-name index-name) */" name="NO_INDEX(table-name index-name) - Does not use one or more indexes for the specified table." type="1"/>
+                <node code="/*+ NO_INDEX_FFS(table-name index-name) */" name="NO_INDEX_FFS(table-name index-name) - Excludes a fast full index scan of the specified indexes on the specified table." type="1"/>
+                <node code="/*+ NO_INDEX_SS(table-name index-name) */" name="NO_INDEX_SS(table-name index-name) - Excludes a skip scan of the specified indexes on the specified table." type="1"/>
+                <node code="/*+ NO_MERGE(table-name) */" name="NO_MERGE(table-name) - Does not combine the outer query and any inline view queries into a single query." type="1"/>
+                <node code="/*+ NO_PARALLEL(table-name) */" name="NO_PARALLEL(table-name) - Overrides a PARALLEL parameter in the DDL that created or altered the table." type="1"/>
+                <node code="/*+ NO_PARALLEL_INDEX(table-name index-name) */" name="NO_PARALLEL_INDEX(table-name index-name) - Overrides a PARALLEL parameter in the DDL that created or altered the index, thus avoiding a parallel index scan operation." type="1"/>
+                <node code="/*+ NO_PUSH_PRED(v) */" name="NO_PUSH_PRED(v) - Does not push a join predicate into the view." type="1"/>
+                <node code="/*+ NO_PUSH_SUBQ */" name="NO_PUSH_SUBQ - Evaluates nonmerged subqueries as the last step in the execution plan. Can improve performance if the subquery is relatively expensive or does not reduce the number of rows significantly." type="1"/>
+                <node code="/*+ NO_PX_JOIN_FILTER(table-name) */" name="NO_PX_JOIN_FILTER(table-name) - Prevents the optimizer from using parallel join bitmap filtering." type="1"/>
+                <node code="/*+ NO_REWRITE */" name="NO_REWRITE - Disables query rewrite for the query block, overriding the setting of the parameter QUERY_REWRITE_ENABLED." type="1"/>
+                <node code="/*+ NO_QUERY_TRANSFORMATION */" name="NO_QUERY_TRANSFORMATION - Skips all query transformations, including but not limited to OR-expansion, view merging, subquery unnesting, star transformation, and materialized view rewrite." type="1"/>
+                <node code="/*+ NO_STAR_TRANSFORMATION */" name="NO_STAR_TRANSFORMATION - Does not perform star query transformation." type="1"/>
+                <node code="/*+ NO_UNNEST */" name="NO_UNNEST - Turns off unnesting." type="1"/>
+                <node code="/*+ NO_USE_HASH(table-name ...) */" name="NO_USE_HASH(table-name ...) - Excludes hash joins when joining each specified table to another row source using the specified table as the inner table." type="1"/>
+                <node code="/*+ NO_USE_MERGE(table-name ...) */" name="NO_USE_MERGE(table-name ...) - Excludes sort-merge joins when joining each specified table to another row source using the specified table as the inner table." type="1"/>
+                <node code="/*+ NO_USE_NL(table-name ...) */" name="NO_USE_NL(table-name ...) - Excludes nested loops joins when joining each specified table to another row source using the specified table as the inner table." type="1"/>
+                <node code="/*+ NO_XML_QUERY_REWRITE */" name="NO_XML_QUERY_REWRITE - Prohibits the rewriting of XPath expressions in SQL statements." type="1"/>
+                <node code="/*+ ORDERED */" name="ORDERED - Joins tables in the order in which they appear in the FROM clause. (Tip: Use the LEADING hint, which is more versatile than the ORDERED hint.)" type="1"/>
+                <node code="/*+ PARALLEL(table-name integer) */" name="PARALLEL(table-name integer) - Uses the specified number of concurrent servers for a parallel operation." type="1"/>
+                <node code="/*+ PARALLEL_INDEX(table-name index-name integer) */" name="PARALLEL_INDEX(table-name index-name integer) - Uses the specified number of concurrent servers to parallelize index range scans for partitioned indexes." type="1"/>
+                <node code="/*+ PQ_DISTRIBUTE(table-name outer-distr inner-distr) */" name="PQ_DISTRIBUTE(table-name outer-distr inner-distr) - Affects how to distribute rows of joined tables among producer and consumer query servers. Can improve the performance of parallel join operations." type="1"/>
+                <node code="/*+ PUSH_PRED(v) */" name="PUSH_PRED(v) - Pushes a join predicate into the view." type="1"/>
+                <node code="/*+ PUSH_SUBQ */" name="PUSH_SUBQ - Evaluates nonmerged subqueries at the earliest possible step in the execution plan Can improve performance ff the subquery is relatively inexpensive and reduces the number of rows significantly." type="1"/>
+                <node code="/*+ PX_JOIN_FILTER(table-name) */" name="PX_JOIN_FILTER(table-name) - Forces the optimizer to use parallel join bitmap filtering." type="1"/>
+                <node code="/*+ QB_NAME */" name="QB_NAME - Defines a name for a query block. This name can then be used in a hint in the outer query or even in a hint in an inline view to affect query execution on the tables appearing in the named query block." type="1"/>
+                <node code="/*+ REWRITE */" name="REWRITE - Rewrites a query in terms of materialized views, when possible, without cost consideration. Use this hint with or without a view list" type="1"/>
+                <node code="/*+ STAR_TRANSFORMATION */" name="STAR_TRANSFORMATION - Uses the best plan in which the transformation has been used." type="1"/>
+                <node code="/*+ UNNEST */" name="UNNEST - Unnests and merges the body of the subquery into the body of the query block that contains it, allowing the optimizer to consider them together when evaluating access paths and joins." type="1"/>
+                <node code="/*+ USE_CONCAT */" name="USE_CONCAT - Transforms combined OR-conditions in the WHERE clause of a query into a compound query using the UNION ALL set operator." type="1"/>
+                <node code="/*+ USE_HASH(table-name ...) */" name="USE_HASH(table-name ...) - Joins each specified table with another row source using a hash join." type="1"/>
+                <node code="/*+ USE_MERGE(table-name ...) */" name="USE_MERGE(table-name ...) - Joins each specified table with another row source using a sort-merge join." type="1"/>
+                <node code="/*+ USE_NL(table-name ...) */" name="USE_NL(table-name ...) - Joins each specified table to another row source with a nested loops join, using the specified table as the inner table." type="1"/>
+                <node code="/*+ USE_NL_WITH_INDEX(table-name index-name) */" name="USE_NL_WITH_INDEX(table-name index-name) - Joins the specified table to another row source with a nested loops join using the specified table as the inner table." type="1"/>
+            </nodes>
+        </node>
+        <node name="PL/SQL Programming Techniques" type="0">
+            <nodes>
+                <node code="CASE grade&#xa;  WHEN 'A' THEN 'Excellent'&#xa;  WHEN 'B' THEN 'Very Good'&#xa;  WHEN 'C' THEN 'Good'&#xa;  WHEN 'D' THEN 'Fair'&#xa;  WHEN 'F' THEN 'Poor'&#xa;  ELSE 'No such grade'&#xa;END;" name="CASE - Selects a result from one or more alternatives, and returns the result." type="1"/>
+                <node code="DECLARE&#xa;  ...&#xa;  TYPE my_cursor IS REF CURSOR;&#xa;  the_cursor my_cursor;&#xa;BEGIN&#xa;  OPEN the_cursor FOR '...' ;&#xa;  LOOP&#xa;    FETCH the_cursor INTO ...;&#xa;    EXIT WHEN the_cursor%NOTFOUND;&#xa;    ...&#xa;  END LOOP;&#xa;  CLOSE the_cursor;&#xa;END;&#xa;/" name="Cursor - Cursor variable points to the current row in the result set of a multi-row query." type="1"/>
+                <node code="FOR REC IN (select * from some_table)&#xa;LOOP&#xa;   var1:= REC.field1;&#xa;   var2:= REC.field2;&#xa;   ...&#xa;END LOOP;   &#xa;" name="FOR REC IN - Inline cursor" type="1"/>
+                <node code="DBMS_OUTPUT.PUT_LINE('There are ' || in_stock || ' items in stock.');" name="DBMS_OUTPUT.PUT_LINE - Displays output from PL/SQL blocks, subprograms, packages, and triggers." type="1"/>
+                <node code="IF sales > (quota + 200) THEN&#xa;  bonus := (sales - quota)/4;&#xa;ELSE&#xa;  bonus := 50;&#xa;END IF;" name="IF-THEN-ELSE - Condition with alternative sequence of statements." type="1"/>
+                <node code="IF sales > 50000 THEN&#xa;  bonus := 1500;&#xa;ELSIF sales > 35000 THEN&#xa;  bonus := 500;&#xa;ELSE&#xa;  bonus := 100;&#xa;END IF;" name="IF-THEN-ELSEIF - Condition with several alternatives." type="1"/>
+                <node code="FOR x IN 1..n LOOP&#xa;  ...;&#xa;END LOOP;" name="Loop: FOR LOOP - Iterates over a range of integers." type="1"/>
+                <node code="WHILE condition LOOP&#xa;  sequence_of_statements&#xa;END LOOP;" name="Loop: WHILE LOOP - Executes the statements in the loop body as long as a condition is true." type="1"/>
+                <node code="RAISE_APPLICATION_ERROR(-number, 'error-text');" name="RAISE_APPLICATION_ERROR(-number, 'error-text') - Issues user-defined ORA- error message from a stored subprogram." type="1"/>
+                <node code="RAISE_APPLICATION_ERROR(-20101, 'Salary below minimum for position');" name="RAISE_APPLICATION_ERROR [example] - Example of RAISE_APPLICATION_ERROR." type="1"/>
+                <node code="DBMS_RANDOM.NORMAL()" name="Random number: NORMAL() - Returns random numbers in a standard normal distribution. Example: .693962661" type="1"/>
+                <node code="DBMS_RANDOM.VALUE()" name="Random number: VALUE() - Returns a random number, greater than or equal to 0 and less than 1, with 38 digits to the right of the decimal." type="1"/>
+                <node code="DBMS_RANDOM.VALUE(1, 100)" name="Random number: VALUE(low, high) - Returns a random number between low and high values. Example: 82.7931995 (between 1 and 100)" type="1"/>
+                <node code="DBMS_RANDOM.STRING('X', 10)" name="Random string: STRING('X', 10) - Returns uppercase alphanumeric characters of specified length. Example: Z71AHSQNA3" type="1"/>
+                <node code="DBMS_RANDOM.STRING('A', 10)" name="Random string: STRING('A', 10) - Returns mixed-case alphabetic characters of specified length. Example: jqKbPnwVql" type="1"/>
+                <node code="DBMS_RANDOM.STRING('P', 10)" name="Random string: STRING('P', 10) - Returns any printable characters of specified length. Example: SZ(X$]+42B" type="1"/>
+                <node code="begin&#xa;....&#xa;exception when others then&#xa;   handle exception here;&#xa;end;" name="Exception handing (any)" type="1"/>
+                <node code="begin&#xa;   select something into variable from some_table;&#xa;exception when NO_DATA_FOUND then&#xa;   handle exception here;&#xa;end;" name="Exception handing (no data found)" type="1"/>
+                <node code="EXECUTE IMMEDIATE 'update some_table set field = :value1 where field2 = :value2' using value1, value2;" name="Execute immideate (example)" type="1"/>
+            </nodes>
+        </node>
+        <node name="Pseudocolumns" type="0">
+            <nodes>
+                <node code="COLUMN_VALUE" name="COLUMN_VALUE - An XMLTable construct without the COLUMNS clause, or the result of the TABLE function to refer to a scalar nested table type." type="1"/>
+                <node code="CONNECT_BY_ISCYCLE" name="CONNECT_BY_ISCYCLE - Returns 1 if the current row has a child which is also its ancestor, otherwise 0." type="1"/>
+                <node code="CONNECT_BY_ISLEAF" name="CONNECT_BY_ISLEAF - Returns 1 if the current row is a leaf of the tree defined by the CONNECT BY condition, otherwise 0. Indicates whether a given row can be further expanded to show more of the hierarchy." type="1"/>
+                <node code="sequence.CURRVAL" name="CURRVAL - Returns the current value of a sequence." type="1"/>
+                <node code="LEVEL" name="LEVEL - For each row returned by a hierarchical query, returns 1 for a root row, 2 for a child of a root, and so on." type="1"/>
+                <node code="sequence.NEXTVAL" name="NEXTVAL - Increments the sequence and returns the next value." type="1"/>
+                <node code="OBJECT_ID" name="OBJECT_ID - Returns the object identifier of a column of an object table or view." type="1"/>
+                <node code="OBJECT_VALUE" name="OBJECT_VALUE - Returns system-generated names for the columns of an object table, XMLType table, object view, or XMLType view." type="1"/>
+                <node code="ORA_ROWSCN" name="ORA_ROWSCN - For each row, returns the conservative upper bound system change number (SCN) of the most recent change to the row. Useful for determining approximately when a row was last updated." type="1"/>
+                <node code="ROWID" name="ROWID - For each row in the database, returns the address of the row." type="1"/>
+                <node code="ROWNUM" name="ROWNUM - For each row returned by a query, returns a number indicating the order in which Oracle selects the row from a table or set of joined rows." type="1"/>
+                <node code="XMLDATA" name="XMLDATA - For XMLType data, lets you access the underlying LOB or object relational column to specify additional storage clause parameters, constraints, indexes, and so on." type="1"/>
+            </nodes>
+        </node>
+        <node name="Metadata" type="0">
+            <nodes>
+                <node code="select table_name&#xa;from dba_tab_columns &#xa;where upper(column_name) = upper(:name) and upper(owner) = upper(:owner)" name="Table Columns" type="1"/>
+                <node code="select &#xa;   spid, &#xa;   osuser, &#xa;   s.program &#xa;from&#xa;   v$process p, &#xa;   v$session s &#xa;where &#xa;   p.addr=s.paddr   &#xa;   AND s.type = 'USER'" name="Sessions" type="1"/>
+                <node code="select index_name, column_name&#xa;FROM dba_ind_columns&#xa;where upper(index_owner)=upper(:owner)&#xa;AND upper(table_name)=upper(:table)&#xa;order by index_name, column_name, column_position" name="Indexes" type="1"/>
+                <node code="select * from all_source&#xa;where line >= :start and line &lt;= :end and upper(owner) = upper(:owner)" name="Get source code by line number" type="1"/>
+                <node code="select dbms_metadata.get_ddl(upper(:type),upper(:name),upper(:schema)) from dual" name="Get DDL for the database object" type="1"/>
+            </nodes>
+        </node>
+        <node name="Sequences" type="0">
+            <nodes>
+                <node code="CREATE SEQUENCE seq_customers&#xa; START WITH     100&#xa; INCREMENT BY   1&#xa; NOCACHE&#xa; NOCYCLE;" name="Create sequence" type="1"/>
+                <node code="select seq_customers.nextval from dual" name="Use sequence" type="1"/>
+            </nodes>
+        </node>
+        <node name="PL/SQL procedures and functions and Sql Developer Techniques" type="0">
+            <nodes>
+                <node code="create or replace procedure test_proc(param1 in number, param2 in varchar2, &#xa;                                      param3 out number, param4 out varchar2, &#xa;                                      param5 out SYS_REFCURSOR)&#xa;as&#xa;begin&#xa;    param3:= param1 + 100;&#xa;&#xa;    param4:= param2 || 'test';&#xa;&#xa;    OPEN param5 FOR &#xa;    select * from employee;&#xa;end;" name="Create stored procedure with input and output parameters, including cursor (example)" type="1"/>
+                <node code="begin&#xa;   test_proc(:param1, :param2, :out_number_param3, :out_varchar_param4, :out_cursor_param5);&#xa;end;" name="Execute stored procedure with input and output parameters from Sql Devloper (Execute Script)" type="1"/>
+                <node code="create or replace function test_func(param1 in number, param2 in varchar2) return varchar2&#xa;as&#xa;begin&#xa;    return to_char(param1) || param2;&#xa;end;&#xa;" name="Create function (example)" type="1"/>
+                <node code="select test_func(:param1, :param2) from dual" name="Execute function with input parameters from Sql Developer (Execute Sql)" type="1"/>
+                <node code="-- create type first&#xa;create type array as table of number&#xa;&#xa;-- create function&#xa;create or replace function gen_numbers(n in number default null) return array PIPELINED&#xa;as&#xa;begin&#xa;  for i in 1 .. nvl(n,999999999)&#xa;  loop&#xa;     pipe row(i);&#xa;  end loop;&#xa;  return;&#xa;end;" name="Pipilined function (example)" type="1"/>
+                <node code="select * from TABLE(gen_numbers(100))" name="Execute pipelined function (example)" type="1"/>
+            </nodes>
+        </node>
+        <node name="Miscellaneous" type="0">
+            <nodes>
+                <node code="select * from employee where rownum &lt; 10" name="Get top N rows (example)" type="1"/>
+                <node code="select * from&#xa;(&#xa;select * from employee &#xa;where rownum &lt; 10&#xa;)&#xa;order by lastname" name="Get first N rows, ordered by any field (example)" type="1"/>
+                <node code="create global temporary table temp_table &#xa;(field1 varchar2(100), &#xa; field2 number(32)) on commit PRESERVE ROWS" name="Create temporary table (example)" type="1"/>
+                <node code="merge into some_table&#xa;using dual on &#xa;(&#xa;some_table.field1 = param1&#xa;and some_table.field2 = param2&#xa;...&#xa;)&#xa;when not matched then insert values (value1, value2, etc)&#xa;when matched update set field1 = value1, field2 = value2, etc" name="Merge" type="1"/>
+                <node code="select sysdate from dual" name="Get current date+time" type="1"/>
+                <node code="select * from dual" name="dual/dummy table" type="1"/>
+            </nodes>
+        </node>
+        <node name="Autotrace" type="0">
+            <nodes>
+                <node code="set autotrace traceonly &#xa;select * from dual" name="Displays execution plan and statistics without displaying the returned rows" type="1"/>
+                <node code="set autotrace on&#xa;select * from dual" name="Enables all options" type="1"/>
+                <node code="set autotrace on statistics&#xa;select * from dual" name="Displays returned rows and statistics" type="1"/>
+                <node code="set autotrace trace explain&#xa;select * from dual" name="Displays the execution plan for a select statement without actually executing it" type="1"/>
+            </nodes>
+        </node>
+    </nodes>
+</oracle>

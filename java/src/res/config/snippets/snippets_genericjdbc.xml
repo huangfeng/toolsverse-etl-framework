@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genericjdbc name="genericjdbc" type="0">
+    <nodes>
+        <node code="select * from employee&#xa;where birthdate >= :birthdate and sex = :sex" name="Execute query with parameters" type="1"/>
+        <node code="begin&#xa;   test_proc(:param1, :param2, :out_number_param3, :out_varchar_param4, :out_minus10_param5);&#xa;end;" name="Execute script with input and ouput parameters, cursor included (Oracle flavor)" type="1"/>
+        <node code="{call test_proc(:integer_param1, :date_param2, :out_number_param3, :out_varchar_param4, :out_minus10_param5)}" name="Execute stored procedure with input and ouput parameters. Define parameter types " type="1"/>
+    </nodes>
+</genericjdbc>

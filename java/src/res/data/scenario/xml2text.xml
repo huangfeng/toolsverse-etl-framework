@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+    <name>xml2text</name>
+    <script>xml2text</script>
+    <onsave action="skip"/>    
+    <onpersist action="skip"/>
+    
+    <sources> 
+       <source> 
+          <name>source_xml</name>
+          <extract>
+              <connection>xml_con</connection> 
+          </extract>
+       </source>
+    </sources>
+    
+    <destinations>
+       <destination>
+          <name>source_xml</name>
+          <load>
+              <connection>text_con</connection>
+          </load>
+       </destination>         
+    </destinations>
+
+</scenario>

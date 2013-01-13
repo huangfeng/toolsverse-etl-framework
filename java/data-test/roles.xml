@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webRowSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="C:/projects/toolsverse/java/data-test/web_test_result_set.xsd">
+   <properties>
+      <table-name>ROLES</table-name>
+   </properties>
+   <metadata>
+      <column-count>1</column-count>
+      <column-definition>
+         <column-index>1</column-index>
+         <nullable>0</nullable>
+         <column-name>ROLE_NAME</column-name>
+         <column-type>12</column-type>
+         <column-type-name>VARCHAR(100)</column-type-name>
+      </column-definition>
+   </metadata>
+   <data>
+      <currentRow>
+         <columnValue>administrator</columnValue>
+      </currentRow>
+      <currentRow>
+         <columnValue>apps_administrator</columnValue>
+      </currentRow>
+      <currentRow>
+         <columnValue>node_administrator</columnValue>
+      </currentRow>
+      <currentRow>
+         <columnValue>node_view_administrator</columnValue>
+      </currentRow>
+   </data>
+</webRowSet>

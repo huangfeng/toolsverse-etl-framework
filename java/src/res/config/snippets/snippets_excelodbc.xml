@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<excelodbc name="excelodbc" type="0">
+    <nodes>
+        <node code="select * from [employee$]" name="Execute query" type="1"/>
+        <node code="select * from [employee$]&#xa;where lastname = :last_name" name="Execute query with parameters" type="1"/>
+    </nodes>
+</excelodbc>

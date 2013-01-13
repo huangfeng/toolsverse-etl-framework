@@ -1,0 +1,1145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="deploy-type">
+	<property location="${dist-dir}/${type}" name="type-dir" />
+
+	<var name="app.executable.ext" unset="true" />
+
+	<if>
+		<or>
+			<equals arg1="${isWindows}" arg2="true" />
+			<equals arg1="${isMac}" arg2="true" />
+		</or>
+		<then>
+			<var name="app.executable.ext" value="exe" />
+		</then>
+	</if>
+
+	<target name="init">
+		<delete dir="${type-dir}" quiet="true" />
+		<mkdir dir="${type-dir}" />
+
+		<trycatch>
+			<try>
+				<loadproperties srcFile="${build-dir}/${type}.properties" />
+			</try>
+			<catch>
+				<echo message="${build-dir}/${type}.properties doesn't exist." />
+				<var name="dirs" unset="true" />
+				<var name="app.main.class" unset="true" />
+			</catch>
+		</trycatch>
+
+	</target>
+
+	<target name="copy-jar">
+		<basename property="prop.name" file="${jar.file.name}" />
+
+		<trycatch>
+			<try>
+				<propertycopy name="free" from="${prop.name}.free-edition" />
+			</try>
+			<catch>
+				<property name="free" value="true" />
+			</catch>
+		</trycatch>
+
+		<trycatch>
+			<try>
+				<propertycopy name="prop" from="${prop.name}.${type}" />
+
+				<if>
+					<or>
+						<and>
+							<equals arg1="${free-edition}" arg2="true" />
+							<equals arg1="${free}" arg2="true" />
+						</and>
+						<equals arg1="${free-edition}" arg2="false" />
+					</or>
+					<then>
+						<mkdir dir="${type-dir}/${prop}" />
+
+						<copy file="${jar.file.name}" todir="${type-dir}/${prop}" flatten="true" />
+					</then>
+				</if>
+			</try>
+			<catch>
+			</catch>
+		</trycatch>
+	</target>
+
+	<target name="copy-all-jars">
+		<foreach param="jar.file.name" target="copy-jar" inheritall="true" inheritrefs="true">
+			<fileset dir="${dist-jar-dir}" includes="**/*.jar" />
+		</foreach>
+	</target>
+
+	<target name="create-dir">
+		<mkdir dir="${type-dir}/${dir-name}" />
+
+		<trycatch>
+			<try>
+				<propertycopy name="includes" from="${dir-name}.includes" />
+			</try>
+			<catch>
+				<var name="includes" unset="true" />
+			</catch>
+		</trycatch>
+
+		<trycatch>
+			<try>
+				<propertycopy name="excludes" from="${dir-name}.excludes" />
+			</try>
+			<catch>
+				<var name="excludes" unset="true" />
+			</catch>
+		</trycatch>
+
+		<trycatch>
+			<try>
+				<propertycopy name="base" from="${dir-name}.basedir" />
+
+				<var name="base" value="${base-dir}/${base}" />
+			</try>
+			<catch>
+				<var name="base" value="${base-dir}/${dir-name}" />
+			</catch>
+		</trycatch>
+
+		<if>
+			<isset property="includes" />
+			<then>
+				<if>
+					<isset property="includes" />
+					<then>
+						<copy todir="${type-dir}/${dir-name}">
+							<fileset dir="${base}" includes="${includes}" excludes="${excludes}" />
+						</copy>
+					</then>
+					<else>
+						<copy todir="${type-dir}/${dir-name}">
+							<fileset dir="${base}" includes="${includes}" />
+						</copy>
+					</else>
+				</if>
+			</then>
+		</if>
+
+		<trycatch>
+			<try>
+				<propertycopy name="moveto" from="${dir-name}.moveto" />
+			</try>
+			<catch>
+				<var name="moveto" unset="true" />
+			</catch>
+		</trycatch>
+
+		<trycatch>
+			<try>
+				<propertycopy name="moveto.folder" from="${dir-name}.moveto.folder" />
+			</try>
+			<catch>
+				<var name="moveto.folder" value="false" />
+			</catch>
+		</trycatch>
+
+		<trycatch>
+			<try>
+				<propertycopy name="apply.permission.to" from="${dir-name}.apply.permission.to" />
+			</try>
+			<catch>
+				<var name="apply.permission.to" unset="true" />
+			</catch>
+		</trycatch>
+
+		<if>
+			<isset property="moveto" />
+			<then>
+				<if>
+					<equals arg1="${moveto}" arg2="." />
+					<then>
+						<move todir="${type-dir}">
+							<fileset dir="${type-dir}/${dir-name}">
+								<include name="**/**" />
+							</fileset>
+						</move>
+					</then>
+					<else>
+						<if>
+							<equals arg1="${moveto.folder}" arg2="false" />
+							<then>
+								<move todir="${type-dir}/${moveto}/${dir-name}">
+									<fileset dir="${type-dir}/${dir-name}">
+										<include name="**/**" />
+									</fileset>
+								</move>
+							</then>
+							<else>
+								<move todir="${type-dir}/${moveto}">
+									<fileset dir="${type-dir}/${dir-name}">
+										<include name="**/**" />
+									</fileset>
+								</move>
+							</else>
+						</if>
+					</else>
+				</if>
+
+				<if>
+					<and>
+						<isset property="apply.permission.to" />
+						<equals arg1="${isMac}" arg2="true" />
+					</and>
+					<then>
+						<chmod file="${type-dir}/${apply.permission.to}.app/Contents/MacOS/start" perm="755"/>
+					</then>
+				</if>
+
+				<delete dir="${type-dir}/${dir-name}" quiet="true" />
+			</then>
+		</if>
+
+
+	</target>
+
+	<target name="copy-files">
+		<if>
+			<isset property="dirs" />
+			<then>
+				<foreach list="${dirs}" delimiter="," param="dir-name" target="create-dir" inheritall="true" inheritrefs="true" />
+			</then>
+		</if>
+	</target>
+
+	<target name="add-class-path">
+		<basename property="classpath.jar.file.name" file="${file.name}" />
+
+		<echo file="${type-dir}/${appstart.properties.file.name}" message="./${class-path-dir}/${classpath.jar.file.name};" append="true" />
+	</target>
+
+	<target name="add-dir-class-path">
+		<foreach param="file.name" target="add-class-path" inheritall="true" inheritrefs="true">
+			<fileset dir="${type-dir}/${class-path-dir}" includes="*.jar" />
+		</foreach>
+	</target>
+
+	<target name="create-command-line-file">
+		<if>
+			<equals arg1="${app.follow}" arg2="true" />
+			<then>
+				<echo file="${type-dir}/${app.file.name}.${cmd-line-ext}" message="#!${script.type}" append="true" />
+				<echo file="${type-dir}/${app.file.name}.${cmd-line-ext}" message="${line.separator}" append="true" />
+				<echo file="${type-dir}/${app.file.name}.${cmd-line-ext}" message="java -jar ${app.file.name}.jar ${app.params}" append="true" />
+			</then>
+			<else>
+				<echo file="${type-dir}/${app.file.name}.${cmd-line-ext}" message="#!${script.type}" append="true" />
+				<echo file="${type-dir}/${app.file.name}.${cmd-line-ext}" message="${line.separator}" append="true" />
+				<echo file="${type-dir}/${app.file.name}.${cmd-line-ext}" message="java -jar ${app.file.name}.jar ${app.params}" append="true" />
+			</else>
+		</if>
+	</target>
+
+	<target name="create-cmd">
+		<if>
+			<isset property="app.main.class" />
+			<then>
+				<trycatch>
+					<try>
+						<propertycopy name="app.params" from="app.ext.params.${app.ext}" />
+					</try>
+					<catch>
+						<var name="app.params" value="" />
+					</catch>
+				</trycatch>
+
+				<trycatch>
+					<try>
+						<propertycopy name="script.type" from="app.script.type.${app.ext}" />
+					</try>
+					<catch>
+						<var name="script.type" value="" />
+					</catch>
+				</trycatch>
+
+				<if>
+					<isset property="app.file.name" />
+					<then>
+					</then>
+					<else>
+						<var name="app.file.name" value="start" />
+					</else>
+				</if>
+
+				<if>
+					<isset property="appstart.properties.file.name" />
+					<then>
+					</then>
+					<else>
+						<var name="appstart.properties.file.name" value="appstart.properties" />
+					</else>
+				</if>
+
+
+				<if>
+					<and>
+						<isset property="jre-path-windows" />
+						<isset property="create.windows.app" />
+						<equals arg1="${isWindows}" arg2="true" />
+					</and>
+					<then>
+						<mkdir dir="${type-dir}/${jre-path-windows}32" />
+						<mkdir dir="${type-dir}/${jre-path-windows}64" />
+
+						<if>
+							<equals arg1="${isWindows}" arg2="true" />
+							<then>
+								<exec executable="xcopy" failonerror="true">
+									<arg value='"${base-dir}/jre-windows-32"' />
+									<arg value='"${type-dir}/${jre-path-windows}32"' />
+									<arg value="/I" />
+									<arg value="/E" />
+									<arg value="/Y" />
+									<arg value="/K" />
+								</exec>
+
+								<exec executable="xcopy" failonerror="true">
+									<arg value='"${base-dir}/jre-windows-64"' />
+									<arg value='"${type-dir}/${jre-path-windows}64"' />
+									<arg value="/I" />
+									<arg value="/E" />
+									<arg value="/Y" />
+									<arg value="/K" />
+								</exec>
+
+							</then>
+							<else>
+								<exec executable="cp" failonerror="true">
+									<arg value="-p" />
+									<arg value="-R" />
+									<arg value="${base-dir}/jre-windows-32/" />
+									<arg value="${type-dir}/${jre-path-windows}32/" />
+								</exec>
+								<exec executable="cp" failonerror="true">
+									<arg value="-p" />
+									<arg value="-R" />
+									<arg value="${base-dir}/jre-windows-64/" />
+									<arg value="${type-dir}/${jre-path-windows}32/" />
+								</exec>
+
+							</else>
+						</if>
+
+					</then>
+					<else>
+						<var name="jre-path-windows" value="" />
+					</else>
+				</if>
+
+
+				<copy file="${lib-dir}/start.jar" tofile="${type-dir}/${app.file.name}.jar" flatten="true" />
+
+				<if>
+					<isset property="app.splash" />
+					<then>
+						<copy file="${source-dir}/res/images/${app.splash}" tofile="${type-dir}/splash.img" flatten="true" />
+					</then>
+				</if>
+
+				<echo file="${type-dir}/${appstart.properties.file.name}" message="app.main.class=${app.main.class}" append="true" />
+				<echo file="${type-dir}/${appstart.properties.file.name}" message="${line.separator}" append="true" />
+				<if>
+					<isset property="app.main.class" />
+					<then>
+						<echo file="${type-dir}/${appstart.properties.file.name}" message="app.libs.dir=./${app.libs.dir}" append="true" />
+						<echo file="${type-dir}/${appstart.properties.file.name}" message="${line.separator}" append="true" />
+					</then>
+				</if>
+
+				<if>
+					<isset property="jvm.params" />
+					<then>
+						<echo message="jvm.params=${jvm.params}" />
+					</then>
+					<else>
+						<var name="jvm.params" value="-Xms100m -Xmx1000m -XX:MaxPermSize=65536K" />
+					</else>
+				</if>
+
+				<echo file="${type-dir}/${appstart.properties.file.name}" message="app.vm.options=${jvm.params}" append="true" />
+				<echo file="${type-dir}/${appstart.properties.file.name}" message="${line.separator}" append="true" />
+
+				<if>
+					<isset property="app.follow" />
+					<then>
+						<echo file="${type-dir}/${appstart.properties.file.name}" message="app.follow=${app.follow}" append="true" />
+						<echo file="${type-dir}/${appstart.properties.file.name}" message="${line.separator}" append="true" />
+					</then>
+					<else>
+						<var name="app.follow" value="false" />
+					</else>
+				</if>
+
+				<if>
+					<isset property="app.need.splash" />
+					<then>
+						<echo file="${type-dir}/${appstart.properties.file.name}" message="app.need.splash=${app.need.splash}" append="true" />
+						<echo file="${type-dir}/${appstart.properties.file.name}" message="${line.separator}" append="true" />
+					</then>
+				</if>
+
+
+				<if>
+					<and>
+						<isset property="create.script.app" />
+						<equals arg1="${create.script.app}" arg2="true" />
+						<isset property="app.ext" />
+					</and>
+					<then>
+						<echo message="Creating shell script..." />
+
+						<foreach list="${app.ext}" delimiter="," param="cmd-line-ext" target="create-command-line-file" inheritall="true" inheritrefs="true" />
+					</then>
+				</if>
+
+				<if>
+					<isset property="app.class.path" />
+					<then>
+						<echo file="${type-dir}/${appstart.properties.file.name}" message="app.class.path=" append="true" />
+						<foreach list="${app.class.path}" delimiter="," param="class-path-dir" target="add-dir-class-path" inheritall="true" inheritrefs="true" />
+					</then>
+				</if>
+
+				<if>
+					<and>
+						<isset property="app.executable.type" />
+						<isset property="app.executable.ext" />
+					</and>
+					<then>
+						<if>
+							<isset property="app.jar" />
+							<then>
+								<var name="app.jar" value=".${app.jar}" />
+								<var name="main.class" value="${app.main.class}" />
+							</then>
+							<else>
+								<var name="app.jar" value="${app.file.name}.jar" />
+								<var name="main.class" value="org.appstart.Starter" />
+							</else>
+						</if>
+
+						<if>
+							<and>
+								<isset property="create.windows.app" />
+								<equals arg1="${create.windows.app}" arg2="true" />
+								<equals arg1="${isWindows}" arg2="true" />
+							</and>
+							<then>
+								<echo message="Creating Windows app..." />
+
+								<launch4j fileVersion="${version-num}.0" txtFileVersion="${version-num}-${build.number}">
+									<config headerType="${app.executable.type}" outfile="${type-dir}/${app.file.name}.${app.executable.ext}" dontWrapJar="true" jarPath="${app.jar}" icon="${source-dir}/res/images/${app.icon}">
+										<classPath mainClass="${main.class}">
+											<cp>./lib/*.jar</cp>
+										</classPath>
+										<jre path="./${jre-path-windows}" minVersion="${jre-min-version}">
+											<opt>-Dlaunch4j.exedir="%EXEDIR%"</opt>
+											<opt>-Dlaunch4j.exefile="%EXEFILE%"</opt>
+										</jre>
+									</config>
+								</launch4j>
+							</then>
+						</if>
+
+						<if>
+							<and>
+								<isset property="create.mac.app" />
+								<equals arg1="${create.mac.app}" arg2="true" />
+								<equals arg1="${isMac}" arg2="true" />
+							</and>
+							<then>
+								<echo message="Creating mac app..." />
+
+								<mkdir dir="${type-dir}/${app.file.name}.app" />
+
+								<if>
+									<equals arg1="${isWindows}" arg2="true" />
+									<then>
+										<exec executable="xcopy" failonerror="true">
+											<arg value='"${source-dir}/res/mac.app"' />
+											<arg value='"${type-dir}/${app.file.name}.app"' />
+											<arg value="/I" />
+											<arg value="/E" />
+											<arg value="/Y" />
+											<arg value="/K" />
+										</exec>
+
+									</then>
+									<else>
+										<exec executable="cp" failonerror="true">
+											<arg value="-p" />
+											<arg value="-R" />
+											<arg value="${source-dir}/res/mac.app/" />
+											<arg value="${type-dir}/${app.file.name}.app/" />
+										</exec>
+									</else>
+								</if>
+
+								<if>
+									<isset property="app.mac.icon" />
+									<then>
+										<copy file="${source-dir}/res/images/${app.mac.icon}" tofile="${type-dir}/${app.file.name}.app/Contents/Resources/${app.mac.icon}" flatten="true" />
+									</then>
+								</if>
+
+								<if>
+									<isset property="app.executable.type" />
+									<then>
+										<if>
+											<equals arg1="${app.executable.type}" arg2="gui" />
+											<then>
+												<var name="app.output.type" value="None" />
+												<var name="app.remain.run.after" value="false" />
+											</then>
+											<else>
+												<var name="app.output.type" value="Text Window" />
+												<var name="app.remain.run.after" value="true" />
+											</else>
+										</if>
+									</then>
+									<else>
+										<var name="app.output.type" value="None" />
+										<var name="app.remain.run.after" value="false" />
+									</else>
+								</if>
+
+								<!-- Info.plist header -->
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='&lt;?xml version="1.0" encoding="UTF-8"?&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='&lt;plist version="1.0"&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='&lt;dict&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<!-- Info.plist body -->
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;CFBundleDevelopmentRegion&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;English&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;CFBundleDisplayName&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;${app.title}&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;CFBundleExecutable&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;start&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;CFBundleIconFile&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;${app.mac.icon}&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;CFBundleIdentifier&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;com.toolsverse.${app.file.name}&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;CFBundleInfoDictionaryVersion&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;6.0&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;CFBundleName&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;${app.title}&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;CFBundlePackageType&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;APPL&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;CFBundleVersion&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;${version-num}&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;LSMinimumSystemVersion&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;10.5.0&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;LSUIElement&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;false/&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;NSHumanReadableCopyright&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;${app-copyright-year} ${app-copyright-company}&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;NSMainNibFile&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;MainMenu&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;key&gt;NSPrincipalClass&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='      &lt;string&gt;NSApplication&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<!-- Info.plist footer -->
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='&lt;/dict&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message='&lt;/plist&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Info.plist" message="${line.separator}" append="true" />
+
+								<!-- AppSettings.plist header -->
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='&lt;?xml version="1.0" encoding="UTF-8"?&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='&lt;plist version="1.0"&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='&lt;dict&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<!-- AppSettings.plist body -->
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;AcceptsFiles&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;true/&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;AcceptsText&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;false/&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;Droppable&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;false/&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;InterpreterArgs&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;array/&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;OutputType&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;string&gt;${app.output.type}&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;RemainRunningAfterCompletion&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;${app.remain.run.after}/&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;RequiresAdminPrivileges&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;false/&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;ScriptArgs&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;array/&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;ScriptInterpreter&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;string&gt;${script.type}&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;Secure&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;false/&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;TextBackground&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;string&gt;#ffffff&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;TextEncoding&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;integer&gt;4&lt;/integer&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;TextFont&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;string&gt;Monaco&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;TextForeground&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;string&gt;#000000&lt;/string&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;key&gt;TextSize&lt;/key&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='      &lt;real&gt;10&lt;/real&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<!-- AppSettings.plist footer -->
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='&lt;/dict&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message='&lt;/plist&gt;' append="true" />
+								<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/AppSettings.plist" message="${line.separator}" append="true" />
+
+								<if>
+									<equals arg1="${app.follow}" arg2="true" />
+									<then>
+										<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/script" message="#!${script.type}" append="true" />
+										<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/script" message="${line.separator}" append="true" />
+										<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/script" message="cd ../../../" append="true" />
+										<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/script" message="${line.separator}" append="true" />
+										<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/script" message="java -jar ${app.file.name}.jar ${app.params}" append="true" />
+									</then>
+									<else>
+										<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/script" message="#!${script.type}" append="true" />
+										<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/script" message="${line.separator}" append="true" />
+										<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/script" message="cd ../../../" append="true" />
+										<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/script" message="${line.separator}" append="true" />
+										<echo file="${type-dir}/${app.file.name}.app/Contents/Resources/script" message="java -jar ${app.file.name}.jar ${app.params}" append="true" />
+									</else>
+								</if>
+
+							</then>
+						</if>
+
+					</then>
+				</if>
+
+			</then>
+		</if>
+	</target>
+
+	<target name="create-config">
+		<if>
+			<equals arg1="${config.file}" arg2="true" />
+			<then>
+
+				<if>
+					<isset property="config.file.name" />
+					<then>
+					</then>
+					<else>
+						<var name="config.file.name" value="config.properties" />
+					</else>
+
+				</if>
+
+
+				<echo file="${type-dir}/config/${config.file.name}" append="true" />
+
+				<if>
+					<equals arg1="${config.file.version}" arg2="true" />
+					<then>
+						<echo file="${type-dir}/config/${config.file.name}" message="app.version=${version-num}-${build.number}" append="true" />
+						<echo file="${type-dir}/config/${config.file.name}" message="${line.separator}" append="true" />
+					</then>
+				</if>
+
+				<if>
+					<isset property="config.file.deployment" />
+					<then>
+						<echo file="${type-dir}/config/${config.file.name}" message="app.deployment=${config.file.deployment}" append="true" />
+						<echo file="${type-dir}/config/${config.file.name}" message="${line.separator}" append="true" />
+					</then>
+				</if>
+
+				<if>
+					<isset property="config.file.server.url" />
+					<then>
+						<echo file="${type-dir}/config/${config.file.name}" message="#app.server.url=${config.file.server.url}" append="true" />
+						<echo file="${type-dir}/config/${config.file.name}" message="${line.separator}" append="true" />
+					</then>
+				</if>
+
+				<if>
+					<isset property="config.file.app.update.url" />
+					<then>
+						<echo file="${type-dir}/config/${config.file.name}" message="app.update.url=${config.file.app.update.url}" append="true" />
+						<echo file="${type-dir}/config/${config.file.name}" message="${line.separator}" append="true" />
+					</then>
+				</if>
+
+				<if>
+					<isset property="config.file.app.update.key" />
+					<then>
+						<echo file="${type-dir}/config/${config.file.name}" message="app.update.key=${config.file.app.update.key}" append="true" />
+						<echo file="${type-dir}/config/${config.file.name}" message="${line.separator}" append="true" />
+					</then>
+				</if>
+
+
+				<if>
+					<isset property="app.name" />
+					<then>
+						<echo file="${type-dir}/config/${config.file.name}" message="app.name=${app.name}" append="true" />
+						<echo file="${type-dir}/config/${config.file.name}" message="${line.separator}" append="true" />
+					</then>
+				</if>
+
+				<if>
+					<isset property="app.title" />
+					<then>
+						<echo file="${type-dir}/config/${config.file.name}" message="app.title=${app.title}" append="true" />
+						<echo file="${type-dir}/config/${config.file.name}" message="${line.separator}" append="true" />
+					</then>
+				</if>
+
+				<if>
+					<isset property="app.frame.icon" />
+					<then>
+						<echo file="${type-dir}/config/${config.file.name}" message="app.frame.icon=${app.frame.icon}" append="true" />
+						<echo file="${type-dir}/config/${config.file.name}" message="${line.separator}" append="true" />
+					</then>
+				</if>
+
+			</then>
+		</if>
+	</target>
+
+	<target name="exec-sql">
+		<sql driver="${database.sql.driver}" url="${database.sql.url}" classpath="${base-dir}/lib/${database.classpath}" userid="${database.sql.user}" password="${database.sql.pass}">
+			<transaction src="${file.name}" />
+		</sql>
+	</target>
+
+
+	<target name="create-db">
+		<if>
+			<isset property="database.create" />
+			<then>
+				<if>
+					<isset property="database.sql.url.path" />
+					<then>
+						<var name="database.sql.url.path" value="${type-dir}/${database.sql.url.path}" />
+					</then>
+					<else>
+						<var name="database.sql.url.path" value="" />
+					</else>
+				</if>
+
+				<if>
+					<isset property="database.sql.url.properties" />
+					<then>
+					</then>
+					<else>
+						<var name="database.sql.url.properties" value="" />
+					</else>
+				</if>
+
+				<if>
+					<isset property="database.sql.init" />
+					<then>
+					</then>
+					<else>
+						<var name="database.sql.init" value="" />
+					</else>
+				</if>
+
+				<if>
+					<isset property="database.sql.user" />
+					<then>
+					</then>
+					<else>
+						<var name="database.sql.user" value="" />
+					</else>
+				</if>
+
+				<if>
+					<isset property="database.sql.password" />
+					<then>
+					</then>
+					<else>
+						<var name="database.sql.password" value="" />
+					</else>
+				</if>
+
+				<var name="database.sql.url" value="${database.sql.url}${database.sql.url.path}${database.sql.url.properties}" />
+
+				<sql driver="${database.sql.driver}" url="${database.sql.url}" classpath="${base-dir}/lib/${database.classpath}" userid="${database.sql.user}" password="${database.sql.pass}">
+					<transaction>
+                        ${database.sql.init} 
+                    </transaction>
+				</sql>
+
+				<foreach param="file.name" target="exec-sql" inheritall="true">
+					<fileset dir="${source-dir}/res/sql/${database.create}" includes="**/*.sql" />
+				</foreach>
+
+				<if>
+					<isset property="database.deploy.sql.user" />
+					<then>
+					</then>
+					<else>
+						<var name="database.deploy.sql.user" value="" />
+					</else>
+				</if>
+
+				<if>
+					<isset property="database.deploy.sql.password" />
+					<then>
+					</then>
+					<else>
+						<var name="database.deploy.sql.password" value="" />
+					</else>
+				</if>
+
+				<if>
+					<isset property="database.deploy.sql" />
+					<then>
+					</then>
+					<else>
+						<var name="database.deploy.sql" value="" />
+					</else>
+				</if>
+
+				<if>
+					<isset property="database.deploy.sql.params" />
+					<then>
+					</then>
+					<else>
+						<var name="database.deploy.sql.params" value="" />
+					</else>
+				</if>
+
+				<mkdir dir="${type-dir}/config/connections" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;?xml version="1.0" encoding="UTF-8"?&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;config&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;connections&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;connection alias="system"&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;driver&gt;${database.sql.driver}&lt;/driver&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;url&gt;${database.deploy.sql.url}&lt;/url&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;userid&gt;${database.deploy.sql.user}&lt;/userid&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;password&gt;${database.deploy.sql.password}&lt;/password&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;params&gt;${database.deploy.sql.params}&lt;/params&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;sql&gt;${database.deploy.sql}&lt;/sql&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;/connection&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;/connections&gt;' append="true" />
+				<echo file="${type-dir}/config/connections/aliases.xml" message="${line.separator}" append="true" />
+
+				<echo file="${type-dir}/config/connections/aliases.xml" message='&lt;/config&gt;' append="true" />
+			</then>
+		</if>
+	</target>
+
+	<target name="create-zip">
+		<if>
+			<and>
+				<isset property="create.zip" />
+				<equals arg1="${create.zip}" arg2="true" />
+				<isset property="zip.name" />
+			</and>
+			<then>
+				<if>
+					<not>
+						<isset property="zip.dir" />
+					</not>
+					<then>
+						<var name="zip.dir" value="" />
+					</then>
+				</if>
+
+				<echo message="Creating zip..." />
+
+				<if>
+					<not>
+						<isset property="zip.dir.version" />
+					</not>
+					<then>
+						<var name="zip.dir.version" value="true" />
+					</then>
+				</if>
+
+				<if>
+					<equals arg1="${zip.dir.version}" arg2="true" />
+					<then>
+						<zip destfile="${type-dir}/tmp.zip">
+							<zipfileset prefix="${zip.dir}-${version-num}" dir="${type-dir}" excludes="**/*.lck" />
+						</zip>
+					</then>
+					<else>
+						<zip destfile="${type-dir}/tmp.zip">
+							<zipfileset prefix="${zip.dir}" dir="${type-dir}" excludes="**/*.lck" />
+						</zip>
+					</else>
+				</if>
+
+				<if>
+					<and>
+						<isset property="create.windows.app" />
+						<equals arg1="${create.windows.app}" arg2="true" />
+						<equals arg1="${isWindows}" arg2="true" />
+					</and>
+					<then>
+						<echo message="Creating Windows installation..." />
+
+						<zip destfile="${type-dir}/${zip.name}-win-${version-num}.zip">
+							<zipfileset src="${type-dir}/tmp.zip" excludes="${zip.dir}-${version-num}/*.app/**,${zip.dir}-${version-num}/*.sh,${zip.dir}-${version-num}/jre*/**" />
+						</zip>
+
+						<trycatch>
+							<try>
+								<delete dir="${type-dir}/tmp" quiet="true" />
+								<mkdir dir="${type-dir}/tmp" />
+								<unzip src="${type-dir}/tmp.zip" dest="${type-dir}/tmp" />
+								<move file="${type-dir}/tmp/${zip.dir}-${version-num}/jre32" tofile="${type-dir}/tmp/${zip.dir}-${version-num}/jre" />
+								<zip destfile="${type-dir}/${zip.name}-win-jre32-${version-num}.zip">
+									<fileset dir="${type-dir}/tmp" excludes="${zip.dir}-${version-num}/*.app/**,${zip.dir}-${version-num}/*.sh,${zip.dir}-${version-num}/jre64/**" />
+								</zip>
+							</try>
+							<catch />
+							<finally>
+								<delete dir="${type-dir}/tmp" quiet="true" />
+							</finally>
+						</trycatch>
+
+						<trycatch>
+							<try>
+								<delete dir="${type-dir}/tmp" quiet="true" />
+								<mkdir dir="${type-dir}/tmp" />
+								<unzip src="${type-dir}/tmp.zip" dest="${type-dir}/tmp" />
+								<move file="${type-dir}/tmp/${zip.dir}-${version-num}/jre64" tofile="${type-dir}/tmp/${zip.dir}-${version-num}/jre" />
+								<zip destfile="${type-dir}/${zip.name}-win-jre64-${version-num}.zip">
+									<fileset dir="${type-dir}/tmp" excludes="${zip.dir}-${version-num}/*.app/**,${zip.dir}-${version-num}/*.sh,${zip.dir}-${version-num}/jre32/**" />
+								</zip>
+							</try>
+							<catch />
+							<finally>
+								<delete dir="${type-dir}/tmp" quiet="true" />
+							</finally>
+						</trycatch>
+					</then>
+				</if>
+
+				<if>
+					<and>
+						<isset property="create.mac.app" />
+						<equals arg1="${create.mac.app}" arg2="true" />
+						<equals arg1="${isMac}" arg2="true" />
+					</and>
+					<then>
+						<echo message="Creating mac installation..." />
+
+						<zip destfile="${type-dir}/${zip.name}-mac-${version-num}.zip">
+							<zipfileset filemode="755" src="${type-dir}/tmp.zip" excludes="${zip.dir}-${version-num}/*.exe,${zip.dir}-${version-num}/jre*/**" />
+						</zip>
+
+						<tar destfile="${type-dir}/${zip.name}-mac.tar-${version-num}.gz" compression="gzip">
+							<zipfileset src="${type-dir}/${zip.name}-mac-${version-num}.zip" />
+						</tar>
+
+						<delete>
+							<fileset dir="${type-dir}" includes="${zip.name}-mac-${version-num}.zip" />
+						</delete>
+					</then>
+				</if>
+
+				<if>
+					<and>
+						<isset property="create.script.app" />
+						<equals arg1="${create.script.app}" arg2="true" />
+					</and>
+					<then>
+						<echo message="Creating script installation..." />
+
+						<zip destfile="${type-dir}/${zip.name}-unix-${version-num}.zip">
+							<zipfileset src="${type-dir}/tmp.zip" excludes="${zip.dir}-${version-num}/*.exe,${zip.dir}-${version-num}/*.app/**,${zip.dir}-${version-num}/jre*/**" />
+						</zip>
+
+						<tar destfile="${type-dir}/${zip.name}-unix-${version-num}.tar.gz" compression="gzip">
+							<zipfileset src="${type-dir}/${zip.name}-unix-${version-num}.zip" />
+						</tar>
+
+						<delete>
+							<fileset dir="${type-dir}" includes="${zip.name}-unix-${version-num}.zip" />
+						</delete>
+					</then>
+				</if>
+
+				<echo message="Creating crossplatform installation..." />
+
+				<zip destfile="${type-dir}/${zip.name}-${version-num}.zip">
+					<zipfileset src="${type-dir}/tmp.zip" excludes="${zip.dir}-${version-num}/*.exe,${zip.dir}-${version-num}/*.app/**,${zip.dir}-${version-num}/*.sh,${zip.dir}-${version-num}/jre*/**" />
+				</zip>
+
+				<tar destfile="${type-dir}/${zip.name}-${version-num}.tar.gz" compression="gzip">
+					<zipfileset src="${type-dir}/${zip.name}-${version-num}.zip" />
+				</tar>
+
+				<zip destfile="${type-dir}/${zip.name}-bin-only-${version-num}.zip">
+					<zipfileset src="${type-dir}/tmp.zip" includes="${zip.dir}-${version-num}/lib/**,${zip.dir}-${version-num}/plugin/**,${zip.dir}-${version-num}/WEB-INF/**" />
+				</zip>
+
+				<if>
+					<available file="${type-dir}/${zip.name}-bin-only-${version-num}.zip" />
+					<then>
+						<tar destfile="${type-dir}/${zip.name}-bin-only-${version-num}.tar.gz" compression="gzip">
+							<zipfileset src="${type-dir}/${zip.name}-bin-only-${version-num}.zip" />
+						</tar>
+					</then>
+				</if>
+
+				<delete>
+					<fileset dir="${type-dir}" includes="tmp.zip" />
+				</delete>
+
+				<if>
+					<and>
+						<isset property="clean.up.after.zip" />
+						<equals arg1="${clean.up.after.zip}" arg2="true" />
+					</and>
+					<then>
+						<echo message="Deleting files..." />
+
+						<delete includeemptydirs="true">
+							<fileset dir="${type-dir}" defaultexcludes="false" includes="**/*" excludes="*.zip,*.tar.gz" />
+						</delete>
+
+					</then>
+				</if>
+
+			</then>
+		</if>
+	</target>
+
+	<target depends="init,copy-all-jars,copy-files,create-cmd,create-config,create-db,create-zip" name="deploy-type" />
+</project>

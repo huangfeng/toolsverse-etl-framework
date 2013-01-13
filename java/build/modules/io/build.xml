@@ -1,0 +1,22 @@
+<project default="toolsverse-io-jar">
+    <target name="toolsverse-io-jar">
+        <jar destfile="${dist-jar-dir}/toolsverse-io.jar" basedir="${destination-dir}" includes="com/toolsverse/io/**" manifest="manifest.mf" />
+
+        <if>
+            <equals arg1="${create-source-jars}" arg2="true" />
+            <then>
+                <mkdir dir="${dist-source-jar-dir}" />
+                <jar destfile="${dist-source-jar-dir}/toolsverse-io-source.jar" basedir="${source-dir}" includes="com/toolsverse/io/**" />
+            </then>
+        </if>
+
+        <if>
+            <equals arg1="${create-javadoc}" arg2="true" />
+            <then>
+                <mkdir dir="${dist-javadoc-jar-dir}" />
+                <jar destfile="${dist-javadoc-jar-dir}/toolsverse-io-javadoc.jar" basedir="${javadoc-dir}" includes="com/toolsverse/io/**" />
+            </then>
+        </if>
+
+    </target>
+</project>

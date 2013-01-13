@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<informix name="informix" type="0">
+    <nodes>
+        <node name="Aggregate Functions" type="0">
+            <nodes>
+                <node code="SELECT COUNT(*)&#xa;FROM stock" name="COUNT - counts and displays the total number of rows in the query." type="1"/>
+                <node code="SELECT COUNT (DISTINCT manu_code)&#xa;FROM stock" name="COUNT with DISTINCT - counts unique rows only" type="1"/>
+                <node code="SELECT AVG (unit_price)&#xa;FROM stock" name="AVG - computes the average value of the field" type="1"/>
+                <node code="SELECT MAX (ship_charge)&#xa;FROM orders" name="MAX - computes highets value of the field" type="1"/>
+                <node code="SELECT MIN (ship_charge)&#xa;FROM orders" name="MIN - computes lowest value of the field" type="1"/>
+                <node code="SELECT SUM (ship_weight)&#xa;FROM orders&#xa;WHERE ship_date = '07/13/1998'" name="SUM - computes the sum of all values of the field" type="1"/>
+                <node code="SELECT RANGE(unit_price) FROM stock" name="RANGE - computes the difference between the maximum and the minimum values for the selected rows" type="1"/>
+                <node code="SELECT STDEV(age) FROM u_pop WHERE age > 21" name="STDEV - computes the standard deviation for the selected rows" type="1"/>
+                <node code="SELECT VARIANCE(age) FROM u_pop WHERE age > 21" name="VARIANCE - returns the variance for a sample of values as an unbiased estimate of the variance for all rows selected" type="1"/>
+            </nodes>
+        </node>
+        <node name="Time Functions" type="0">
+            <nodes>
+                <node code="SELECT customer_num, DAY (call_dtime), DAY (res_dtime)&#xa;FROM cust_calls" name="DAY - returns the day of the date" type="1"/>
+                <node code="SELECT customer_num, DAY (call_dtime), DAY (res_dtime)&#xa;FROM cust_calls&#xa;WHERE DAY (call_dtime) &lt; DAY (CURRENT)" name="CURRENT - retuns current date" type="1"/>
+                <node code="SELECT customer_num, call_code, call_descr&#xa;FROM cust_calls&#xa;WHERE call_dtime &lt; CURRENT YEAR TO DAY" name="CURRENT YEAR TO DAY - current date" type="1"/>
+                <node code="SELECT customer_num,&#xa;MONTH (call_dtime) call_month,&#xa;MONTH (res_dtime) res_month&#xa;FROM cust_calls" name="MONTH - returns the month of the date" type="1"/>
+                <node code="SELECT customer_num,&#xa;WEEKDAY (call_dtime) called,&#xa;WEEKDAY (res_dtime) resolved&#xa;FROM cust_calls&#xa;ORDER BY resolved" name="WEEKDAY - returns the weekday of the date" type="1"/>
+                <node code="SELECT customer_num, call_code,&#xa;YEAR (call_dtime) call_year,&#xa;YEAR (res_dtime) res_year&#xa;FROM cust_calls&#xa;WHERE YEAR (call_dtime) &lt; YEAR (TODAY)" name="YEAR - returns year of the date" type="1"/>
+                <node code="SELECT customer_num,&#xa;EXTEND (call_dtime, month to minute) call_time,&#xa;EXTEND (res_dtime, month to minute) res_time&#xa;FROM cust_calls&#xa;ORDER BY res_time" name="EXTEND - displays only the specified subfields to restrict the two DATETIME values" type="1"/>
+            </nodes>
+        </node>
+        <node name="Date-Conversion Functions" type="0">
+            <nodes>
+                <node code="SELECT customer_num, call_dtime, res_dtime&#xa;FROM cust_calls&#xa;WHERE call_dtime > DATE ('12/31/97')" name="DATE - converts a character string to a DATE value" type="1"/>
+                <node code="SELECT customer_num,&#xa;TO_CHAR(call_dtime, &quot;%A %B %d %Y&quot;) call_date&#xa;FROM cust_calls&#xa;WHERE call_code = &quot;B&quot;" name="TO_CHAR - converts DATETIME or DATE values to character string values" type="1"/>
+                <node code="SELECT customer_num, call_descr&#xa;FROM cust_calls&#xa;WHERE call_dtime = TO_DATE(&quot;1998-07-07 10:24&quot;,&#xa;&quot;%Y-%m-%d %H:%M&quot;)." name="TO_DATE - accepts an argument of a character data type and converts this value to a DATETIME value" type="1"/>
+            </nodes>
+        </node>
+        <node name="Cardinality Function" type="0">
+            <nodes>
+                <node code="SELECT department, CARDINALITY(direct_reports)&#xa;FROM manager&#xa;WHERE CARDINALITY(direct_reports) &lt; 6&#xa;GROUP BY department" name="CARDINALITY - counts the number of elements that a collection contains" type="1"/>
+            </nodes>
+        </node>
+        <node name="Smart-Large-Object Functions" type="0">
+            <nodes>
+                <node code="INSERT INTO candidate (cand_num, cand_lname, resume) &#xa;   VALUES (2, 'Smith', FILETOBLOB('smith.rsm', 'client'));" name="FILETOBLOB - copies a file into a BLOB column." type="1"/>
+                <node code="INSERT INTO candidate (cand_num, cand_lname, resume) &#xa;   VALUES (2, 'Smith', FILETOCLOB('smith.rsm', 'client'));" name="FILETOCLOB - copies a file into a CLOB column" type="1"/>
+                <node code="update interviews &#xa;   SET (cand_num, resume) = &#xa;      (SELECT cand_num, &#xa;         LOCOPY(resume, 'candidate', 'resume')&#xa;      FROM candidate&#xa;      WHERE cand_lname = 'Haven')" name="LOCOPY - copies BLOB or CLOB data into another BLOB or CLOB column" type="1"/>
+                <node code="SELECT id_num, LOTOFILE(felony, 'felon_322.txt', 'client')&#xa;FROM inmate&#xa;WHERE id = 322" name="LOTOFILE - copies a BLOB or CLOB into a file" type="1"/>
+            </nodes>
+        </node>
+        <node name="String-Manipulation Functions" type="0">
+            <nodes>
+                <node code="SELECT manu_code, LOWER(manu_code)&#xa;FROM items&#xa;WHERE order_num = 1018" name="LOWER - replaces every uppercase letter in a character string with a lowercase letter" type="1"/>
+                <node code="SELECT call_code, UPPER(code_descr)&#xa;FROM call_type" name="UPPER - replaces every lowercase letter in a character string with an uppercase letter" type="1"/>
+                <node code="SELECT INITCAP(description)&#xa;FROM stock&#xa;WHERE manu_code = &quot;ANZ&quot;" name="INITCAP - replaces the first letter of every word in a character string with an uppercase letter" type="1"/>
+                <node code="SELECT stock_num, REPLACE(unit,&quot;each&quot;, &quot;item&quot;) cost_per,&#xa;unit_price&#xa;FROM stock&#xa;WHERE manu_code = &quot;HRO&quot;" name="REPLACE - replaces a certain set of characters in a character string with other characters." type="1"/>
+                <node code="SELECT sname, SUBSTRING(sname FROM 1 FOR 4)&#xa;FROM state&#xa;WHERE code = &quot;AZ&quot;" name="SUBSTRING - returns a portion of a character string" type="1"/>
+                <node code="SELECT sname, SUBSTR(sname, -15, 5)&#xa;FROM state&#xa;WHERE code = &quot;CA&quot;" name="SUBSTR - returns a portion of a character string" type="1"/>
+                <node code="SELECT sname, LPAD(sname, 21, &quot;-&quot;)&#xa;FROM state&#xa;WHERE code = &quot;CA&quot; OR code = &quot;AZ&quot;" name="LPAD returns a copy of a string that has been left padded with a sequence of characters" type="1"/>
+                <node code="SELECT sname, RPAD(sname, 21, &quot;-&quot;)&#xa;FROM state&#xa;WHERE code = &quot;WV&quot; OR code = &quot;AZ&quot;" name="RPAD - returns a copy of a string that has been right padded with a sequence of characters" type="1"/>
+            </nodes>
+        </node>
+        <node code="SELECT DBINFO('dbhostname')&#xa;FROM systables&#xa;WHERE tabid = 1" name="Other functions" type="0">
+            <nodes>
+                <node code="SELECT customer_num,&#xa;LENGTH (fname) + LENGTH (lname) namelength&#xa;FROM customer&#xa;WHERE LENGTH (company) > 15" name="LENGTH - calculates the number of bytes in the string" type="1"/>
+                <node code="SELECT * FROM cust_calls&#xa;WHERE user_id = USER" name="USER - defines a restricted view of a table that contains only rows that include your user id" type="1"/>
+                <node code="SELECT * FROM orders&#xa;WHERE order_date = TODAY" name="TODAY - returns the current system date" type="1"/>
+                <node code="SELECT DBSERVERNAME server, tabid&#xa;FROM systables&#xa;WHERE tabid &lt;= 4" name="DBSERVERNAME - returns the name of the database server" type="1"/>
+                <node code="SELECT HEX (customer_num) hexnum, HEX (zipcode) hexzip,&#xa;HEX (rowid) hexrow&#xa;FROM customer" name="HEX - returns the hexadecimal value of the field" type="1"/>
+                <node name="DBINFO - find name of the host computer" type="1"/>
+                <node code="SELECT DBINFO('version','full')&#xa;FROM systables&#xa;WHERE tabid = 1" name="DBINFO - find version of the current database" type="1"/>
+                <node code="SELECT name, NVL(address, &quot;address is unknown&quot;) AS address&#xa;FROM student" name="NVL - converts an expression that evaluates to null to a value that you specify" type="1"/>
+                <node code="SELECT emp_id, DECODE(evaluation, &quot;poor&quot;, 0, &quot;fair&quot;, 25,&#xa;&quot;good&quot;, 50, &quot;very good&quot;, 75, &quot;great&quot;, 100, -1) AS evaluation&#xa;FROM employee" name="DECODE - converts an expression of one value to another value" type="1"/>
+            </nodes>
+        </node>
+        <node name="Pseudocolumns" type="0">
+            <nodes>
+                <node code="SELECT rowid, * FROM manufact" name="ROWID - the internal record number that is associated with a row in a table" type="1"/>
+            </nodes>
+        </node>
+        <node name="SPL Programming Techniques" type="0">
+            <nodes>
+                <node code="CASE i&#xa;   WHEN 1 THEN LET j = x;&#xa;   WHEN 2 THEN LET k = x;&#xa;   WHEN 3 THEN LET l = x;&#xa;   WHEN 4 THEN LET m = x;&#xa;   ELSE&#xa;      RAISE EXCEPTION 100; --illegal value&#xa;END CASE" name="CASE - Selects a result from one or more alternatives, and returns the result." type="1"/>
+                <node code="IF sales > (quota + 200) THEN&#xa;  let bonus = (sales - quota)/4;&#xa;ELSE&#xa;  let bonus = 50;&#xa;END IF;" name="IF-THEN-ELSE - Condition with alternative sequence of statements." type="1"/>
+                <node code="IF sales > 50000 THEN&#xa;  let bonus = 1500;&#xa;ELSIF sales > 35000 THEN&#xa;  let bonus = 500;&#xa;ELSE&#xa;  let bonus = 100;&#xa;END IF;" name="IF-THEN-ELSEIF - Condition with several alternatives." type="1"/>
+                <node code="FOR index_var = 12 TO 21 STEP 2&#xa;   -- statement block&#xa;END FOR" name="LOOP FOR..TO" type="1"/>
+                <node code="FOR index_var IN (12 TO 21 STEP 2)&#xa;   -- statement block&#xa;END FOR" name="LOOP FOR..IN" type="1"/>
+                <node code="CREATE PROCEDURE simp_while()&#xa;   DEFINE i INT;&#xa;   WHILE EXISTS (SELECT fname FROM customer&#xa;       WHERE customer_num > 400)&#xa;      DELETE FROM customer WHERE id_2 = 2;&#xa;   END WHILE;&#xa;   LET i = 1;&#xa;   WHILE i &lt; 10&#xa;      INSERT INTO tab_2 VALUES (i);&#xa;      LET i = i + 1;&#xa;   END WHILE;&#xa;END PROCEDURE" name="LOOP WHILE - establish a loop with variable end conditions" type="1"/>
+                <node code="DEFINE employees employee_t;&#xa;DEFINE n VARCHAR(30);&#xa;DEFINE s INTEGER;&#xa;&#xa;SELECT emp_list into employees FROM dept_table&#xa;   WHERE dept_no = 1057;&#xa;FOREACH cursor1 FOR&#xa;   SELECT name,salary &#xa;      INTO n,s FROM TABLE( employees ) AS e;&#xa;...&#xa;END FOREACH;" name="CURSOR - FOREACH" type="1"/>
+                <node code="CREATE PROCEDURE delete_cust (cnum INT)&#xa;   ON EXCEPTION  IN (-691)    -- children exist&#xa;      BEGIN -- Begin-end so no other DELETEs get caught in here.&#xa;         ON EXCEPTION IN (-691)&#xa;            DELETE FROM another_child WHERE num = cnum;   { 1 }&#xa;            DELETE FROM orders WHERE customer_num = cnum; { 2 }&#xa;         END EXCEPTION -- for error -691&#xa;         DELETE FROM orders WHERE customer_num = cnum;    { 3 }&#xa;      END&#xa;      DELETE FROM cust_calls WHERE customer_num = cnum;   { 4 }&#xa;      DELETE FROM customer WHERE customer_num = cnum;     { 5 }&#xa;   END EXCEPTION&#xa;   DELETE FROM customer WHERE customer_num = cnum;        { 6 }&#xa;END PROCEDURE" name="ON EXCEPTION -  specifies actions to be taken for any error" type="1"/>
+                <node code="FOREACH SELECT c1 INTO alpha FROM sometable&#xa;IF alpha &lt; 0 THEN&#xa;RAISE EXCEPTION -746, 0, 'a &lt; 0 found' -- emergency exit&#xa;END IF&#xa;END FOREACH" name="RAISE EXCEPTION - simulates the generation of an error" type="1"/>
+                <node code="CREATE FUNCTION loop_skip()&#xa;   RETURNING INT;&#xa;   DEFINE i INT;&#xa;   ...&#xa;   FOR i IN (3 TO 15 STEP 2)&#xa;      INSERT INTO testtable values(i, null, null); &#xa;      IF i = 11&#xa;         CONTINUE FOR;&#xa;      END IF;&#xa;      RETURN i WITH RESUME;&#xa;   END FOR;&#xa;&#xa;END FUNCTION;" name="CONTINUE -  starts the next iteration of the innermost FOR, WHILE, or FOREACH loop" type="1"/>
+                <node code="CREATE PROCEDURE ex_cont_ex()&#xa;   DEFINE i,s,j, INT;&#xa;   FOR j = 1 TO 20&#xa;      IF j > 10 THEN &#xa;         CONTINUE FOR;&#xa;      END IF&#xa;      LET i,s = j,0;&#xa;      WHILE i > 0&#xa;         LET i = i -1;&#xa;         IF i = 5 THEN&#xa;            EXIT FOR;&#xa;         END IF&#xa;      END WHILE&#xa;   END FOR&#xa;END PROCEDURE" name="EXIT -  terminates execution of a FOR, WHILE, or FOREACH loop" type="1"/>
+            </nodes>
+        </node>
+        <node name="Sequences and serial column" type="0">
+            <nodes>
+                <node code="CREATE SEQUENCE TEST_SEQUENCE &#xa;INCREMENT BY 1 &#xa;START WITH 1 &#xa;MAXVALUE 1000 &#xa;NOMINVALUE &#xa;CYCLE &#xa;NOCACHE &#xa;ORDER" name="Create sequence" type="1"/>
+                <node code="select TEST_SEQUENCE.NEXTVAL from sysmaster:'informix'.sysdual" name="Use sequence" type="1"/>
+                <node code="create table config_property_test&#xa;(&#xa;  CFG_PROP_NUM&#x9;SERIAL NOT NULL,&#xa;  NAME&#x9;VARCHAR(255)&#xa;)    " name="Create table with serial column" type="1"/>
+                <node code="insert into config_property_test(name) values ('test')" name="Insert into table with serial column" type="1"/>
+                <node code="let val = dbinfo('serial8');&#xa;&#xa;or &#xa;&#xa;let val = dbinfo('sqlca.sqlerrd1');" name="Get value of the last generated serial column" type="1"/>
+            </nodes>
+        </node>
+        <node name="Miscellaneous" type="0">
+            <nodes>
+                <node code="select limit 10 * from employee" name="Get top N rows (example)" type="1"/>
+                <node code="create temp table primary_keys_table (field_name varchar(100), pk decimal(32), old_pk decimal(32));" name="Create temporary table (example)" type="1"/>
+                <node code="merge into some_table&#xa;using sysmaster:'informix'.sysdual on &#xa;(&#xa;some_table.field1 = param1&#xa;and some_table.field2 = param2&#xa;...&#xa;)&#xa;when not matched then insert values (value1, value2, etc)&#xa;when matched update set field1 = value1, field2 = value2, etc" name="Merge" type="1"/>
+                <node code="select * from sysmaster:'informix'.sysdual" name="dual/dummy table" type="1"/>
+                <node code="select CURRENT from sysmaster:'informix'.sysdual" name="Get current date+time" type="1"/>
+            </nodes>
+        </node>
+        <node name="SPL procedures and functions and Sql Developer Techniques" type="0">
+            <nodes>
+                <node code="create procedure test_proc(param1 int, param2 varchar, &#xa;                           out param3 int, out param4 varchar)&#xa;    let param3 = param1 + 100;&#xa;&#xa;    let param4 = param2 || 'test';&#xa;end procedure;&#xa;" name="Create stored procedure with input and output parameters (example)" type="1"/>
+                <node code="call test_proc(:one, :two, :out_number_param3, :out_varchar_param4);" name="Execute stored procedure with input and output parameters from Sql Devloper (Execute Script)" type="1"/>
+                <node code="CREATE FUNCTION test_fnc(v_value int) RETURNING CHAR(6)&#xa;   RETURN cast(v_value as char(6));&#xa;END FUNCTION;" name="Create function (example)" type="1"/>
+                <node code="select test_fnc(:param1) from sysmaster:'informix'.sysdual" name="Execute function with input parameters from Sql Developer (Execute Sql)" type="1"/>
+                <node code="create procedure pReturnSet() returning char(6), varchar(12), varchar(15);&#xa;define vEMPNO char(6);&#xa;define vFIRSTNME varchar(12);&#xa;define vLASTNAME varchar(15);&#xa;&#xa;foreach&#xa;  select EMPNO,FIRSTNME,LASTNAME into vEMPNO,vFIRSTNME,vLASTNAME&#xa;  from employee&#xa;  &#xa;  return vEMPNO,vFIRSTNME,vLASTNAME with resume;&#xa;&#xa;end foreach;&#xa;&#xa;end procedure;" name="Function/procedure which returns resultset (example)" type="1"/>
+                <node code="call pReturnSet();" name="Execute function/procedure which returns resultset (example)" type="1"/>
+            </nodes>
+        </node>
+    </nodes>
+</informix>

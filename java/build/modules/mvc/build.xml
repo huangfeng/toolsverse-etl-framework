@@ -1,0 +1,40 @@
+<project default="toolsverse-mvc-jar">
+    <target name="toolsverse-mvc-jar">
+        <jar destfile="${dist-jar-dir}/toolsverse-mvc.jar" basedir="${destination-dir}" includes="com/toolsverse/mvc/controller/**,
+			           com/toolsverse/mvc/model/**,
+			           com/toolsverse/mvc/pojo/**,
+			           com/toolsverse/mvc/view/**" excludes="com/toolsverse/mvc/view/swing/**,
+			           com/toolsverse/mvc/view/wings/**" manifest="manifest.mf" />
+        <jar destfile="${dist-jar-dir}/toolsverse-mvc-swing.jar" basedir="${destination-dir}" includes="com/toolsverse/mvc/view/swing/**" manifest="manifest.mf" />
+        <jar destfile="${dist-jar-dir}/toolsverse-mvc-wings.jar" basedir="${destination-dir}" includes="com/toolsverse/mvc/view/wings/**" manifest="manifest.mf" />
+
+        <if>
+            <equals arg1="${create-source-jars}" arg2="true" />
+            <then>
+                <mkdir dir="${dist-source-jar-dir}" />
+                <jar destfile="${dist-source-jar-dir}/toolsverse-mvc-source.jar" basedir="${source-dir}" includes="com/toolsverse/mvc/controller/**,
+					           com/toolsverse/mvc/model/**,
+					           com/toolsverse/mvc/pojo/**,
+					           com/toolsverse/mvc/view/**" excludes="com/toolsverse/mvc/view/swing/**,
+					           com/toolsverse/mvc/view/wings/**" />
+                <jar destfile="${dist-source-jar-dir}/toolsverse-mvc-swing-source.jar" basedir="${source-dir}" includes="com/toolsverse/mvc/view/swing/**" />
+                <jar destfile="${dist-source-jar-dir}/toolsverse-mvc-wings-source.jar" basedir="${source-dir}" includes="com/toolsverse/mvc/view/wings/**" />
+            </then>
+        </if>
+
+        <if>
+            <equals arg1="${create-javadoc}" arg2="true" />
+            <then>
+                <mkdir dir="${dist-javadoc-jar-dir}" />
+                <jar destfile="${dist-javadoc-jar-dir}/toolsverse-mvc-javadoc.jar" basedir="${javadoc-dir}" includes="com/toolsverse/mvc/controller/**,
+					           com/toolsverse/mvc/model/**,
+					           com/toolsverse/mvc/pojo/**,
+					           com/toolsverse/mvc/view/**" excludes="com/toolsverse/mvc/view/swing/**,
+					           com/toolsverse/mvc/view/wings/**" />
+                <jar destfile="${dist-javadoc-jar-dir}/toolsverse-mvc-swing-javadoc.jar" basedir="${javadoc-dir}" includes="com/toolsverse/mvc/view/swing/**" />
+                <jar destfile="${dist-javadoc-jar-dir}/toolsverse-mvc-wings-javadoc.jar" basedir="${javadoc-dir}" includes="com/toolsverse/mvc/view/wings/**" />
+            </then>
+        </if>
+
+    </target>
+</project>

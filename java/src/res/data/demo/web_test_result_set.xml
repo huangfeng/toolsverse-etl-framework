@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webRowSet>
+    <properties>
+       <table-name>test_result_set</table-name>
+    </properties>
+    <metadata>
+        <column-count>7</column-count>
+        <column-definition>
+           <column-index>1</column-index>
+           <nullable>1</nullable>
+           <column-name>numfield</column-name>
+           <column-type>4</column-type>
+           <column-type-name>NUMERIC</column-type-name>
+        </column-definition> 
+        <column-definition>
+           <column-index>2</column-index>
+           <nullable>1</nullable>
+           <column-name>strfield</column-name>
+           <column-type>12</column-type>
+           <column-type-name>VARCHAR</column-type-name>
+        </column-definition> 
+        <column-definition>
+           <column-index>3</column-index>
+           <nullable>1</nullable>
+           <column-name>datetimefield</column-name>
+           <column-type>93</column-type>
+           <column-type-name>DATETIME</column-type-name>
+        </column-definition> 
+        <column-definition>
+           <column-index>4</column-index>
+           <nullable>1</nullable>
+           <column-name>intfield</column-name>
+           <column-type>4</column-type>
+           <column-type-name>NUMERIC</column-type-name>
+        </column-definition> 
+        <column-definition>
+           <column-index>5</column-index>
+           <nullable>1</nullable>
+           <column-name>floatfield</column-name>
+           <column-type>6</column-type>
+           <column-type-name>NUMERIC</column-type-name>
+        </column-definition> 
+        <column-definition>
+           <column-index>6</column-index>
+           <nullable>1</nullable>
+           <column-name>datefield</column-name>
+           <column-type>91</column-type>
+           <column-type-name>DATE</column-type-name>
+        </column-definition> 
+        <column-definition>
+           <column-index>7</column-index>
+           <nullable>1</nullable>
+           <column-name>timefield</column-name>
+           <column-type>91</column-type>
+           <column-type-name>TIME</column-type-name>
+        </column-definition> 
+    </metadata>
+    <data>
+        <currentRow>
+            <columnValue>1</columnValue>
+            <columnValue>record1</columnValue>
+            <columnValue>2003-03-03 03:03:03</columnValue>
+            <columnValue>123</columnValue>
+            <columnValue>123.01</columnValue>
+            <columnValue>2005-05-05 00:00:00</columnValue>
+            <columnValue>09:09:09</columnValue>
+        </currentRow>
+        <currentRow>
+            <columnValue>2</columnValue>
+            <columnValue>record2</columnValue>
+            <columnValue>2002-02-02 02:02:02</columnValue>
+            <columnValue>456</columnValue>
+            <columnValue>456.02</columnValue>
+            <columnValue>2007-07-07 00:00:00</columnValue>
+            <columnValue>10:10:10</columnValue>
+        </currentRow>
+        <currentRow>
+            <columnValue>3</columnValue>
+            <columnValue>record3</columnValue>
+            <columnValue>2001-01-01 01:01:01</columnValue>
+            <columnValue>789</columnValue>
+            <columnValue>789.02</columnValue>
+            <columnValue>2008-08-08 00:00:00</columnValue>
+            <columnValue>11:11:11</columnValue>
+        </currentRow>
+        <currentRow>
+            <columnValue>4</columnValue>
+            <columnValue/>
+            <columnValue>2011-11-11 01:01:01</columnValue>
+            <columnValue/>
+            <columnValue/>
+            <columnValue>2012-01-01 00:00:00</columnValue>
+            <columnValue>02:02:02</columnValue>
+        </currentRow>
+        <currentRow>
+            <columnValue>5</columnValue>
+            <columnValue>record5</columnValue>
+            <columnValue/>
+            <columnValue>111</columnValue>
+            <columnValue>22.01</columnValue>
+            <columnValue/>
+            <columnValue/>
+        </currentRow>
+    </data>
+</webRowSet>

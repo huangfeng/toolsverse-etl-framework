@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+    <user name="test" password="{3Des}O7K3vQRrEeI=">
+       <roles>
+          <role name="administrator" /> 
+       </roles>
+    </user>
+    <user name="somebody" password="{3Des}/gQa3zifxh0=">
+       <roles>
+          <role name="developer" /> 
+          <role name="manager" />  
+       </roles>
+    </user>
+    <user name="somebody2" password="{3Des}/gQa3zifxh0=">
+       <roles>
+          <role name="developer" /> 
+       </roles>
+    </user>    
+    <user name="nobody" password="{3Des}7zWp8RBkDuo=" />
+    <user name="wrongguy" password="passwd" />
+</users>

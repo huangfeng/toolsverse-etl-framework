@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<postgresql name="postgresql" type="0">
+    <nodes>
+        <node name="Performing Administrative Tasks" type="0">
+            <nodes>
+                <node name="Database Management" type="0">
+                    <nodes>
+                        <node code="ALTER DATABASE database1&#xa;  CONNECTION LIMIT 10;" name="Change connection limit" type="1"/>
+                        <node code="CREATE DATABASE database1;" name="Create Database" type="1"/>
+                        <node code="ALTER DATABASE database1 RENAME TO new_database_name" name="Rename database" type="1"/>
+                        <node code="ALTER DATABASE database1 RESET ALL" name="Clear all database-specific settings" type="1"/>
+                    </nodes>
+                </node>
+                <node name="Security" type="0">
+                    <nodes>
+                        <node code="CREATE USER user1&#xa;  PASSWORD 'qwerty';" name="Create  User" type="1"/>
+                        <node code="GRANT ALL PRIVILEGES ON OBJECT1 TO user1;" name="Grant" type="1"/>
+                        <node code="GRANT ALL PRIVILEGES ON OBJECT1 FROM user1;" name="Revoke" type="1"/>
+                        <node code="ALTER USER postgres WITH PASSWORD 'VeryVerySecret';" name="Alter user" type="1"/>
+                    </nodes>
+                </node>
+            </nodes>
+        </node>
+        <node name="SQL Syntax" type="0">
+            <nodes>
+                <node name="DML Statements" type="0">
+                    <nodes>
+                        <node code="DELETE FROM table1 WHERE column1 = VALUE" name="Delete" type="1"/>
+                        <node code="INSERT INTO table1(&#xa;  column1, column2)&#xa;  VALUES (VALUE1, VALUE2);" name="Insert" type="1"/>
+                        <node code="INSERT INTO table1(column11, column12)&#xa;  SELECT column21, column22 FROM table2" name="Insert with Select Clause" type="1"/>
+                        <node code="TRUNCATE TABLE table1;" name="Truncate" type="1"/>
+                        <node code="UPDATE table1&#xa;  SET column1 = VALUE1&#xa;  WHERE column2 = VALUE2;" name="Update" type="1"/>
+                    </nodes>
+                </node>
+                <node name="Functions" type="0">
+                    <nodes>
+                        <node name="Aggregate Functions" type="0">
+                            <nodes>
+                                <node code="AVG(DISTINCT 1)" name="Avg" type="1"/>
+                                <node code="COUNT(*)" name="Count" type="1"/>
+                                <node code="SUM(1+1)" name="Sum" type="1"/>
+                                <node code="MIN(field)" name="Min" type="1"/>
+                                <node code="MAX(field)" name="Max" type="1"/>
+                            </nodes>
+                        </node>
+                        <node name="Cast Functions" type="0">
+                            <nodes>
+                                <node code="'2000-01-01'::date" name="Cast to date" type="1"/>
+                                <node code="'2000-01-01'::text" name="Cast to text" type="1"/>
+                            </nodes>
+                        </node>
+                        <node name="Date and Time Functions" type="0">
+                            <nodes>
+                                <node code="'2010-09-28'::date + '10 days'::interval" name="Add day" type="1"/>
+                                <node code="'2010-09-28'::date + '1 month'::interval" name="Add month" type="1"/>
+                                <node code="now()" name="Current time" type="1"/>
+                                <node code="'2010-09-28'::date - '2010-08-28'::date" name="Date diff" type="1"/>
+                                <node code="('2001-02-16'::date, '2001-12-21'::date) OVERLAPS ('2001-10-30'::date, '2002-10-30'::date)" name="Overlaps" type="1"/>
+                                <node code="EXTRACT(DAY FROM '2001-02-16 20:38:40'::timestamp);" name="Extract day" type="1"/>
+                            </nodes>
+                        </node>
+                        <node name="Numeric Functions" type="0">
+                            <nodes>
+                                <node code="@(-1)" name="Abs" type="1"/>
+                                <node code="cos(1)" name="Cos" type="1"/>
+                                <node code="log(1, 1)" name="Log" type="1"/>
+                                <node code="2^3" name="Power" type="1"/>
+                            </nodes>
+                        </node>
+                        <node name="String Functions" type="0">
+                            <nodes>
+                                <node code="ascii('a')" name="Ascii" type="1"/>
+                                <node code="length('xxxxx')" name="Length" type="1"/>
+                                <node code="'String1' || 'String2')" name="Concat" type="1"/>
+                                <node code="lower('XXXXX')" name="Lower" type="1"/>
+                                <node code="upper('xxxxx')" name="Upper" type="1"/>
+                                <node code="substring('xxxxx' from 1 for 2)" name="Substring" type="1"/>
+                                <node code="trim(both 'x' from 'xTomxx')" name="Trim" type="1"/>
+                            </nodes>
+                        </node>
+                    </nodes>
+                </node>
+                <node name="SQL Queries" type="0">
+                    <nodes>
+                        <node code="SELECT&#xa;  * &#xa;FROM&#xa;  public.table1;" name="Select" type="1"/>
+                        <node code="SELECT&#xa;  t1.column1, t2.column2&#xa;FROM&#xa;  table1 t1, table1 t2&#xa;WHERE&#xa;  t1.column3 = t2.column4;" name="Select with Aliases" type="1"/>
+                        <node code="SELECT table1.column1, table2.column2&#xa; FROM table1 NATURAL JOIN table2;" name="Full Join" type="1"/>
+                        <node code="SELECT&#xa;  column1, COUNT(column2)&#xa;FROM&#xa;  table1&#xa;GROUP BY&#xa;  column1;" name="Group" type="1"/>
+                        <node code="SELECT table1.column1, table2.column2&#xa; FROM table1 JOIN table2&#xa; ON table1.JOIN_column1 = table2.JOIN_column2;" name="Join" type="1"/>
+                        <node code="SELECT table1.column1, table2.column2&#xa; FROM table1 LEFT OUTER JOIN table2&#xa; ON table1.JOIN_column1 = table2.JOIN_column2;" name="Left Join" type="1"/>
+                        <node code="SELECT &#xa;  *&#xa;FROM&#xa;  table1&#xa;WHERE&#xa;  column1 LIKE '%a%';" name="Like" type="1"/>
+                        <node code="SELECT table1.column1, table2.column2&#xa; FROM table1 RIGHT OUTER JOIN table2&#xa; ON table1.JOIN_column1 = table2.JOIN_column2;" name="Right Join" type="1"/>
+                        <node code="SELECT&#xa;  column1&#xa;FROM&#xa;  table1&#xa;UNION&#xa;  SELECT&#xa;    column2&#xa;  FROM&#xa;    table2;" name="Union" type="1"/>
+                        <node code="SELECT&#xa;  *&#xa;FROM&#xa;  table1&#xa;WHERE&#xa;  column1 > 10&#xa;ORDER BY column1;" name="Where" type="1"/>
+                    </nodes>
+                </node>
+            </nodes>
+        </node>
+        <node name="Stored Procedure Syntax" type="0">
+            <nodes>
+                <node name="Control Structures" type="0">
+                    <nodes>
+                        <node code="CASE A&#xa;  WHEN  THEN  &#xa;  ELSE &#xa;END CASE;&#xa;" name="Case" type="1"/>
+                        <node code="IF true THEN&#xa;  &#xa;END IF;&#xa;" name="If-Then" type="1"/>
+                        <node code="IF true THEN &#xa;&#xa;ELSE&#xa;&#xa;END IF;&#xa;" name="If-Then-Else" type="1"/>
+                        <node code="IF true THEN&#xa;&#xa;ELSEIF &#xa;&#xa;ELSE&#xa;&#xa;END IF;&#xa;" name="If-Then-Elseif" type="1"/>
+                        <node code="label1: LOOP&#xa;&#xa;END LOOP label1;&#xa;" name="Labeled Loop" type="1"/>
+                        <node code="LOOP&#xa;&#xa;END LOOP;&#xa;" name="Loop" type="1"/>
+                        <node code="WHILE true LOOP&#xa;&#xa;END LOOP;&#xa;" name="While" type="1"/>
+                    </nodes>
+                </node>
+                <node name="Cursors" type="0">
+                    <nodes>
+                        <node code="CLOSE cursor1;" name="Close Cursor" type="1"/>
+                        <node code="DECLARE cursor1 CURSOR FOR&#xa;  SELECT table1.column1 &#xa;FROM&#xa;  TEST.table1;" name="Declare Cursor" type="1"/>
+                        <node code="FETCH FROM cursor1&#xa;  INTO VARIABLE1" name="Fetch Cursor" type="1"/>
+                        <node code="OPEN cursor1;" name="Open Cursor" type="1"/>
+                    </nodes>
+                </node>
+            </nodes>
+        </node>
+        <node name="Working With Schema Objects" type="0">
+            <nodes>
+                <node name="Stored Procedures" type="0">
+                    <nodes>
+                        <node code="DROP FUNCTION public.function01(p1 integer);" name="Drop Function" type="1"/>
+                        <node code="CREATE OR REPLACE FUNCTION public.function01&#xa;(&#xa;  p1  integer&#xa;)&#xa;RETURNS text AS&#xa;$$&#xa;begin&#xa;  /* Insert real code here */&#xa;end&#xa;$$&#xa;LANGUAGE 'plpgsql';" name="Create Function" type="1"/>
+                    </nodes>
+                </node>
+                <node name="Triggers" type="0">
+                    <nodes>
+                        <node code="CREATE OR REPLACE FUNCTION public.table_trigger_function()&#xa;RETURNS trigger AS&#xa;$$&#xa;begin&#xa;  RETURN NEW;&#xa;end&#xa;$$&#xa;LANGUAGE 'plpgsql';&#xa;&#xa;CREATE TRIGGER &quot;table_trigger&quot;&#xa;  BEFORE INSERT&#xa;  ON public.table1&#xa;  FOR EACH ROW&#xa;  EXECUTE PROCEDURE public.table_trigger_function();&#xa;" name="Create Trigger" type="1"/>
+                        <node code="DROP TRIGGER table_trigger&#xa;  ON public.table1;" name="Drop Trigger" type="1"/>
+                    </nodes>
+                </node>
+                <node name="Views" type="0">
+                    <nodes>
+                        <node code="CREATE VIEW public.v_table&#xa;AS&#xa;SELECT &#xa;  country.col1, &#xa;  country.col2, &#xa;  country.col3 &#xa;FROM table;&#xa;" name="Create View" type="1"/>
+                        <node code="DROP VIEW public.v_table;" name="Drop View" type="1"/>
+                    </nodes>
+                </node>
+            </nodes>
+        </node>
+        <node name="Miscellaneous" type="0">
+            <nodes>
+                <node code="select * from employee limit 10" name="Get top N rows (example)" type="1"/>
+                <node code="create global temporary table temp_table &#xa;(field1 varchar(100), &#xa; field2 number(32)) on commit PRESERVE ROWS" name="Create temporary table (example)" type="1"/>
+                <node code="select NOW()" name="Get current date+time" type="1"/>
+                <node code="select 'Y'" name="dual/dummy table" type="1"/>
+            </nodes>
+        </node>
+        <node name="Sequences and serial column" type="0">
+            <nodes>
+                <node code="CREATE SEQUENCE seq_customers&#xa; START WITH     100&#xa; INCREMENT BY   1&#xa;" name="Create sequence" type="1"/>
+                <node code="select NEXTVAL('seq_customers')" name="Use sequence" type="1"/>
+                <node code="CREATE TABLE users (&#xa;    id    SERIAL PRIMARY KEY,&#xa;    name  varchar(100),&#xa;    age   INT4&#xa;);" name="Create table with serial column" type="1"/>
+                <node code="insert into users (name, age) values ('test', 18)" name="Insert into table with serial column" type="1"/>
+            </nodes>
+        </node>
+        <node name="PL/pgSQL procedures and functions and Sql Developer Techniques" type="0">
+            <nodes>
+                <node code="CREATE FUNCTION test_fnc(param1 integer, param2 varchar(100), &#xa;                       out param3 integer, out param4 varchar(100), OUT param5 REFCURSOR) RETURNS RECORD &#xa;AS $$&#xa;BEGIN&#xa;    param3:= param1 + 100;&#xa;&#xa;    param4:= param2 || 'test';&#xa;&#xa;    OPEN param5 FOR SELECT * FROM employee;&#xa;&#xa;    return;&#xa;END;&#xa;$$ LANGUAGE plpgsql;" name="Create stored procedure with input and output parameters, including cursor (example)" type="1"/>
+                <node code="{call test_fnc(:integer_param1, :param2, :out_integer_param3, :out_varchar_param4, :out_cursor_param)}" name="Execute stored procedure with input and output parameters from Sql Devloper (Execute Script)" type="1"/>
+                <node code="create or replace function to_value_fnc(v_value in integer) RETURNS CHAR&#xa;AS $$ &#xa;BEGIN&#xa;  return to_char(v_value, 'FM999999');&#xa;END;$$ LANGUAGE plpgsql;" name="Create function (example)" type="1"/>
+                <node code="select to_value_fnc(:integer_param)" name="Execute function with input parameters from Sql Developer (Execute Sql)" type="1"/>
+                <node code="create or replace function resultset_fnc() RETURNS SETOF CHAR&#xa;AS $$&#xa;  select empno from employee;  &#xa;$$ LANGUAGE sql;" name="Create function which returns resultset (Execute Script)" type="1"/>
+                <node code="select * from resultset_fnc()" name="Execute function which reurns resultset (Execute Sql)" type="1"/>
+            </nodes>
+        </node>
+    </nodes>
+</postgresql>

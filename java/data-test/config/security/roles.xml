@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roles>
+   <role name="developer">
+      <permissions>
+          <permission name="test1" />
+          <permission name="test2" />
+          <permission name="test9" actions="edit,view" />
+          <permission name="test10" />
+      </permissions>  
+   </role>
+   <role name="manager">
+      <permissions>
+          <permission name="test3" />
+          <permission name="test4" />
+      </permissions>  
+   </role>
+   <test />
+</roles>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+    <name>mapfields</name>
+    <script>mapfields</script>
+    <onsave action="skip"/>    
+    <onpersist action="skip"/>
+    <driver name="com.toolsverse.etl.driver.GenericJdbcDriver" />
+    
+    <sources> 
+       <source> 
+          <name>source</name>
+          <extract>
+              <sql>select * from source</sql> 
+          </extract>
+       </source>
+    </sources>
+    
+    <destinations>
+       <destination>
+          <name>source</name>
+          <load>
+              <connection>source_xml_mapped</connection>
+              <variables>
+                 <MAP_SOURCE_NUM field="SOURCE_NUM" include="false" />
+                 <MAP_DESCRIPTION field="DESCRIPTION"/>
+              </variables>
+          </load>
+       </destination>         
+    </destinations>
+
+</scenario>

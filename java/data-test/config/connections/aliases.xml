@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+   <connections>
+      <connection alias="system">
+         <driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+         <url>jdbc:derby:.\data-test\javadb</url>
+      </connection>
+   </connections>
+</config>
