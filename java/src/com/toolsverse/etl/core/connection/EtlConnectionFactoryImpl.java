@@ -225,9 +225,19 @@ public class EtlConnectionFactoryImpl implements EtlConnectionFactory
             {
                 ConnectionParams params = getConnectionParams(con);
                 
-                con.commit();
-                
-                con.close();
+                try
+                {
+                    con.rollback();
+                }
+                catch (Exception ex)
+                {
+                    Logger.log(Logger.INFO, this,
+                            Resource.ERROR_GENERAL.getValue(), ex);
+                }
+                finally
+                {
+                    con.close();
+                }
                 
                 if (params != null)
                 {

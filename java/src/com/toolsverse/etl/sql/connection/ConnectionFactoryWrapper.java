@@ -92,7 +92,20 @@ public class ConnectionFactoryWrapper implements ConnectionFactory
         if (_closeWhenDone && _connection != null)
             try
             {
-                _connection.close();
+                try
+                {
+                    _connection.rollback();
+                }
+                catch (Exception ex)
+                {
+                    Logger.log(Logger.INFO, this,
+                            Resource.ERROR_GENERAL.getValue(), ex);
+                }
+                finally
+                {
+                    _connection.close();
+                }
+                
             }
             catch (Exception ex)
             {

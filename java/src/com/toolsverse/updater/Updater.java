@@ -7,6 +7,7 @@
 
 package com.toolsverse.updater;
 
+import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.toolsverse.config.SystemConfig;
@@ -15,6 +16,7 @@ import com.toolsverse.updater.service.UpdaterRequest;
 import com.toolsverse.updater.service.UpdaterResponse;
 import com.toolsverse.updater.service.UpdaterService;
 import com.toolsverse.util.FileUtils;
+import com.toolsverse.util.FilenameUtils;
 import com.toolsverse.util.Utils;
 import com.toolsverse.util.log.Logger;
 
@@ -69,12 +71,17 @@ public class Updater
     /** The is running flag. */
     private AtomicBoolean _running;
     
+    /** The is downloading flag. */
+    private AtomicBoolean _downloading;
+    
     /**
      * Instantiates a new updater.
      */
     public Updater()
     {
         _running = new AtomicBoolean(false);
+        
+        _downloading = new AtomicBoolean(false);
         
         _response = new UpdaterResponse(
                 UpdaterResponse.ResponseCode.NO_SERVICE, null, null);
@@ -121,6 +128,20 @@ public class Updater
             {
                 try
                 {
+                    if (_downloading.get())
+                    {
+                        UpdaterResponse newResponse = new UpdaterResponse(
+                                UpdaterResponse.ResponseCode.DOWNLOADING, null,
+                                null);
+                        
+                        if (callback != null)
+                            callback.doneChecking(newResponse);
+                        
+                        _response = newResponse;
+                        
+                        return;
+                    }
+                    
                     UpdaterService updaterService = (UpdaterService)ServiceFactory
                             .getService(UpdaterService.class);
                     
@@ -194,6 +215,11 @@ public class Updater
     public void downloadUpdate(final UpdaterResponse response,
             final UpdaterCallbak callback)
     {
+        if (_downloading.get())
+        {
+            return;
+        }
+        
         if (!isEnabled())
         {
             _response = new UpdaterResponse(
@@ -211,7 +237,6 @@ public class Updater
             {
                 try
                 {
-                    
                     if (!FileUtils.fileExists(SystemConfig.instance()
                             .getUpdateFolder()))
                     {
@@ -239,7 +264,21 @@ public class Updater
                     String fileName = SystemConfig.instance().getUpdateFolder()
                             + response.getFileName();
                     
-                    FileUtils.downloadFile(response.getDownloadUrl(), fileName);
+                    String downloadFileName = SystemConfig.instance()
+                            .getUpdateFolder()
+                            + FilenameUtils.getBaseName(response.getFileName())
+                            + ".tmp";
+                    
+                    FileUtils.downloadFile(response.getDownloadUrl(),
+                            downloadFileName);
+                    
+                    if (FileUtils.fileExists(downloadFileName))
+                    {
+                        File dFile = new File(downloadFileName);
+                        dFile.renameTo(new File(fileName));
+                    }
+                    
+                    _downloading.set(false);
                     
                     if (FileUtils.fileExists(fileName))
                     {
@@ -266,6 +305,8 @@ public class Updater
                 }
                 catch (Exception ex)
                 {
+                    _downloading.set(false);
+                    
                     Logger.log(
                             Logger.SEVERE,
                             this,
@@ -280,7 +321,7 @@ public class Updater
                 }
                 finally
                 {
-                    _running.set(false);
+                    _downloading.set(false);
                 }
                 
             }
@@ -290,7 +331,7 @@ public class Updater
         {
             Thread thread = new Thread(downloader);
             
-            _running.set(true);
+            _downloading.set(true);
             _response = new UpdaterResponse(
                     UpdaterResponse.ResponseCode.DOWNLOADING, null, null);
             thread.start();
@@ -307,6 +348,12 @@ public class Updater
      */
     public UpdaterResponse getResponse()
     {
+        if (_downloading.get())
+        {
+            return new UpdaterResponse(
+                    UpdaterResponse.ResponseCode.DOWNLOADING, null, null);
+        }
+        
         if (_running.get())
         {
             return new UpdaterResponse(UpdaterResponse.ResponseCode.CHECKING,

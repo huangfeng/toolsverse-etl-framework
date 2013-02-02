@@ -4,7 +4,6 @@
 			           com/toolsverse/cache/**,
 			           com/toolsverse/config/**,
 			           com/toolsverse/resource/**,
-        	           com/toolsverse/license/**,
         	           com/toolsverse/ext/**,
 			           com/toolsverse/exception/**" 
         	           manifest="manifest.mf" />
@@ -18,7 +17,6 @@
 					           com/toolsverse/config/**,
 					           com/toolsverse/resource/**,
                 	           com/toolsverse/ext/**,  
-                	           com/toolsverse/license/**,
 					           com/toolsverse/exception/**" />
             </then>
         </if>
@@ -32,7 +30,6 @@
 					           com/toolsverse/config/**,
 					           com/toolsverse/resource/**,
                 	           com/toolsverse/ext/**, 
-                	           com/toolsverse/license/**,
 					           com/toolsverse/exception/**" />
             </then>
         </if>

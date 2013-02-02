@@ -23,7 +23,7 @@
 
 	<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask"
 		                     classpath="${base-dir}/ant/launch4j/launch4j.jar:${base-dir}/ant/launch4j/lib/xstream.jar"	/>
-	
+
 	<condition property="isWindows" value="true" else="false">
 		<os family="windows" />
 	</condition>
@@ -40,7 +40,7 @@
 		<pathelement location="${destination-dir}" />
 		<path refid="toolsverse.classpath" />
 	</path>
-	
+
 	<buildnumber file="build.num" />
 
 	<target name="import-all-props">
@@ -136,11 +136,16 @@
 
 					<mkdir dir="${junit-reports-dir}" />
 
-					<junit dir="${base-dir}" fork="false" maxmemory="512m" haltonfailure="true" printsummary="true">
+					<junit fork="yes" dir="${base-dir}" maxmemory="512m" haltonfailure="yes" printsummary="yes">
 						<sysproperty key="user.dir" value="${base-dir}"/>
 						<classpath refid="unit-test.classpath" />
-						<formatter type="xml" />
-						<test name="com.toolsverse.suite.AllTests" outfile="test-result" todir="${junit-reports-dir}" />
+						<batchtest todir="${junit-reports-dir}">
+							<formatter type="plain"/>
+							<fileset dir="${destination-dir}">
+								<include name="**/*Test.class"/>
+								<exclude name="**/AllTests.class"/>
+							</fileset>
+						</batchtest>
 					</junit>
 				</then>
 				<else>
@@ -177,30 +182,30 @@
 		</else>
 	</if>
 </target>
-	
+
 <target name="sign-jar">
-   <signjar jar="${file.name}" alias="${aliasName}" keystore="${keystoreFileName}" storepass="${keystorePassword}" />
-</target>	
+	<signjar jar="${file.name}" alias="${aliasName}" keystore="${keystoreFileName}" storepass="${keystorePassword}" />
+</target>
 
 <target name="sign-jars">
 	<if>
 		<equals arg1="${sign-jars}" arg2="true" />
 		<then>
-			   <property name="aliasName" value="${app-copyright-company}"/>
-			   <property name="keystorePassword" value="${app-copyright-company}"/>
-			   <property name="keystoreFileName" location="${build-dir}/${app-copyright-company}.ks"/>
-			   <property name="organisationName" value="${app-copyright-company}"/>
+			<property name="aliasName" value="${app-copyright-company}"/>
+			<property name="keystorePassword" value="${app-copyright-company}"/>
+			<property name="keystoreFileName" location="${build-dir}/${app-copyright-company}.ks"/>
+			<property name="organisationName" value="${app-copyright-company}"/>
 
-			   <delete file="${keystoreFileName}" failonerror="false" />
-			   <genkey alias="${aliasName}" storepass="${keystorePassword}" keystore="${keystoreFileName}" validity="3650">
-	 	          <dname>
-			         <param name="O"  value="${organisationName}"/>
-			      </dname>
-			   </genkey>
-			
- 			   <foreach param="file.name" target="sign-jar" inheritall="true">
-				    <fileset dir="${dist-jar-dir}" includes="**" />
-			   </foreach>
+			<delete file="${keystoreFileName}" failonerror="false" />
+			<genkey alias="${aliasName}" storepass="${keystorePassword}" keystore="${keystoreFileName}" validity="3650">
+				<dname>
+					<param name="O"  value="${organisationName}"/>
+				</dname>
+			</genkey>
+
+			<foreach param="file.name" target="sign-jar" inheritall="true">
+				<fileset dir="${dist-jar-dir}" includes="**" />
+			</foreach>
 		</then>
 		<else>
 			<echo message="Skipped signing jars." />

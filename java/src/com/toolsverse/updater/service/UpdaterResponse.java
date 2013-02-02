@@ -51,9 +51,10 @@ public class UpdaterResponse implements Serializable
         CODES.put(ResponseCode.UP_TO_DATE, "up to date");
         CODES.put(ResponseCode.READY_TO_DOWNLOAD, "new version available");
         CODES.put(ResponseCode.NO_SERVICE, "");
-        CODES.put(ResponseCode.CHECKING, "checking for updates");
-        CODES.put(ResponseCode.DOWNLOADING, "downloading updates");
-        CODES.put(ResponseCode.DOWNLOADED, "update downloaded");
+        CODES.put(ResponseCode.CHECKING, "checking for update");
+        CODES.put(ResponseCode.DOWNLOADING, "downloading update");
+        CODES.put(ResponseCode.DOWNLOADED,
+                "update downloaded, restart app to apply");
     }
     
     /** The response code. */

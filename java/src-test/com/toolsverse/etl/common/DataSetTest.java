@@ -842,6 +842,8 @@ public class DataSetTest
         
         assertNotNull(dataSet);
         
+        // assertTrue(false);
+        
         assertTrue(dataSet.getFieldCount() == 2);
         
         dataSet = CommonEtlUtils.union(dataSet1, dataSet2, null, true, null,

@@ -660,7 +660,7 @@ public class SystemConfig implements ObjectFactoryModule, Serializable
      */
     public String getVersion()
     {
-        return getSystemProperty(VERSION, "3.1");
+        return getSystemProperty(VERSION, "3.2");
     }
     
     /**

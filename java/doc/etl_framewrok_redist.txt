@@ -12,22 +12,23 @@ home
       log4j.properties
       test_etl_config.xml 
    lib	
-      core.jar
-      service.jar
-      toolsverse-core.jar      
+      toolsverse-core.jar
+      toolsverse-license.jar      
       toolsverse-etl-common.jar
       toolsverse-etl-core.jar  
       toolsverse-io.jar        
       toolsverse-service.jar   
       toolsverse-storage.jar   
       toolsverse-mvc.jar
-      toolsverse-update.jar	
+      toolsverse-updater.jar	
       cglib-nodep-2.2.jar
       commons-beanutils-1.8.3.jar       
       commons-collections-3.2.1.jar   
       commons-pool-1.5.4.jar  
       commons-dbcp-1.4.jar              
       commons-logging-1.1.1.jar         
+      commons-math3-3.0.jar
+      commons-net-2.0.jar 
       dom4j-1.6.1.jar                   
       jsch-0.1.43.jar                   
       log4j-1.2.16.jar                  

@@ -20,7 +20,7 @@ import com.toolsverse.config.SystemConfig;
 public enum UpdaterResource
 {
     // messages
-    NEW_VERSION_IS_READY("New version of the software is available. You can download it using the following url: %1"),
+    NEW_VERSION_IS_READY("New version of the software is available. You can download it using the following url:"),
     
     NEW_VERSION_IS_DOWNLOADED("New version of the software is downloaded. The update file name: %1"),
     

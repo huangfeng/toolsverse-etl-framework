@@ -16,7 +16,6 @@ import java.util.Map;
 import com.toolsverse.mvc.view.ComponentAdapter;
 import com.toolsverse.mvc.view.View;
 import com.toolsverse.resource.Resource;
-import com.toolsverse.ui.common.Behavior;
 import com.toolsverse.util.log.Logger;
 
 /**

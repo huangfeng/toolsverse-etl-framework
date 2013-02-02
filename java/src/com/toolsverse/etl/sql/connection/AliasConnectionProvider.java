@@ -124,7 +124,12 @@ public class AliasConnectionProvider implements ConnectionProvider<Alias>
                     {
                         try
                         {
-                            con.commit();
+                            con.rollback();
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.log(Logger.INFO, this,
+                                    Resource.ERROR_GENERAL.getValue(), ex);
                         }
                         finally
                         {
